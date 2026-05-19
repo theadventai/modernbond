@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rubik's Tic Tac Toe</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0f0f1a; overflow: hidden; font-family: 'Segoe UI', sans-serif; }
+  #c { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: block; }
+
+  #ui {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    display: flex; flex-direction: column; align-items: center;
+  }
+
+  #top-bar {
+    pointer-events: none;
+    margin-top: 20px;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 12px 28px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-align: center;
+    min-width: 320px;
+  }
+
+  #player-indicator {
+    font-size: 13px;
+    opacity: 0.65;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  #phase-text {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  #phase-text .mark-x { color: #ff4444; }
+  #phase-text .mark-o { color: #4488ff; }
+
+  #move-panel {
+    pointer-events: auto;
+    margin-top: 16px;
+    background: rgba(0,0,0,0.7);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: none;
+  }
+
+  #move-panel h3 {
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  #move-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 7px;
+  }
+
+  .move-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    border-radius: 7px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    min-width: 44px;
+    text-align: center;
+  }
+
+  .move-btn:hover {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.45);
+    transform: translateY(-1px);
+  }
+
+  .move-btn:active { transform: translateY(0); }
+
+  #win-banner {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    z-index: 100;
+  }
+
+  #win-banner.show { display: flex; }
+
+  #win-box {
+    background: rgba(15,15,30,0.95);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 48px 60px;
+    text-align: center;
+    color: #fff;
+  }
+
+  #win-title {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+
+  #win-sub {
+    font-size: 18px;
+    opacity: 0.6;
+    margin-bottom: 32px;
+  }
+
+  #restart-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    border-radius: 10px;
+    padding: 12px 36px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  #restart-btn:hover { background: rgba(255,255,255,0.2); }
+
+  #hint {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.3);
+    font-size: 13px;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="ui">
+  <div id="top-bar">
+    <div id="player-indicator">Player X's Turn</div>
+    <div id="phase-text">Click any <span class="mark-x">white sticker</span> to place your mark</div>
+  </div>
+  <div id="move-panel">
+    <h3>Choose a Cube Move</h3>
+    <div id="move-grid">
+      <button class="move-btn" data-move="R">R</button>
+      <button class="move-btn" data-move="R'">R'</button>
+      <button class="move-btn" data-move="L">L</button>
+      <button class="move-btn" data-move="L'">L'</button>
+      <button class="move-btn" data-move="U">U</button>
+      <button class="move-btn" data-move="U'">U'</button>
+      <button class="move-btn" data-move="D">D</button>
+      <button class="move-btn" data-move="D'">D'</button>
+      <button class="move-btn" data-move="F">F</button>
+      <button class="move-btn" data-move="F'">F'</button>
+      <button class="move-btn" data-move="B">B</button>
+      <button class="move-btn" data-move="B'">B'</button>
+    </div>
+  </div>
+</div>
+
+<div id="win-banner">
+  <div id="win-box">
+    <div id="win-title"></div>
+    <div id="win-sub"></div>
+    <button id="restart-btn">Play Again</button>
+  </div>
+</div>
+
+<div id="hint">Drag to rotate &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Click a sticker to place your mark</div>
+
+<script type="module">
+import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+
+// ─── Face constants ───────────────────────────────────────────────────────────
+const FACE = { R:0, L:1, U:2, D:3, F:4, B:5 };
+
+// Cycle definitions for sticker face permutation (CW = a→b→c→d→a)
+const FACE_CYCLES = {
+  x: [FACE.U, FACE.F, FACE.D, FACE.B],
+  y: [FACE.F, FACE.R, FACE.B, FACE.L],
+  z: [FACE.U, FACE.L, FACE.D, FACE.R],
+};
+
+// ─── Move table ───────────────────────────────────────────────────────────────
+const MOVES = {
+  'R':  { axis:'x', layer: c => c.gx ===  1, dir: -1 },
+  "R'": { axis:'x', layer: c => c.gx ===  1, dir: +1 },
+  'L':  { axis:'x', layer: c => c.gx === -1, dir: +1 },
+  "L'": { axis:'x', layer: c => c.gx === -1, dir: -1 },
+  'U':  { axis:'y', layer: c => c.gy ===  1, dir: -1 },
+  "U'": { axis:'y', layer: c => c.gy ===  1, dir: +1 },
+  'D':  { axis:'y', layer: c => c.gy === -1, dir: +1 },
+  "D'": { axis:'y', layer: c => c.gy === -1, dir: -1 },
+  'F':  { axis:'z', layer: c => c.gz ===  1, dir: -1 },
+  "F'": { axis:'z', layer: c => c.gz ===  1, dir: +1 },
+  'B':  { axis:'z', layer: c => c.gz === -1, dir: +1 },
+  "B'": { axis:'z', layer: c => c.gz === -1, dir: -1 },
+};
+
+// ─── Renderer / Scene ─────────────────────────────────────────────────────────
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x0f0f1a);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(4.5, 3.5, 5.5);
+camera.lookAt(0, 0, 0);
+
+scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+const dir1 = new THREE.DirectionalLight(0xffffff, 0.9);
+dir1.position.set(5, 8, 5);
+scene.add(dir1);
+const dir2 = new THREE.DirectionalLight(0x8899ff, 0.3);
+dir2.position.set(-5, -3, -5);
+scene.add(dir2);
+
+const cubeRoot = new THREE.Group();
+scene.add(cubeRoot);
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ─── Sticker canvas drawing ───────────────────────────────────────────────────
+function drawSticker(ctx, owner, highlighted) {
+  ctx.clearRect(0, 0, 128, 128);
+  // Background
+  ctx.fillStyle = highlighted ? '#ffffc0' : '#ffffff';
+  ctx.beginPath();
+  ctx.roundRect(6, 6, 116, 116, 10);
+  ctx.fill();
+
+  if (owner === 'X') {
+    ctx.strokeStyle = '#dd2200';
+    ctx.lineWidth = 18;
+    ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(26, 26); ctx.lineTo(102, 102); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(102, 26); ctx.lineTo(26, 102); ctx.stroke();
+  } else if (owner === 'O') {
+    ctx.strokeStyle = '#1155ee';
+    ctx.lineWidth = 16;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.arc(64, 64, 38, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+}
+
+// ─── Cubie construction ───────────────────────────────────────────────────────
+const CUBIE_SIZE   = 0.94;
+const STICKER_SIZE = 0.82;
+const STICKER_OFF  = 0.472;
+
+const faceConfigs = [
+  { faceId: FACE.R, cond: (gx,gy,gz) => gx ===  1, normal:[1,0,0],  rx:0,        ry: Math.PI/2,  rz:0 },
+  { faceId: FACE.L, cond: (gx,gy,gz) => gx === -1, normal:[-1,0,0], rx:0,        ry:-Math.PI/2,  rz:0 },
+  { faceId: FACE.U, cond: (gx,gy,gz) => gy ===  1, normal:[0,1,0],  rx:-Math.PI/2, ry:0,         rz:0 },
+  { faceId: FACE.D, cond: (gx,gy,gz) => gy === -1, normal:[0,-1,0], rx: Math.PI/2, ry:0,         rz:0 },
+  { faceId: FACE.F, cond: (gx,gy,gz) => gz ===  1, normal:[0,0,1],  rx:0,        ry:0,            rz:0 },
+  { faceId: FACE.B, cond: (gx,gy,gz) => gz === -1, normal:[0,0,-1], rx:0,        ry: Math.PI,     rz:0 },
+];
+
+// Lookup table: for each face ID, the correct local position/rotation of a sticker plane
+const STICKER_POSE = {};
+for (const fc of faceConfigs) {
+  STICKER_POSE[fc.faceId] = {
+    px: fc.normal[0] * STICKER_OFF,
+    py: fc.normal[1] * STICKER_OFF,
+    pz: fc.normal[2] * STICKER_OFF,
+    rx: fc.rx, ry: fc.ry, rz: fc.rz,
+  };
+}
+
+function buildCubie(gx, gy, gz) {
+  const group = new THREE.Group();
+  group.position.set(gx, gy, gz);
+
+  const body = new THREE.Mesh(
+    new THREE.BoxGeometry(CUBIE_SIZE, CUBIE_SIZE, CUBIE_SIZE),
+    new THREE.MeshLambertMaterial({ color: 0x111111 })
+  );
+  group.add(body);
+
+  const stickers = {};
+
+  for (const fc of faceConfigs) {
+    if (!fc.cond(gx, gy, gz)) continue;
+
+    const cvs = document.createElement('canvas');
+    cvs.width = cvs.height = 128;
+    drawSticker(cvs.getContext('2d'), null, false);
+
+    const tex = new THREE.CanvasTexture(cvs);
+    const plane = new THREE.Mesh(
+      new THREE.PlaneGeometry(STICKER_SIZE, STICKER_SIZE),
+      new THREE.MeshLambertMaterial({ map: tex, side: THREE.FrontSide })
+    );
+    plane.rotation.set(fc.rx, fc.ry, fc.rz);
+    plane.position.set(
+      fc.normal[0] * STICKER_OFF,
+      fc.normal[1] * STICKER_OFF,
+      fc.normal[2] * STICKER_OFF
+    );
+    plane.userData.isStickerPlane = true;
+    plane.userData.faceId = fc.faceId;
+
+    group.add(plane);
+    stickers[fc.faceId] = { owner: null, mesh: plane, canvas: cvs, texture: tex };
+  }
+
+  const cubie = { gx, gy, gz, group, stickers };
+
+  for (const s of Object.values(stickers)) {
+    s.mesh.userData.cubie = cubie;
+  }
+
+  return cubie;
+}
+
+// ─── Build cube ───────────────────────────────────────────────────────────────
+let cubies = [];
+
+function buildCube() {
+  for (const c of cubies) cubeRoot.remove(c.group);
+  cubies = [];
+  for (let gx = -1; gx <= 1; gx++)
+    for (let gy = -1; gy <= 1; gy++)
+      for (let gz = -1; gz <= 1; gz++) {
+        const c = buildCubie(gx, gy, gz);
+        cubies.push(c);
+        cubeRoot.add(c.group);
+      }
+}
+
+buildCube();
+
+// ─── Orbit controls ───────────────────────────────────────────────────────────
+let isDragging = false;
+let dragStartX = 0, dragStartY = 0;
+let prevMouseX = 0, prevMouseY = 0;
+
+canvas.addEventListener('mousedown', e => {
+  if (e.button !== 0) return;
+  isDragging = true;
+  dragStartX = prevMouseX = e.clientX;
+  dragStartY = prevMouseY = e.clientY;
+});
+
+canvas.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  const dx = e.clientX - prevMouseX;
+  const dy = e.clientY - prevMouseY;
+  prevMouseX = e.clientX;
+  prevMouseY = e.clientY;
+  cubeRoot.rotation.y += dx * 0.006;
+  cubeRoot.rotation.x = Math.max(-Math.PI / 2,
+    Math.min(Math.PI / 2, cubeRoot.rotation.x + dy * 0.006));
+});
+
+canvas.addEventListener('mouseup', e => {
+  if (!isDragging) return;
+  isDragging = false;
+  const totalMove = Math.abs(e.clientX - dragStartX) + Math.abs(e.clientY - dragStartY);
+  if (totalMove < 5) handleClick(e);
+});
+
+canvas.addEventListener('mouseleave', () => { isDragging = false; });
+
+canvas.addEventListener('wheel', e => {
+  const len = camera.position.length();
+  const newLen = Math.max(3.5, Math.min(12, len * (1 + e.deltaY * 0.001)));
+  camera.position.setLength(newLen);
+}, { passive: true });
+
+// Touch support
+let touchPrevX = 0, touchPrevY = 0, touchStartX = 0, touchStartY = 0;
+canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
+  const t = e.touches[0];
+  touchStartX = touchPrevX = t.clientX;
+  touchStartY = touchPrevY = t.clientY;
+  isDragging = true;
+}, { passive: false });
+
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  if (!isDragging) return;
+  const t = e.touches[0];
+  const dx = t.clientX - touchPrevX;
+  const dy = t.clientY - touchPrevY;
+  touchPrevX = t.clientX;
+  touchPrevY = t.clientY;
+  cubeRoot.rotation.y += dx * 0.006;
+  cubeRoot.rotation.x = Math.max(-Math.PI / 2,
+    Math.min(Math.PI / 2, cubeRoot.rotation.x + dy * 0.006));
+}, { passive: false });
+
+canvas.addEventListener('touchend', e => {
+  if (!isDragging) return;
+  isDragging = false;
+  const t = e.changedTouches[0];
+  const totalMove = Math.abs(t.clientX - touchStartX) + Math.abs(t.clientY - touchStartY);
+  if (totalMove < 8) handleClick(t);
+}, { passive: false });
+
+// ─── Game state ───────────────────────────────────────────────────────────────
+let gamePhase = 'place'; // 'place' | 'move' | 'animating' | 'won'
+let currentPlayer = 'X';
+
+// ─── Click / raycasting ───────────────────────────────────────────────────────
+const raycaster = new THREE.Raycaster();
+const mouse2d = new THREE.Vector2();
+
+function handleClick(e) {
+  if (gamePhase !== 'place') return;
+
+  const rect = canvas.getBoundingClientRect();
+  mouse2d.x =  ((e.clientX - rect.left) / rect.width)  * 2 - 1;
+  mouse2d.y = -((e.clientY - rect.top)  / rect.height) * 2 + 1;
+
+  raycaster.setFromCamera(mouse2d, camera);
+
+  const stickerMeshes = [];
+  for (const c of cubies)
+    for (const s of Object.values(c.stickers))
+      stickerMeshes.push(s.mesh);
+
+  const hits = raycaster.intersectObjects(stickerMeshes);
+  if (!hits.length) return;
+
+  const mesh = hits[0].object;
+  const cubie = mesh.userData.cubie;
+  const faceId = mesh.userData.faceId;
+  const sticker = cubie.stickers[faceId];
+
+  if (!sticker || sticker.owner !== null) return;
+
+  sticker.owner = currentPlayer;
+  drawSticker(sticker.canvas.getContext('2d'), currentPlayer, false);
+  sticker.texture.needsUpdate = true;
+
+  gamePhase = 'move';
+  updateUI();
+}
+
+// ─── Coord permutation ────────────────────────────────────────────────────────
+function permuteCubieCoord(c, axis, dir) {
+  const { gx, gy, gz } = c;
+  if (axis === 'x') {
+    // R CW (dir=-1) = +90° around X: y_new=-z, z_new=y
+    if (dir === -1) { c.gy = -gz; c.gz =  gy; }
+    else            { c.gy =  gz; c.gz = -gy; }
+  } else if (axis === 'y') {
+    // U CW (dir=-1) = +90° around Y: x_new=z, z_new=-x
+    if (dir === -1) { c.gx =  gz; c.gz = -gx; }
+    else            { c.gx = -gz; c.gz =  gx; }
+  } else {
+    // F CW (dir=-1) = +90° around Z: x_new=-y, y_new=x
+    if (dir === -1) { c.gx = -gy; c.gy =  gx; }
+    else            { c.gx =  gy; c.gy = -gx; }
+  }
+}
+
+function permuteStickerFaces(cubie, axis, dir) {
+  const [a, b, cc, d] = FACE_CYCLES[axis];
+  const s = cubie.stickers;
+  const snap = { [a]: s[a], [b]: s[b], [cc]: s[cc], [d]: s[d] };
+
+  const assign = (to, from) => {
+    if (snap[from] !== undefined) s[to] = snap[from];
+    else delete s[to];
+  };
+
+  if (dir === -1) { // CW: d→a, a→b, b→c, c→d
+    assign(a, d); assign(b, a); assign(cc, b); assign(d, cc);
+  } else {          // CCW: b→a, c→b, d→c, a→d
+    assign(a, b); assign(b, cc); assign(cc, d); assign(d, a);
+  }
+
+  // Update back-references on meshes
+  for (const [fid, sticker] of Object.entries(cubie.stickers)) {
+    if (sticker && sticker.mesh) {
+      sticker.mesh.userData.faceId = Number(fid);
+      sticker.mesh.userData.cubie = cubie;
+    }
+  }
+}
+
+// ─── Move animation ───────────────────────────────────────────────────────────
+async function executeMove(moveName) {
+  gamePhase = 'animating';
+  updateUI();
+
+  const move = MOVES[moveName];
+  const layerCubies = cubies.filter(move.layer);
+
+  const pivot = new THREE.Group();
+  scene.add(pivot);
+
+  for (const c of layerCubies) {
+    pivot.attach(c.group);
+  }
+
+  const axisVec = new THREE.Vector3(
+    move.axis === 'x' ? 1 : 0,
+    move.axis === 'y' ? 1 : 0,
+    move.axis === 'z' ? 1 : 0
+  );
+  const targetAngle = -move.dir * Math.PI / 2;
+  const duration = 380;
+  const startTime = performance.now();
+
+  await new Promise(resolve => {
+    function tick() {
+      const raw = (performance.now() - startTime) / duration;
+      const t = Math.min(raw, 1.0);
+      // ease in-out quad
+      const ease = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      pivot.setRotationFromAxisAngle(axisVec, targetAngle * ease);
+      renderer.render(scene, camera);
+      if (t < 1.0) requestAnimationFrame(tick);
+      else {
+        pivot.setRotationFromAxisAngle(axisVec, targetAngle);
+        resolve();
+      }
+    }
+    requestAnimationFrame(tick);
+  });
+
+  // Reparent back to cubeRoot, snap positions
+  for (const c of layerCubies) {
+    cubeRoot.attach(c.group);
+    c.group.position.set(
+      Math.round(c.group.position.x),
+      Math.round(c.group.position.y),
+      Math.round(c.group.position.z)
+    );
+    c.group.rotation.set(0, 0, 0);
+  }
+
+  scene.remove(pivot);
+
+  // Update logical state
+  for (const c of layerCubies) {
+    permuteStickerFaces(c, move.axis, move.dir);
+    permuteCubieCoord(c, move.axis, move.dir);
+  }
+
+  // Reposition sticker plane meshes to match their new face IDs.
+  // This is necessary because zeroing group rotation returns planes to their
+  // original local transforms; we must move them to the new face's position.
+  for (const c of layerCubies) {
+    for (const [fid, sticker] of Object.entries(c.stickers)) {
+      const pose = STICKER_POSE[Number(fid)];
+      sticker.mesh.position.set(pose.px, pose.py, pose.pz);
+      sticker.mesh.rotation.set(pose.rx, pose.ry, pose.rz);
+    }
+  }
+
+  // Check win
+  const winner = checkWin();
+  if (winner) {
+    gamePhase = 'won';
+    showWin(winner);
+    return;
+  }
+
+  // Check draw
+  const totalStickers = cubies.reduce((acc, c) => acc + Object.keys(c.stickers).length, 0);
+  const filledStickers = cubies.reduce((acc, c) =>
+    acc + Object.values(c.stickers).filter(s => s.owner !== null).length, 0);
+  if (filledStickers === totalStickers) {
+    gamePhase = 'won';
+    showDraw();
+    return;
+  }
+
+  currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+  gamePhase = 'place';
+  updateUI();
+}
+
+// ─── Face grid ────────────────────────────────────────────────────────────────
+function cubieToFaceCoord(c, faceId) {
+  switch (faceId) {
+    case FACE.R: return [1 - c.gy, 1 - c.gz];
+    case FACE.L: return [1 - c.gy, 1 + c.gz];
+    case FACE.U: return [1 + c.gz, 1 + c.gx];
+    case FACE.D: return [1 - c.gz, 1 + c.gx];
+    case FACE.F: return [1 - c.gy, 1 + c.gx];
+    case FACE.B: return [1 - c.gy, 1 - c.gx];
+  }
+}
+
+function getFaceGrid(faceId) {
+  const grid = [[null,null,null],[null,null,null],[null,null,null]];
+  for (const c of cubies) {
+    const s = c.stickers[faceId];
+    if (s === undefined) continue;
+    const [row, col] = cubieToFaceCoord(c, faceId);
+    if (row >= 0 && row <= 2 && col >= 0 && col <= 2)
+      grid[row][col] = s.owner;
+  }
+  return grid;
+}
+
+function checkGrid(grid) {
+  const lines = [
+    [[0,0],[0,1],[0,2]], [[1,0],[1,1],[1,2]], [[2,0],[2,1],[2,2]],
+    [[0,0],[1,0],[2,0]], [[0,1],[1,1],[2,1]], [[0,2],[1,2],[2,2]],
+    [[0,0],[1,1],[2,2]], [[0,2],[1,1],[2,0]],
+  ];
+  for (const line of lines) {
+    const v = line.map(([r,c]) => grid[r][c]);
+    if (v[0] && v[0] === v[1] && v[1] === v[2]) return v[0];
+  }
+  return null;
+}
+
+function checkWin() {
+  for (let faceId = 0; faceId < 6; faceId++) {
+    const winner = checkGrid(getFaceGrid(faceId));
+    if (winner) return winner;
+  }
+  return null;
+}
+
+// ─── UI ───────────────────────────────────────────────────────────────────────
+const playerIndicator = document.getElementById('player-indicator');
+const phaseText       = document.getElementById('phase-text');
+const movePanel       = document.getElementById('move-panel');
+const winBanner       = document.getElementById('win-banner');
+const winTitle        = document.getElementById('win-title');
+const winSub          = document.getElementById('win-sub');
+
+function updateUI() {
+  const px = currentPlayer === 'X';
+  const color = px ? '#ff4444' : '#4488ff';
+  playerIndicator.textContent = `Player ${currentPlayer}'s Turn`;
+  playerIndicator.style.color = color;
+
+  if (gamePhase === 'place') {
+    phaseText.innerHTML = `Click any <strong style="color:${color}">white sticker</strong> to place your mark`;
+    movePanel.style.display = 'none';
+  } else if (gamePhase === 'move') {
+    phaseText.innerHTML = `<strong style="color:${color}">${currentPlayer}</strong> placed — now choose a move`;
+    movePanel.style.display = 'block';
+  } else if (gamePhase === 'animating') {
+    phaseText.textContent = 'Rotating…';
+    movePanel.style.display = 'none';
+  }
+}
+
+function showWin(winner) {
+  const color = winner === 'X' ? '#ff4444' : '#4488ff';
+  winTitle.innerHTML = `<span style="color:${color}">Player ${winner} Wins!</span>`;
+  winSub.textContent = '3 in a row on a single face';
+  winBanner.classList.add('show');
+}
+
+function showDraw() {
+  winTitle.textContent = "It's a Draw!";
+  winSub.textContent = 'All stickers filled with no winner';
+  winBanner.classList.add('show');
+}
+
+document.querySelectorAll('.move-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (gamePhase !== 'move') return;
+    executeMove(btn.dataset.move);
+  });
+});
+
+document.getElementById('restart-btn').addEventListener('click', () => {
+  winBanner.classList.remove('show');
+  cubeRoot.rotation.set(0, 0, 0);
+  buildCube();
+  currentPlayer = 'X';
+  gamePhase = 'place';
+  updateUI();
+});
+
+// ─── Render loop ──────────────────────────────────────────────────────────────
+function animate() {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+}
+
+updateUI();
+animate();
+</script>
+</body>
+</html>

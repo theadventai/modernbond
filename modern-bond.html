@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Bond — Unlock Your Best Sex Life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #0c0612;
+      --bg2:        #100818;
+      --purple:     #1a0820;
+      --purple-mid: #2e0d48;
+      --purple-hi:  #4a1460;
+      --pink:       #e91e8c;
+      --pink-light: #f548a8;
+      --pink-dim:   rgba(233,30,140,0.15);
+      --pink-glow:  rgba(233,30,140,0.35);
+      --white:      #ffffff;
+      --muted:      rgba(255,255,255,0.5);
+      --muted2:     rgba(255,255,255,0.25);
+      --font-heading: 'Bebas Neue', sans-serif;
+      --font-cond:  'Barlow Condensed', sans-serif;
+      --font-body:  'Barlow', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--pink); color: var(--white); }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--pink); }
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── Diagonal texture overlay ───────────────────────────────── */
+    .tex {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(255,255,255,0.018) 0px,
+        rgba(255,255,255,0.018) 1px,
+        transparent 1px,
+        transparent 8px
+      );
+      z-index: 1;
+    }
+
+    /* ─── Reveal ─────────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(36px);
+      transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.on { opacity: 1; transform: none; }
+    .d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; }
+    .d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; }
+
+    /* ─── Pink glow button ───────────────────────────────────────── */
+    .btn-pink {
+      display: inline-block;
+      background: var(--pink);
+      color: var(--white);
+      font-family: var(--font-cond);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: 16px 44px;
+      border: none; cursor: pointer;
+      box-shadow: 0 0 32px var(--pink-glow);
+      transition: all .3s;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+    .btn-pink:hover { background: var(--pink-light); box-shadow: 0 0 56px rgba(233,30,140,.6); }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--white);
+      font-family: var(--font-cond);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: 15px 40px;
+      border: 1px solid rgba(233,30,140,.5);
+      cursor: pointer;
+      transition: all .3s;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+    .btn-outline:hover { border-color: var(--pink); color: var(--pink); box-shadow: 0 0 24px var(--pink-dim); }
+
+    /* ─── Section label ──────────────────────────────────────────── */
+    .sec-label {
+      font-family: var(--font-cond);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--pink);
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+    }
+    .sec-label::before { content: '⚡'; font-size: 12px; }
+
+    /* ─── Pink line divider ──────────────────────────────────────── */
+    .pink-line {
+      width: 60px; height: 3px;
+      background: var(--pink);
+      box-shadow: 0 0 12px var(--pink-glow);
+      margin: 0 auto 32px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      transition: background .4s, border-color .4s;
+    }
+    nav.scrolled {
+      background: rgba(12,6,18,.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(233,30,140,.15);
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      position: relative; z-index: 1;
+    }
+    .nav-logo img {
+      width: 53px; height: 53px;
+      object-fit: contain;
+    }
+    .nav-wordmark {
+      font-family: var(--font-cond);
+      font-size: 18px; font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex; gap: 32px; list-style: none;
+      position: relative; z-index: 1;
+    }
+    .nav-links a {
+      font-family: var(--font-cond);
+      font-size: 13px; font-weight: 600;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--muted);
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta { position: relative; z-index: 1; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════════════════ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Background gradient matching brand palette */
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 120% 90% at 50% 30%, rgba(74,20,96,.7) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 60% at 20% 60%, rgba(46,13,72,.6) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 60% at 80% 60%, rgba(46,13,72,.5) 0%, transparent 50%),
+        linear-gradient(180deg, #100818 0%, #0c0612 100%);
+      z-index: 0;
+    }
+
+    /* Hero image — centered character art */
+    .hero-img-wrap {
+      position: absolute;
+      top: 80px; left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      z-index: 2;
+      display: flex; align-items: flex-start; justify-content: center;
+    }
+    .hero-img-wrap img {
+      width: 100%; height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Pink bloom glow behind character */
+    .hero-bloom {
+      position: absolute;
+      bottom: -40px; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(233,30,140,.28) 0%, transparent 65%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Top gradient fade so nav is readable */
+    .hero-top-fade {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 220px;
+      background: linear-gradient(to bottom, rgba(12,6,18,1) 0%, transparent 100%);
+      z-index: 3; pointer-events: none;
+    }
+    /* Bottom fade */
+    .hero-bottom-fade {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 300px;
+      background: linear-gradient(to top, rgba(12,6,18,1) 0%, transparent 100%);
+      z-index: 3; pointer-events: none;
+    }
+
+    /* MODERN BOND headline — behind image, massive */
+    .hero-title-behind {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-heading);
+      font-size: clamp(80px, 14vw, 200px);
+      font-weight: 900;
+      letter-spacing: -.01em;
+      text-transform: uppercase;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(255,255,255,.08);
+      white-space: nowrap;
+      z-index: 1; pointer-events: none; user-select: none;
+    }
+
+    /* Side text — rotated like reference */
+    .hero-side {
+      position: absolute;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: var(--font-cond);
+      font-size: 10px; font-weight: 600;
+      letter-spacing: .28em; text-transform: uppercase;
+      color: var(--muted);
+      z-index: 5;
+    }
+    .hero-side-left  { left: 40px; top: 50%; transform: translateY(-50%) rotate(180deg); }
+    .hero-side-right { right: 40px; top: 50%; transform: translateY(-50%); }
+
+    /* Main headline (foreground, over image) */
+    .hero-content {
+      position: absolute;
+      bottom: calc(32px - 10vh);
+      left: 50%; transform: translateX(-50%);
+      width: 100%;
+      z-index: 6;
+      text-align: center;
+      display: flex; flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .hero-supertitle {
+      font-family: var(--font-cond);
+      font-size: clamp(11px, 1.2vw, 14px);
+      font-weight: 600; letter-spacing: .4em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 16px;
+    }
+    .hero-headline {
+      font-family: var(--font-heading);
+      font-size: clamp(72px, 14vw, 200px);
+      font-weight: 900; line-height: .88;
+      letter-spacing: -.01em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-shadow:
+        0 0 80px rgba(233,30,140,.5),
+        0 0 160px rgba(233,30,140,.25),
+        0 2px 40px rgba(0,0,0,.8);
+      margin-bottom: 0;
+    }
+
+    /* Logo heart in center */
+    .hero-logo-center {
+      margin: 24px auto 20px;
+      width: clamp(60px, 8vw, 100px);
+      filter: drop-shadow(0 0 24px rgba(233,30,140,.8));
+    }
+
+    .hero-tagline-img {
+      width: clamp(220px, 40vw, 600px);
+      height: auto;
+      display: block;
+    }
+    .hero-tagline {
+      font-family: var(--font-heading);
+      font-size: clamp(18px, 3vw, 36px);
+      font-weight: 800; letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-shadow: 0 0 40px rgba(233,30,140,.4);
+    }
+
+    .hero-ctas {
+      display: flex; align-items: center; gap: 20px;
+      margin-top: 40px;
+    }
+
+    /* Bottom sub-nav pills */
+    .hero-subnav {
+      position: absolute;
+      bottom: 40px; left: 50%; transform: translateX(-50%);
+      z-index: 6;
+      display: flex; gap: 0;
+    }
+    .subnav-item {
+      font-family: var(--font-cond);
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted);
+      padding: 10px 24px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-right: none;
+      transition: all .3s;
+    }
+    .subnav-item:last-child { border-right: 1px solid rgba(255,255,255,.08); }
+    .subnav-item:hover { color: var(--pink); border-color: rgba(233,30,140,.3); background: rgba(233,30,140,.05); }
+
+    /* Scroll line */
+    .scroll-line {
+      position: absolute; bottom: 100px; right: 44px; z-index: 6;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    .scroll-bar {
+      width: 1px; height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--pink));
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:.3}50%{opacity:1} }
+
+    /* ═══════════════════════════════════════════════════════════════
+       MARQUEE
+    ═══════════════════════════════════════════════════════════════ */
+    .marquee-outer { overflow: hidden; }
+    .marquee-track {
+      display: flex; white-space: nowrap;
+      animation: mq 30s linear infinite;
+    }
+    .marquee-track.rev { animation: mq 24s linear infinite reverse; }
+    @keyframes mq { from{transform:translateX(0)}to{transform:translateX(-50%)} }
+
+    .mq-word {
+      font-family: var(--font-heading);
+      font-size: clamp(48px,7vw,90px);
+      font-weight: 900; text-transform: uppercase;
+      letter-spacing: -.01em;
+      color: transparent;
+      -webkit-text-stroke: 0.3px rgba(255,255,255,.25);
+      display: inline-block; padding: 0 24px;
+      white-space: nowrap;
+    }
+    .mq-word.lit {
+      color: var(--white); -webkit-text-stroke: 0;
+    }
+    .mq-dot {
+      display: inline-block; width: 28px; height: 22px;
+      background: url('images/Mouth_Icon_003_v001.png') center/contain no-repeat;
+      border-radius: 0; box-shadow: none;
+      flex-shrink: 0; align-self: center; margin: 0 8px;
+    }
+
+    /* Pink band marquee */
+    .mq-band {
+      background: var(--pink);
+      padding: 16px 0;
+      overflow: hidden;
+    }
+    .mq-band .mq-word {
+      font-size: clamp(12px,1.6vw,18px);
+      color: var(--white); -webkit-text-stroke: 0;
+      letter-spacing: .3em;
+    }
+    .mq-band .mq-dot { width: 6px; height: 6px; background: rgba(0,0,0,.35); border-radius: 50%; box-shadow: none; }
+    .mq-band .rev { animation-duration: 55s; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       ABOUT
+    ═══════════════════════════════════════════════════════════════ */
+    #about {
+      position: relative;
+      padding: 140px 48px;
+      overflow: hidden;
+    }
+    .about-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 80% at 90% 40%, rgba(46,13,72,.6) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 10% 70%, rgba(74,20,96,.4) 0%, transparent 55%),
+        var(--bg2);
+    }
+    .about-grid {
+      position: relative; z-index: 2;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+      max-width: 1280px; margin: 0 auto;
+    }
+    .about-h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(48px,6vw,88px);
+      font-weight: 900; line-height: .92;
+      letter-spacing: -.01em; text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .about-h2 span { color: var(--pink); display: block; }
+    .about-body {
+      font-size: 15px; line-height: 1.9;
+      color: var(--muted);
+    }
+    .about-body p + p { margin-top: 18px; }
+    .about-body strong { color: var(--white); font-weight: 500; }
+    .about-values {
+      display: flex; flex-direction: column; gap: 0;
+      margin-top: 40px;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    .val {
+      display: flex; align-items: center; gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      font-family: var(--font-cond);
+      font-size: 13px; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted);
+      transition: color .25s;
+    }
+    .val:hover { color: var(--white); }
+    .val::before { content: '⚡'; color: var(--pink); font-size: 12px; }
+
+    /* Right side — logo + stats */
+    .about-right {
+      position: relative;
+      display: flex; flex-direction: column; align-items: center; gap: 40px;
+    }
+    .about-logo-wrap {
+      width: 100%;
+      display: flex; justify-content: center;
+    }
+    .about-logo-wrap img {
+      width: 93%; height: auto;
+      display: block;
+    }
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px; background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.06);
+      width: 100%;
+    }
+    .stat-box {
+      background: var(--bg2);
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .stat-n {
+      font-family: var(--font-cond);
+      font-size: 48px; font-weight: 900;
+      color: var(--pink); line-height: 1;
+      display: block;
+      text-shadow: 0 0 20px var(--pink-glow);
+    }
+    .stat-l {
+      font-family: var(--font-cond);
+      font-size: 10px; font-weight: 600;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--muted); display: block; margin-top: 6px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       COACHING
+    ═══════════════════════════════════════════════════════════════ */
+    #coaching {
+      position: relative; padding: 140px 48px; overflow: hidden;
+    }
+    .coaching-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 15% 30%, rgba(46,13,72,.7) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 85% 70%, rgba(74,20,96,.5) 0%, transparent 55%),
+        var(--bg);
+    }
+    .coaching-inner {
+      position: relative; z-index: 2;
+      max-width: 1280px; margin: 0 auto;
+    }
+    .coaching-top {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: end; margin-bottom: 64px;
+    }
+    .coaching-h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(52px,7vw,100px);
+      font-weight: 900; line-height: .9;
+      letter-spacing: -.01em; text-transform: uppercase;
+    }
+    .coaching-h2 span { color: var(--pink); }
+    .coaching-intro {
+      font-size: 15px; line-height: 1.9; color: var(--muted);
+    }
+    .coaching-intro strong { color: var(--white); font-style: italic; }
+
+    .coaching-grid {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 2px; background: rgba(233,30,140,.12);
+      border: 1px solid rgba(233,30,140,.2);
+      border-radius: 4px; overflow: hidden;
+    }
+    .c-card {
+      background: linear-gradient(145deg, #120a1a 0%, #0c0612 100%);
+      padding: 44px 32px;
+      position: relative; overflow: hidden;
+      transition: background .3s;
+      display: flex; align-items: flex-start; gap: 16px;
+      min-height: 320px;
+      border-top: 1px solid rgba(233,30,140,.15);
+    }
+    .c-card-text {
+      flex: 0 0 40%; width: 40%;
+    }
+    .c-card-img {
+      flex: 0 0 60%; width: 60%;
+      display: flex; align-items: center; justify-content: center;
+      align-self: center;
+    }
+    .c-card-icon {
+      width: 100%; max-width: 286px; height: auto;
+      object-fit: contain; opacity: .95; pointer-events: none;
+    }
+    .c-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0;
+      width: 0; height: 2px; background: var(--pink);
+      transition: width .4s cubic-bezier(.16,1,.3,1);
+      box-shadow: 0 0 16px var(--pink-glow);
+    }
+    .c-card:hover { background: linear-gradient(145deg, #1e0d2a 0%, #150920 100%); }
+    .c-card:hover::after { width: 100%; }
+    .c-num {
+      font-family: var(--font-cond);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .2em; color: var(--pink);
+      margin-bottom: 16px; opacity: .7;
+    }
+    .c-title {
+      font-family: var(--font-heading);
+      font-size: clamp(18px,1.6vw,26px); font-weight: 800;
+      text-transform: uppercase; letter-spacing: .05em;
+      color: var(--white); margin-bottom: 12px; line-height: 1.1;
+    }
+    .c-desc { font-size: 13px; line-height: 1.75; color: var(--muted); }
+
+    /* Feature block */
+    .coaching-feat {
+      margin-top: 1px;
+      background: linear-gradient(135deg, rgba(74,20,96,.2) 0%, rgba(233,30,140,.06) 100%);
+      border: 1px solid rgba(233,30,140,.15);
+      padding: 60px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .feat-quote {
+      font-family: var(--font-heading);
+      font-size: clamp(22px,2.8vw,34px);
+      font-weight: 700; font-style: italic;
+      text-transform: uppercase; line-height: 1.3;
+      color: var(--white);
+    }
+    .feat-quote span { color: var(--pink); }
+    .feat-items { display: flex; flex-direction: column; gap: 0; }
+    .feat-item {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .feat-item:first-child { border-top: 1px solid rgba(255,255,255,.06); }
+    .feat-arrow { color: var(--pink); font-size: 14px; margin-top: 2px; flex-shrink: 0; }
+    .feat-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .feat-text strong { color: var(--white); font-weight: 600; display: block; margin-bottom: 2px; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       COMMUNITY
+    ═══════════════════════════════════════════════════════════════ */
+    #community {
+      position: relative; padding: 100px 0 140px; overflow: hidden;
+    }
+    .community-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 90% 90% at 50% 50%, rgba(74,20,96,.35) 0%, transparent 65%),
+        var(--bg2);
+    }
+    .community-inner {
+      position: relative; z-index: 2;
+      max-width: 1280px; margin: 0 auto; text-align: center;
+    }
+    /* Three-column hero: image | headline | image */
+    .community-hero {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: stretch;
+      gap: 0;
+      margin-bottom: 0;
+    }
+    .community-hero-img-wrap {
+      overflow: hidden;
+    }
+    .community-hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: brightness(.9) saturate(1.1);
+    }
+
+    .community-hero-center {
+      padding: 0 56px;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      padding-top: 40px;
+    }
+    .community-h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(64px,11vw,160px);
+      font-weight: 900; line-height: .88;
+      letter-spacing: -.02em; text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .community-h2 .out {
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(255,255,255,.2);
+    }
+    .community-h2 .fill { color: var(--white); }
+    .community-h2 .pink-fill { color: var(--pink); }
+    .community-desc {
+      font-size: 16px; line-height: 1.9; color: var(--muted);
+      max-width: 580px; margin: 0 auto 16px;
+    }
+    .pillars {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
+      margin-top: 0;
+    }
+    .pillar {
+      border: 1px solid rgba(255,255,255,.07);
+      background: rgba(255,255,255,.02);
+      padding: 40px 32px; text-align: left;
+      position: relative; overflow: hidden;
+      transition: border-color .3s;
+      display: flex; align-items: center; gap: 24px;
+      min-height: 300px;
+    }
+    .pillar:hover { border-color: rgba(233,30,140,.35); }
+    .pillar::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(233,30,140,.04) 0%, transparent 60%);
+      opacity: 0; transition: opacity .3s;
+    }
+    .pillar:hover::before { opacity: 1; }
+    .pillar-img-wrap {
+      flex: 0 0 50%; position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pillar-img {
+      width: 100%; max-width: 207px; height: auto; object-fit: contain;
+    }
+    .pillar-content { flex: 0 0 50%; position: relative; z-index: 1; }
+    .pillar-n {
+      font-family: var(--font-cond);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: .2em; color: var(--pink);
+      opacity: .7; margin-bottom: 14px;
+    }
+    .pillar-title {
+      font-family: var(--font-heading);
+      font-size: clamp(20px,1.8vw,28px); font-weight: 800;
+      text-transform: uppercase; color: var(--white);
+      margin-bottom: 10px; line-height: 1.1;
+    }
+    .pillar-desc { font-size: 13px; line-height: 1.8; color: var(--muted); }
+    .pillar-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 20px;
+      font-family: var(--font-cond);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--pink);
+      transition: gap .3s;
+    }
+    .pillar-link:hover { gap: 14px; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       PRODUCTS
+    ═══════════════════════════════════════════════════════════════ */
+    #products {
+      position: relative; padding: 140px 48px; overflow: hidden;
+    }
+    .products-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 80% 30%, rgba(46,13,72,.6) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 20% 80%, rgba(74,20,96,.4) 0%, transparent 50%),
+        var(--bg);
+    }
+    .products-inner {
+      position: relative; z-index: 2;
+      max-width: 1280px; margin: 0 auto;
+    }
+    .products-hdr {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 56px;
+    }
+    .products-h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(48px,6vw,88px);
+      font-weight: 900; line-height: .92;
+      text-transform: uppercase;
+    }
+    .products-h2 span { color: var(--pink); }
+    .products-sub {
+      font-size: 13px; line-height: 1.8; color: var(--muted);
+      max-width: 320px; text-align: right;
+    }
+    .products-row {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 16px;
+    }
+    .products-row-equal {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .prod-card {
+      position: relative; overflow: hidden; cursor: pointer;
+      border: 1px solid rgba(233,30,140,.2);
+      transition: border-color .35s, box-shadow .35s;
+    }
+    .prod-card:hover {
+      border-color: rgba(233,30,140,.6);
+      box-shadow: 0 0 28px rgba(233,30,140,.18), inset 0 0 0 1px rgba(233,30,140,.12);
+    }
+    .prod-card:first-child { min-height: 380px; }
+    .prod-card:not(:first-child) { min-height: 380px; }
+    .prod-vis {
+      width: 100%; height: 100%;
+      position: absolute; inset: 0;
+      transition: transform .6s cubic-bezier(.16,1,.3,1);
+    }
+    .prod-card:hover .prod-vis { transform: scale(1.04); }
+    .pv1 { background: linear-gradient(135deg, #2e0d48 0%, #4a1460 40%, #e91e8c22 100%); }
+    .pv2 { background: linear-gradient(135deg, #1a0820 0%, #3d1060 100%); }
+    .pv3 { background: linear-gradient(135deg, #2a0840 0%, #1a0820 100%); }
+    .prod-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(12,6,18,.9) 0%, transparent 60%);
+      z-index: 1;
+    }
+    .prod-info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 28px; z-index: 2;
+    }
+    .prod-cat {
+      font-family: var(--font-cond);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .25em; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 6px;
+    }
+    .prod-name {
+      font-family: var(--font-cond);
+      font-size: 20px; font-weight: 800;
+      text-transform: uppercase; color: var(--white);
+    }
+    .prod-price { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .prod-hover {
+      position: absolute; inset: 0; z-index: 3;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity .3s;
+    }
+    .prod-card:hover .prod-hover { opacity: 1; }
+    .prod-btn {
+      background: var(--pink); color: var(--white);
+      font-family: var(--font-cond);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: .2em; text-transform: uppercase;
+      padding: 12px 28px;
+      box-shadow: 0 0 32px var(--pink-glow);
+      transform: translateY(8px);
+      transition: transform .35s;
+    }
+    .prod-card:hover .prod-btn { transform: translateY(0); }
+
+    /* Big char watermark on product cards */
+    .prod-char {
+      position: absolute;
+      font-family: var(--font-cond);
+      font-size: 160px; font-weight: 900;
+      color: rgba(255,255,255,.03);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      pointer-events: none; user-select: none;
+      white-space: nowrap;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       EXPERIENCES
+    ═══════════════════════════════════════════════════════════════ */
+    #experiences {
+      position: relative; padding: 140px 0 80px; overflow: hidden;
+    }
+    .exp-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 70% at 25% 40%, rgba(46,13,72,.7) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(74,20,96,.5) 0%, transparent 55%),
+        var(--bg2);
+    }
+    .exp-inner {
+      position: relative; z-index: 2;
+      max-width: 1280px; margin: 0 auto;
+    }
+    .exp-h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(52px,8vw,110px);
+      font-weight: 900; line-height: .9;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .exp-h2 span { color: var(--pink); }
+    .exp-visual {
+      position: relative; margin-bottom: 56px;
+    }
+    .exp-visual img {
+      width: 100%; height: auto; display: block;
+    }
+    .exp-cs-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-end;
+      padding-bottom: 48px;
+    }
+    .exp-cs-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1px solid rgba(233,30,140,.5);
+      padding: 8px 22px;
+      background: rgba(12,6,18,.5);
+      backdrop-filter: blur(8px);
+      font-family: var(--font-heading);
+      font-size: clamp(14px, 2vw, 28px);
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--white);
+    }
+    .exp-cs-badge::before {
+      content: ''; width: 10px; height: 10px;
+      border-radius: 50%; background: var(--pink);
+      flex-shrink: 0;
+      box-shadow: 0 0 12px var(--pink);
+      animation: pulse-dot 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(.7); }
+    }
+    .exp-coming-soon {
+      text-align: center; padding-top: 8px;
+    }
+    .exp-cs-copy {
+      font-size: 15px; line-height: 1.85; color: var(--muted);
+      max-width: 560px; margin: 0 auto 36px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       CONTENT / EDITORIAL
+    ═══════════════════════════════════════════════════════════════ */
+    #content {
+      position: relative; padding: 140px 48px; overflow: hidden;
+    }
+    .content-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 60% 50%, rgba(74,20,96,.25) 0%, transparent 60%),
+        var(--bg);
+    }
+    .content-inner {
+      position: relative; z-index: 2;
+      max-width: 1280px; margin: 0 auto;
+    }
+    .content-top {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: end; margin-bottom: 64px;
+    }
+    .content-h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(48px,6vw,88px);
+      font-weight: 900; line-height: .92;
+      text-transform: uppercase;
+    }
+    .content-h2 span { color: var(--pink); }
+    .content-sub { font-size: 14px; line-height: 1.8; color: var(--muted); }
+    .articles {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 28px;
+    }
+    .art-card { cursor: pointer; }
+    .art-vis {
+      aspect-ratio: 4/3; position: relative; overflow: hidden; margin-bottom: 18px;
+    }
+    .art-grad {
+      width: 100%; height: 100%;
+      transition: transform .6s cubic-bezier(.16,1,.3,1);
+    }
+    .art-card:hover .art-grad { transform: scale(1.05); }
+    .ag1 { background: linear-gradient(135deg, #2e0d48 0%, #4a1460 100%); }
+    .ag2 { background: linear-gradient(135deg, #3d1060 0%, #2e0d48 100%); }
+    .ag3 { background: linear-gradient(135deg, #1a0820 0%, #3d1060 100%); }
+    .art-char {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-cond);
+      font-size: 120px; font-weight: 900;
+      color: rgba(233,30,140,.12);
+    }
+    .art-cat {
+      font-family: var(--font-cond);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .25em; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 8px;
+    }
+    .art-title {
+      font-family: var(--font-heading);
+      font-size: 20px; font-weight: 800;
+      text-transform: uppercase; color: var(--white);
+      line-height: 1.2; margin-bottom: 8px;
+      transition: color .25s;
+    }
+    .art-card:hover .art-title { color: var(--pink); }
+    .art-meta { font-size: 11px; color: var(--muted); }
+
+    /* ═══════════════════════════════════════════════════════════════
+       JOIN
+    ═══════════════════════════════════════════════════════════════ */
+    #join {
+      position: relative; padding: 180px 48px;
+      overflow: hidden; text-align: center;
+    }
+    .join-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 100% 90% at 50% 50%, rgba(74,20,96,.5) 0%, rgba(46,13,72,.6) 40%, transparent 70%),
+        var(--bg2);
+    }
+    .join-glow {
+      position: absolute;
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(233,30,140,.18) 0%, transparent 65%);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      pointer-events: none; z-index: 0;
+    }
+    .join-inner {
+      position: relative; z-index: 2;
+      max-width: 920px; margin: 0 auto;
+    }
+    .join-eyebrow {
+      font-family: var(--font-cond);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: .38em; text-transform: uppercase;
+      color: var(--pink);
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      margin-bottom: 28px;
+    }
+    .join-eyebrow::before, .join-eyebrow::after {
+      content: ''; flex: 1; max-width: 80px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--pink));
+    }
+    .join-eyebrow::after { background: linear-gradient(to left, transparent, var(--pink)); }
+    .join-h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(60px,10vw,140px);
+      font-weight: 900; line-height: .88;
+      letter-spacing: -.01em; text-transform: uppercase;
+      margin-bottom: 28px;
+      text-shadow: 0 0 80px rgba(233,30,140,.25);
+    }
+    .join-h2 span { color: var(--pink); display: block; }
+    .join-desc {
+      font-size: 16px; line-height: 1.9; color: var(--muted);
+      max-width: 560px; margin: 0 auto 52px;
+    }
+    .join-form {
+      display: flex; max-width: 500px; margin: 0 auto 24px;
+    }
+    .join-input {
+      flex: 1;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-right: none;
+      padding: 18px 24px;
+      font-size: 13px; color: var(--white);
+      font-family: var(--font-body);
+      outline: none; transition: border-color .3s;
+    }
+    .join-input::placeholder { color: var(--muted); }
+    .join-input:focus { border-color: rgba(233,30,140,.5); }
+    .join-submit {
+      background: var(--pink); color: var(--white); border: none;
+      padding: 18px 36px;
+      font-family: var(--font-cond);
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .2em; text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 0 32px var(--pink-glow);
+      transition: all .3s;
+    }
+    .join-submit:hover { background: var(--pink-light); }
+    .join-note { font-size: 11px; color: var(--muted2); letter-spacing: .05em; }
+
+    /* Tiers */
+    .tiers {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 20px; margin-top: 80px; text-align: left;
+    }
+    .tier {
+      border: 1px solid rgba(255,255,255,.07);
+      padding: 40px 36px; position: relative;
+      transition: border-color .3s;
+    }
+    .tier.feat {
+      border-color: rgba(233,30,140,.4);
+      background: linear-gradient(135deg, rgba(233,30,140,.07) 0%, transparent 100%);
+      box-shadow: 0 0 60px rgba(233,30,140,.1);
+    }
+    .tier:not(.feat):hover { border-color: rgba(255,255,255,.15); }
+    .tier-badge {
+      position: absolute; top: -1px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--pink);
+      font-family: var(--font-cond);
+      font-size: 9px; font-weight: 700;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--white); padding: 5px 18px;
+      white-space: nowrap;
+      box-shadow: 0 0 20px var(--pink-glow);
+    }
+    .tier-name {
+      font-family: var(--font-heading);
+      font-size: 22px; font-weight: 800;
+      text-transform: uppercase; color: var(--white);
+      margin-bottom: 8px;
+    }
+    .tier-price {
+      font-family: var(--font-heading);
+      font-size: 48px; font-weight: 900;
+      color: var(--pink); line-height: 1;
+      text-shadow: 0 0 20px var(--pink-glow);
+      margin-bottom: 20px;
+    }
+    .tier-price span { font-size: 16px; font-weight: 400; color: var(--muted); }
+    .tier-feats {
+      list-style: none; display: flex;
+      flex-direction: column; gap: 12px; margin-bottom: 32px;
+    }
+    .tier-feats li {
+      font-size: 12px; color: var(--muted);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .tier-feats li::before { content: '⚡'; color: var(--pink); font-size: 10px; flex-shrink: 0; }
+    .tier-btn {
+      width: 100%; display: block; text-align: center;
+      padding: 14px;
+      font-family: var(--font-cond);
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,.12); color: var(--muted);
+      transition: all .3s;
+    }
+    .tier-btn:hover, .tier.feat .tier-btn {
+      background: var(--pink); border-color: var(--pink);
+      color: var(--white);
+      box-shadow: 0 0 24px var(--pink-glow);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════════════ */
+    footer {
+      position: relative;
+      padding: 80px 48px 48px;
+      border-top: 1px solid rgba(233,30,140,.1);
+    }
+    .footer-inner { max-width: 1280px; margin: 0 auto; }
+    .footer-top {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 60px; margin-bottom: 60px;
+    }
+    .footer-logo {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+    }
+    .footer-logo img { width: 48px; height: 48px; object-fit: contain; }
+    .footer-wm {
+      font-family: var(--font-cond);
+      font-size: 17px; font-weight: 900;
+      letter-spacing: .12em; text-transform: uppercase;
+    }
+    .footer-brand p { font-size: 13px; line-height: 1.8; color: var(--muted); max-width: 280px; }
+    .footer-col-h {
+      font-family: var(--font-cond);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .3em; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a { font-size: 13px; color: var(--muted); transition: color .25s; }
+    .footer-links a:hover { color: var(--pink); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 28px; border-top: 1px solid rgba(255,255,255,.05);
+    }
+    .footer-copy { font-size: 11px; color: var(--muted2); }
+    .footer-soc { display: flex; gap: 24px; }
+    .footer-soc a {
+      font-family: var(--font-cond);
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--muted); transition: color .25s;
+    }
+    .footer-soc a:hover { color: var(--pink); }
+
+    /* ─── Responsive ─────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      #hero .hero-side { display: none; }
+      .hero-subnav { display: none; }
+      .about-grid, .coaching-top, .content-top { grid-template-columns: 1fr; gap: 40px; }
+      .coaching-grid { grid-template-columns: repeat(2,1fr); }
+      .coaching-feat { grid-template-columns: 1fr; gap: 40px; padding: 40px; }
+      .pillars { grid-template-columns: 1fr; }
+      .products-hdr { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .products-row { grid-template-columns: 1fr; }
+      .products-row-equal { grid-template-columns: 1fr; }
+      .exp-grid { grid-template-columns: 1fr; }
+      .articles { grid-template-columns: 1fr; }
+      .tiers { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+      #about, #coaching, #community, #products, #experiences, #content, #join { padding: 100px 24px; }
+      .community-hero { grid-template-columns: 1fr; }
+      .community-hero-img-wrap { display: none; }
+      #community { padding: 100px 24px 120px; }
+    }
+    @media (max-width: 640px) {
+      .hero-headline { font-size: 64px; }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .join-form { flex-direction: column; }
+      .join-input { border-right: 1px solid rgba(255,255,255,.12); }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAV ══════════════════════════════════════════════════════ -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">
+      <img src="images/MB_Logo_pink-pink.png" alt="Modern Bond" style="mix-blend-mode:multiply;" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#coaching">Coaching</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#products">Marketplace</a></li>
+      <li><a href="#experiences">Experiences</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#join" class="btn-pink" style="padding:12px 32px;font-size:11px;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);">Join Now</a>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ══════════════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="tex"></div>
+
+    <!-- Actual hero image -->
+    <div class="hero-img-wrap">
+      <img src="images/Image_VTAR_002_LAnding_v001.png" alt="Modern Bond" />
+    </div>
+
+    <div class="hero-top-fade"></div>
+    <div class="hero-bottom-fade"></div>
+
+    <!-- Pink bloom under characters -->
+    <div class="hero-bloom"></div>
+
+    <!-- Side labels -->
+    <div class="hero-side hero-side-left">⚡ Modern Intimacy Coaching for Individuals + Couples ⚡</div>
+    <div class="hero-side hero-side-right">Coaching / Content / Community / Products / Experiences</div>
+
+    <!-- Main headline content -->
+    <div class="hero-content">
+      <img src="images/Tagline_001_v002.png" alt="Unlock Your Best S*x Life" class="hero-tagline-img reveal" />
+      <div class="hero-supertitle reveal d1">⚡ Next-Generation Intimacy Platform ⚡</div>
+
+      <div class="hero-ctas reveal d2">
+        <a href="#join" class="btn-pink">Begin Your Journey</a>
+        <a href="#coaching" class="btn-outline">Explore Coaching</a>
+      </div>
+    </div>
+
+
+    <!-- Scroll line -->
+    <div class="scroll-line">
+      <div class="scroll-bar"></div>
+    </div>
+  </section>
+
+  <!-- ═══ PINK BAND MARQUEE ════════════════════════════════════════ -->
+  <div class="marquee-outer mq-band">
+    <div class="marquee-track rev">
+      <div style="display:inline-flex;align-items:center;gap:32px;padding:0 32px;">
+        <span class="mq-word">Intimacy</span><span class="mq-dot"></span>
+        <span class="mq-word">Connection</span><span class="mq-dot"></span>
+        <span class="mq-word">Coaching</span><span class="mq-dot"></span>
+        <span class="mq-word">Confidence</span><span class="mq-dot"></span>
+        <span class="mq-word">Community</span><span class="mq-dot"></span>
+        <span class="mq-word">Growth</span><span class="mq-dot"></span>
+        <span class="mq-word">Experience</span><span class="mq-dot"></span>
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:32px;padding:0 32px;" aria-hidden="true">
+        <span class="mq-word">Intimacy</span><span class="mq-dot"></span>
+        <span class="mq-word">Connection</span><span class="mq-dot"></span>
+        <span class="mq-word">Coaching</span><span class="mq-dot"></span>
+        <span class="mq-word">Confidence</span><span class="mq-dot"></span>
+        <span class="mq-word">Community</span><span class="mq-dot"></span>
+        <span class="mq-word">Growth</span><span class="mq-dot"></span>
+        <span class="mq-word">Experience</span><span class="mq-dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ BIG MARQUEE ══════════════════════════════════════════════ -->
+  <div class="marquee-outer" style="padding:36px 0;overflow:hidden;">
+    <div class="marquee-track" style="animation-duration:32s;">
+      <div style="display:inline-flex;align-items:center;gap:16px;">
+        <span class="mq-word">LEARN</span><span class="mq-dot"></span>
+        <span class="mq-word lit">CONNECT</span><span class="mq-dot"></span>
+        <span class="mq-word">DISCOVER</span><span class="mq-dot"></span>
+        <span class="mq-word lit">EXPERIENCE</span><span class="mq-dot"></span>
+        <span class="mq-word">GROW</span><span class="mq-dot"></span>
+        <span class="mq-word lit">BOND</span><span class="mq-dot"></span>
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:16px;" aria-hidden="true">
+        <span class="mq-word">LEARN</span><span class="mq-dot"></span>
+        <span class="mq-word lit">CONNECT</span><span class="mq-dot"></span>
+        <span class="mq-word">DISCOVER</span><span class="mq-dot"></span>
+        <span class="mq-word lit">EXPERIENCE</span><span class="mq-dot"></span>
+        <span class="mq-word">GROW</span><span class="mq-dot"></span>
+        <span class="mq-word lit">BOND</span><span class="mq-dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ABOUT ════════════════════════════════════════════════════ -->
+  <section id="about">
+    <div class="about-bg"></div>
+    <div class="tex"></div>
+    <div class="about-grid">
+      <div>
+        <div class="sec-label reveal">Who We Are</div>
+        <h2 class="about-h2 reveal d1">
+          Built for<br/>
+          <span>Modern</span>
+          Intimacy
+        </h2>
+        <div class="about-body reveal d2">
+          <p>Modern Bond is where intimacy meets intention. We believe real connection — with yourself and with others — is a skill that can be <strong>learned, practiced, and deepened.</strong></p>
+          <p>We created one platform where education, community, curated tools, and transformative experiences come together to support you at every stage of your journey.</p>
+          <p>Whether you're building confidence, deepening a relationship, or simply learning to connect more authentically — <strong>Modern Bond is built for you.</strong></p>
+        </div>
+        <div class="about-values reveal d3">
+          <div class="val">Trust &amp; Safety First</div>
+          <div class="val">Expert-Led Guidance</div>
+          <div class="val">Curated Community</div>
+          <div class="val">Privacy by Design</div>
+          <div class="val">Modern &amp; Unapologetic</div>
+        </div>
+      </div>
+      <div class="about-right reveal d2">
+        <div class="about-logo-wrap">
+          <img src="images/ABOUT_Image_001_v014.png" alt="A New Standard for Deeper Intimacy" />
+        </div>
+        <div class="about-stats">
+          <div class="stat-box">
+            <span class="stat-n">8</span>
+            <span class="stat-l">Experiences</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-n">1:1</span>
+            <span class="stat-l">Coaching</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-n">∞</span>
+            <span class="stat-l">Growth</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ COACHING ══════════════════════════════════════════════════ -->
+  <section id="coaching">
+    <div class="coaching-bg"></div>
+    <div class="tex"></div>
+    <div class="coaching-inner">
+      <div class="coaching-top">
+        <h2 class="coaching-h2 reveal">
+          Guides<br/>&amp; <span>Coaching</span>
+        </h2>
+        <div class="coaching-intro reveal d1">
+          <p>Intimacy doesn't just happen. It is built through <strong>trust, communication, curiosity, and practice.</strong></p>
+          <p style="margin-top:14px;">The stronger the connection, the stronger the experience. This is where you learn, ask real questions, and develop the skills to connect with clarity and confidence.</p>
+        </div>
+      </div>
+
+      <div class="coaching-grid">
+        <div class="c-card reveal">
+          <div class="c-card-text">
+            <div class="c-num">01</div>
+            <div class="c-title">1:1 Coaching</div>
+            <div class="c-desc">Private, focused sessions for personal guidance and lasting clarity.</div>
+          </div>
+          <div class="c-card-img"><img src="images/1on1Icon_v003.png" alt="" class="c-card-icon" /></div>
+        </div>
+        <div class="c-card reveal d1">
+          <div class="c-card-text">
+            <div class="c-num">02</div>
+            <div class="c-title">Couples Coaching</div>
+            <div class="c-desc">Better communication, deeper understanding, stronger connection.</div>
+          </div>
+          <div class="c-card-img"><img src="images/CouplesC_Icon_v003.png" alt="" class="c-card-icon" /></div>
+        </div>
+        <div class="c-card reveal d2">
+          <div class="c-card-text">
+            <div class="c-num">03</div>
+            <div class="c-title">Group Coaching</div>
+            <div class="c-desc">Shared learning in a curated group of like-minded people.</div>
+          </div>
+          <div class="c-card-img"><img src="images/GroupC_Icon_v003.png" alt="" class="c-card-icon" /></div>
+        </div>
+        <div class="c-card reveal d3">
+          <div class="c-card-text">
+            <div class="c-num">04</div>
+            <div class="c-title">Scenario Coaching</div>
+            <div class="c-desc">What to say and how to handle real-life moments with confidence.</div>
+          </div>
+          <div class="c-card-img"><img src="images/ScenarioC_Icon_v003.png" alt="" class="c-card-icon" /></div>
+        </div>
+      </div>
+
+      <div class="coaching-feat reveal">
+        <div>
+          <div class="sec-label">Our Promise</div>
+          <p class="feat-quote">"Coaching designed to help you <span>communicate better</span>, connect deeper, and feel more confident in real-life situations."</p>
+          <div style="margin-top:36px;">
+            <a href="#join" class="btn-pink">Book a Session</a>
+          </div>
+        </div>
+        <div class="feat-items">
+          <div class="feat-item"><span class="feat-arrow">→</span><div class="feat-text"><strong>For Individuals</strong>Build confidence, clarity, and real-world communication skills.</div></div>
+          <div class="feat-item"><span class="feat-arrow">→</span><div class="feat-text"><strong>For Couples</strong>Deepen trust, improve communication, and strengthen your bond.</div></div>
+          <div class="feat-item"><span class="feat-arrow">→</span><div class="feat-text"><strong>For Groups</strong>Learn alongside others navigating similar journeys.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ REVERSE MARQUEE ══════════════════════════════════════════ -->
+  <div class="marquee-outer" style="padding:36px 0;overflow:hidden;border-top:1px solid rgba(233,30,140,.08);border-bottom:1px solid rgba(233,30,140,.08);">
+    <div class="marquee-track rev">
+      <div style="display:inline-flex;align-items:center;gap:16px;">
+        <span class="mq-word lit">INTIMACY</span><span class="mq-dot"></span>
+        <span class="mq-word">TRUST</span><span class="mq-dot"></span>
+        <span class="mq-word lit">COMMUNICATION</span><span class="mq-dot"></span>
+        <span class="mq-word">CONFIDENCE</span><span class="mq-dot"></span>
+        <span class="mq-word lit">GROWTH</span><span class="mq-dot"></span>
+        <span class="mq-word">PLEASURE</span><span class="mq-dot"></span>
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:16px;" aria-hidden="true">
+        <span class="mq-word lit">INTIMACY</span><span class="mq-dot"></span>
+        <span class="mq-word">TRUST</span><span class="mq-dot"></span>
+        <span class="mq-word lit">COMMUNICATION</span><span class="mq-dot"></span>
+        <span class="mq-word">CONFIDENCE</span><span class="mq-dot"></span>
+        <span class="mq-word lit">GROWTH</span><span class="mq-dot"></span>
+        <span class="mq-word">PLEASURE</span><span class="mq-dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ COMMUNITY ════════════════════════════════════════════════ -->
+  <section id="community">
+    <div class="community-bg"></div>
+    <div class="tex"></div>
+    <div class="community-inner">
+      <div class="community-hero">
+        <!-- Left image -->
+        <div class="community-hero-img-wrap reveal">
+          <img src="images/COMUNITY_Image_001_v006-1.png" alt="Community" class="community-hero-img" />
+        </div>
+
+        <!-- Centre: label + headline + desc -->
+        <div class="community-hero-center">
+          <div class="sec-label reveal" style="justify-content:center;">A Refined Space</div>
+          <h2 class="community-h2 reveal d1">
+            <span class="out">COM</span><span class="pink-fill">MUNI</span><span class="fill">TY</span>
+          </h2>
+          <p class="community-desc reveal d2" style="margin-bottom:0;">
+            A curated space for like-minded people to connect, share, and grow together.
+            Private, intentional, and built for real belonging.
+          </p>
+        </div>
+
+        <!-- Right image -->
+        <div class="community-hero-img-wrap reveal">
+          <img src="images/COMUNITY_Image_001_v006-2.png" alt="Community" class="community-hero-img" />
+        </div>
+      </div>
+      <div class="pillars">
+        <div class="pillar reveal">
+          <div class="pillar-img-wrap">
+            <img src="images/CONNECT_Icon_v002.png" alt="" class="pillar-img" />
+          </div>
+          <div class="pillar-content">
+            <div class="pillar-n">01</div>
+            <div class="pillar-title">Connect</div>
+            <div class="pillar-desc">Meet people on the same path — curious, intentional, and ready to grow. Our community is curated, not just collected.</div>
+            <a href="#join" class="pillar-link">Join the Circle →</a>
+          </div>
+        </div>
+        <div class="pillar reveal d1">
+          <div class="pillar-img-wrap">
+            <img src="images/SHARE_Icon_v002.png" alt="" class="pillar-img" />
+          </div>
+          <div class="pillar-content">
+            <div class="pillar-n">02</div>
+            <div class="pillar-title">Share</div>
+            <div class="pillar-desc">Real conversations, honest experiences, and genuine support. Vulnerability here is met with respect, always.</div>
+            <a href="#join" class="pillar-link">Start Sharing →</a>
+          </div>
+        </div>
+        <div class="pillar reveal d2">
+          <div class="pillar-img-wrap">
+            <img src="images/GROW_Icon_v002.png" alt="" class="pillar-img" />
+          </div>
+          <div class="pillar-content">
+            <div class="pillar-n">03</div>
+            <div class="pillar-title">Grow</div>
+            <div class="pillar-desc">Ongoing engagement, group learning, and shared milestones. Growth is better when it happens together.</div>
+            <a href="#join" class="pillar-link">Begin Growing →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PRODUCTS ══════════════════════════════════════════════════ -->
+  <section id="products">
+    <div class="products-bg"></div>
+    <div class="tex"></div>
+    <div class="products-inner">
+      <div class="products-hdr">
+        <h2 class="products-h2 reveal">The<br/><span>Marketplace</span></h2>
+        <p class="products-sub reveal d1">Curated products and tools selected to elevate intimacy, confidence, and connection. Simple, selective, premium.</p>
+      </div>
+
+      <!-- Row 1: Featured large + 2 small -->
+      <div class="products-row" style="margin-bottom:16px;">
+        <a href="product-connection-journal.html" class="prod-card reveal" style="text-decoration:none;">
+          <div class="prod-vis" style="background:url('images/product_connection_journal.png') center/cover no-repeat;"></div>
+          <div class="prod-overlay"></div>
+          <div class="prod-info">
+            <div class="prod-cat">Featured · Digital</div>
+            <div class="prod-name">Connection Journal</div>
+            <div class="prod-price">$29 — Guided prompts for deeper intimacy</div>
+          </div>
+          <div class="prod-hover"><div class="prod-btn">Shop Now</div></div>
+        </a>
+        <a href="product-ritual-kit.html" class="prod-card reveal d1" style="text-decoration:none;">
+          <div class="prod-vis" style="background:url('images/product_ritual_kit.png') center/cover no-repeat;"></div>
+          <div class="prod-overlay"></div>
+          <div class="prod-info">
+            <div class="prod-cat">Wellness · Physical</div>
+            <div class="prod-name">Ritual Kit</div>
+            <div class="prod-price">$89 — Curated sensory essentials</div>
+          </div>
+          <div class="prod-hover"><div class="prod-btn">Shop Now</div></div>
+        </a>
+        <a href="product-masterclass.html" class="prod-card reveal d2" style="text-decoration:none;">
+          <div class="prod-vis" style="background:url('images/product_masterclass.png') center/cover no-repeat;"></div>
+          <div class="prod-overlay"></div>
+          <div class="prod-info">
+            <div class="prod-cat">Digital · Course</div>
+            <div class="prod-name">Intimacy Masterclass</div>
+            <div class="prod-price">$197 — 8-week immersive program</div>
+          </div>
+          <div class="prod-hover"><div class="prod-btn">Shop Now</div></div>
+        </a>
+      </div>
+
+      <!-- Row 2: 3 equal cards -->
+      <div class="products-row products-row-equal">
+        <a href="product-desire-deck.html" class="prod-card reveal" style="text-decoration:none;">
+          <div class="prod-vis" style="background:url('images/product_desire_deck.png') center/cover no-repeat;"></div>
+          <div class="prod-overlay"></div>
+          <div class="prod-info">
+            <div class="prod-cat">Game · Physical</div>
+            <div class="prod-name">Desire Deck</div>
+            <div class="prod-price">$49 — 60-card intimate couples game</div>
+          </div>
+          <div class="prod-hover"><div class="prod-btn">Shop Now</div></div>
+        </a>
+        <a href="product-bond-oil.html" class="prod-card reveal d1" style="text-decoration:none;">
+          <div class="prod-vis" style="background:url('images/product_bond_oil.png') center/cover no-repeat;"></div>
+          <div class="prod-overlay"></div>
+          <div class="prod-info">
+            <div class="prod-cat">Wellness · Physical</div>
+            <div class="prod-name">Bond Oil Collection</div>
+            <div class="prod-price">$68 — Signature sensory trio</div>
+          </div>
+          <div class="prod-hover"><div class="prod-btn">Shop Now</div></div>
+        </a>
+        <a href="product-couples-blueprint.html" class="prod-card reveal d2" style="text-decoration:none;">
+          <div class="prod-vis" style="background:url('images/product_couples_blueprint.png') center/cover no-repeat;"></div>
+          <div class="prod-overlay"></div>
+          <div class="prod-info">
+            <div class="prod-cat">Digital · Guide</div>
+            <div class="prod-name">Couples Blueprint</div>
+            <div class="prod-price">$79 — The complete relationship guide</div>
+          </div>
+          <div class="prod-hover"><div class="prod-btn">Shop Now</div></div>
+        </a>
+      </div>
+
+      <div style="text-align:center;margin-top:52px;" class="reveal">
+        <a href="product-connection-journal.html" class="btn-outline">Browse All Products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ EXPERIENCES ════════════════════════════════════════════════ -->
+  <section id="experiences">
+    <div class="exp-bg"></div>
+    <div class="tex"></div>
+    <div class="exp-inner">
+      <div class="sec-label reveal" style="justify-content:center;">Exclusive &amp; Curated</div>
+      <h2 class="exp-h2 reveal d1" style="text-align:center;">Experi<span>ences</span></h2>
+      <div class="exp-visual reveal d2">
+        <img src="images/MB_Experiences_v008.png" alt="Modern Bond Experiences" />
+        <div class="exp-cs-overlay">
+          <div class="exp-cs-badge">Coming Soon</div>
+        </div>
+      </div>
+      <div class="exp-coming-soon reveal d3">
+        <p class="exp-cs-copy">We're crafting a series of immersive events, retreats, and curated gatherings designed to deepen connection in real life. Something truly special is on its way.</p>
+        <a href="#join" class="btn-primary">Get Early Access</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTENT ════════════════════════════════════════════════════ -->
+  <section id="content" style="display:none;">
+    <div class="content-bg"></div>
+    <div class="content-inner">
+      <div class="content-top">
+        <h2 class="content-h2 reveal">Editorial<br/>&amp; <span>Content</span></h2>
+        <p class="content-sub reveal d1">Articles, videos, and brand-led learning to support every stage of your journey. Expert perspectives. Real conversations. No fluff.</p>
+      </div>
+      <div class="articles">
+        <div class="art-card reveal">
+          <div class="art-vis"><div class="art-grad ag1"><div class="art-char">T</div></div></div>
+          <div class="art-cat">Relationships · Long Read</div>
+          <div class="art-title">The Trust Paradox: Why Vulnerability Is the Foundation of Real Intimacy</div>
+          <div class="art-meta">8 min read</div>
+        </div>
+        <div class="art-card reveal d1">
+          <div class="art-vis"><div class="art-grad ag2"><div class="art-char">C</div></div></div>
+          <div class="art-cat">Communication · Guide</div>
+          <div class="art-title">How to Have the Conversations That Actually Matter</div>
+          <div class="art-meta">6 min read</div>
+        </div>
+        <div class="art-card reveal d2">
+          <div class="art-vis"><div class="art-grad ag3"><div class="art-char">S</div></div></div>
+          <div class="art-cat">Self-Development · Practice</div>
+          <div class="art-title">Solo Confidence: Building Your Inner Foundation Before You Connect</div>
+          <div class="art-meta">5 min read</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ JOIN ══════════════════════════════════════════════════════ -->
+  <section id="join">
+    <div class="join-bg"></div>
+    <div class="join-glow"></div>
+    <div class="tex"></div>
+    <div class="join-inner">
+      <div class="join-eyebrow reveal">Begin Your Journey</div>
+      <h2 class="join-h2 reveal d1">
+        JOIN<br/><span>Modern Bond</span>
+      </h2>
+      <p class="join-desc reveal d2">
+        Access the full Modern Bond experience — education, community, curated products, and exclusive events. All in one place, built with intention.
+      </p>
+      <div class="join-form reveal d3">
+        <input type="email" class="join-input" placeholder="Your email address" />
+        <button class="join-submit">Join Waitlist</button>
+      </div>
+      <div class="join-note reveal d4">Private. Curated. No spam, ever.</div>
+
+      <div class="tiers">
+        <div class="tier reveal">
+          <div class="tier-name">Explorer</div>
+          <div class="tier-price">Free <span>/ always</span></div>
+          <ul class="tier-feats">
+            <li>Editorial content access</li>
+            <li>Community forum (read)</li>
+            <li>Monthly newsletter</li>
+            <li>Public events</li>
+          </ul>
+          <a href="#" class="tier-btn">Get Started</a>
+        </div>
+        <div class="tier feat reveal d1">
+          <div class="tier-badge">⚡ Most Popular</div>
+          <div class="tier-name">Member</div>
+          <div class="tier-price">$49 <span>/ month</span></div>
+          <ul class="tier-feats">
+            <li>Everything in Explorer</li>
+            <li>Full community access</li>
+            <li>Group coaching sessions</li>
+            <li>Workshop discounts</li>
+            <li>Curated product access</li>
+            <li>Monthly AMA / Office Hours</li>
+          </ul>
+          <a href="#" class="tier-btn">Become a Member</a>
+        </div>
+        <div class="tier reveal d2">
+          <div class="tier-name">Inner Circle</div>
+          <div class="tier-price">$149 <span>/ month</span></div>
+          <ul class="tier-feats">
+            <li>Everything in Member</li>
+            <li>Monthly 1:1 coaching</li>
+            <li>Private community</li>
+            <li>Priority event access</li>
+            <li>Exclusive experiences</li>
+            <li>Direct coach messaging</li>
+          </ul>
+          <a href="#" class="tier-btn">Apply Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="images/LogoAvatar_001_v001.jpg" alt="Modern Bond" style="mix-blend-mode:screen;" />
+          </div>
+          <p>A next-generation platform for modern intimacy, connection, and personal growth. Learn, connect, discover, and experience with intention.</p>
+        </div>
+        <div>
+          <div class="footer-col-h">Platform</div>
+          <ul class="footer-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#coaching">Coaching</a></li>
+            <li><a href="#content">Content</a></li>
+            <li><a href="#community">Community</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-h">Explore</div>
+          <ul class="footer-links">
+            <li><a href="#products">Products</a></li>
+            <li><a href="#experiences">Experiences</a></li>
+            <li><a href="#join">Join</a></li>
+            <li><a href="#join">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-h">Connect</div>
+          <ul class="footer-links">
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">TikTok</a></li>
+            <li><a href="#">YouTube</a></li>
+            <li><a href="#">Spotify</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2024 Modern Bond. All rights reserved.</div>
+        <div class="footer-soc">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Hero parallax
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      const bgWord = document.querySelector('.hero-title-behind');
+      if (bgWord) bgWord.style.transform = `translate(-50%, calc(-50% + ${y * 0.22}px))`;
+      const bloom = document.querySelector('.hero-bloom');
+      if (bloom) bloom.style.transform = `translateX(-50%) translateY(${y * 0.15}px)`;
+    }, { passive: true });
+
+    // Subtle mouse parallax on hero bloom
+    document.addEventListener('mousemove', e => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 40;
+      const y = (e.clientY / window.innerHeight - 0.5) * 24;
+      const bloom = document.querySelector('.hero-bloom');
+      if (bloom) bloom.style.transform = `translateX(calc(-50% + ${x}px)) translateY(${y}px)`;
+    });
+  </script>
+</body>
+</html>
