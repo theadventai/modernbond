@@ -26,7 +26,7 @@ document.querySelectorAll('[id^="prod-cta"]').forEach(btn => {
     this.style.background = '#2e0d48';
     setTimeout(() => {
       this.textContent = this.dataset.orig || this.textContent;
-      window.location.href = 'modern-bond.html#join';
+      window.location.href = 'index.html#join';
     }, 1000);
   });
   btn.dataset.orig = btn.textContent;
