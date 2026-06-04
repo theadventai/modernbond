@@ -1,3 +1,135 @@
+/* ─── Snipcart dark theme — Modern Bond ──────────────────────── */
+#snipcart {
+  --color-default:               #ffffff;
+  --color-alt:                   rgba(255,255,255,0.55);
+  --color-success:               #e91e8c;
+  --color-error:                 #ff4466;
+  --color-badge:                 #e91e8c;
+  --color-badge-active:          #f548a8;
+  --color-badge-foreground:      #ffffff;
+  --color-input-focus:           #e91e8c;
+  --color-link:                  #e91e8c;
+  --color-link-hover:            #f548a8;
+  --color-button-default:        #e91e8c;
+  --color-button-default-hover:  #f548a8;
+  --color-button-primary:        #e91e8c;
+  --color-button-primary-hover:  #f548a8;
+  --color-icon:                  rgba(255,255,255,0.45);
+  --color-icon-hover:            #e91e8c;
+  --color-shadow:                rgba(0,0,0,0.85);
+  --color-input:                 rgba(255,255,255,0.06);
+  --color-input-placeholder:     rgba(255,255,255,0.3);
+  --color-input-label:           rgba(255,255,255,0.5);
+  --border-radius:               0px;
+  --border-radius-button:        0px;
+}
+
+/* Dark background — panels, cart, checkout */
+.snipcart-layout,
+.snipcart-layout__col,
+.snipcart-layout__content,
+.snipcart-cart,
+.snipcart-cart__content,
+.snipcart-cart__header,
+.snipcart-cart__footer,
+.snipcart-order,
+.snipcart-checkout,
+.snipcart-base-popup,
+.snipcart__modal,
+.snipcart__modal__container {
+  background: #0c0612 !important;
+  color: #ffffff !important;
+}
+
+/* Slightly lighter surface for items and panels */
+.snipcart-item-line,
+.snipcart-summary-fees,
+.snipcart-shipping-rates-list__item,
+.snipcart-payment-methods-list__item,
+.snipcart-discount-box,
+.snipcart-typeahead {
+  background: #100818 !important;
+  border-color: rgba(233,30,140,0.15) !important;
+}
+
+/* Input fields */
+.snipcart-input,
+.snipcart-textbox,
+.snipcart-select__select,
+input[class*="snipcart"],
+textarea[class*="snipcart"] {
+  background: #1a0820 !important;
+  border-color: rgba(233,30,140,0.3) !important;
+  color: #ffffff !important;
+}
+.snipcart-input:focus,
+.snipcart-textbox:focus {
+  border-color: #e91e8c !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(233,30,140,0.2) !important;
+}
+
+/* Dividers & borders */
+.snipcart__hr,
+.snipcart-item-line + .snipcart-item-line {
+  border-color: rgba(233,30,140,0.12) !important;
+}
+
+/* Pink highlights — prices, totals, product names */
+.snipcart-item-line__title,
+.snipcart-summary-fees__amount,
+.snipcart-summary-fees__amount--highlight,
+.snipcart-order__summary-price,
+.snipcart-cart-header__count,
+.snipcart-cart__secondary-header-title {
+  color: #e91e8c !important;
+}
+
+/* All other text — white */
+.snipcart-layout *,
+.snipcart__modal * {
+  color: inherit;
+}
+
+/* Close / back buttons */
+.snipcart-modal__close-icon,
+.snipcart-form-step__arrow {
+  color: rgba(255,255,255,0.5) !important;
+}
+.snipcart-modal__close-icon:hover,
+.snipcart-form-step__arrow:hover {
+  color: #e91e8c !important;
+}
+
+/* Overlay backdrop */
+.snipcart__overlay {
+  background: rgba(12,6,18,0.85) !important;
+}
+
+/* Scrollbar */
+.snipcart-layout ::-webkit-scrollbar { width: 4px; }
+.snipcart-layout ::-webkit-scrollbar-track { background: #0c0612; }
+.snipcart-layout ::-webkit-scrollbar-thumb { background: rgba(233,30,140,0.4); border-radius: 2px; }
+.nav-cart {
+  background: transparent;
+  border: 1px solid rgba(233,30,140,.5);
+  color: #ffffff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase;
+  padding: 10px 20px; cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  transition: all .3s;
+  clip-path: polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+}
+.nav-cart:hover { border-color: #e91e8c; color: #e91e8c; }
+.snipcart-items-count {
+  background: #e91e8c; color: white; border-radius: 50%;
+  width: 18px; height: 18px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700;
+}
+
 /* ─── Reset ──────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -32,6 +164,32 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--pink); }
 a { text-decoration: none; color: inherit; }
+
+/* ─── Breadcrumb bar ─────────────────────────────────────────── */
+.prod-breadcrumb-bar {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-body);
+  font-size: 12px; font-weight: 300;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.prod-breadcrumb-bar a { color: var(--muted); transition: color .25s; }
+.prod-breadcrumb-bar a:hover { color: var(--pink); }
+.bc-sep { color: rgba(255,255,255,.2); font-size: 10px; }
+.bc-current { color: var(--white); }
+
+/* ─── Product tagline ────────────────────────────────────────── */
+.prod-tagline {
+  font-family: var(--font-cond);
+  font-size: 16px; font-weight: 600;
+  font-style: italic;
+  color: var(--pink);
+  letter-spacing: .05em;
+  margin-bottom: 16px;
+}
 
 /* ─── Diagonal texture overlay ───────────────────────────────── */
 .tex {
@@ -246,6 +404,27 @@ nav.scrolled {
   border: 1px solid rgba(233,30,140,.3);
   padding: 6px 14px;
   background: rgba(233,30,140,.05);
+}
+
+/* Thumbnail gallery strip */
+.prod-thumb-strip {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-top: 12px;
+}
+.prod-thumb {
+  width: 72px; height: 72px; object-fit: cover;
+  border: 2px solid transparent;
+  cursor: pointer; opacity: .65;
+  transition: border-color .25s, opacity .25s;
+}
+.prod-thumb:hover { opacity: 1; }
+.prod-thumb.active {
+  border-color: var(--pink);
+  box-shadow: 0 0 10px var(--pink-glow);
+  opacity: 1;
+}
+.prod-main-img {
+  transition: opacity .25s ease;
 }
 
 /* Info column */

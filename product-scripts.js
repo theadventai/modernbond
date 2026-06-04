@@ -18,16 +18,23 @@ window.addEventListener('load', () => {
   }
 });
 
-// Add to cart button pulse on click
-document.querySelectorAll('[id^="prod-cta"]').forEach(btn => {
-  btn.addEventListener('click', function(e) {
-    e.preventDefault();
-    this.textContent = '✓ Added!';
-    this.style.background = '#2e0d48';
-    setTimeout(() => {
-      this.textContent = this.dataset.orig || this.textContent;
-      window.location.href = 'index.html#join';
-    }, 1000);
+// Cart handled by Snipcart
+
+// Image gallery — thumbnail swap
+document.querySelectorAll('.prod-img-col').forEach(col => {
+  const mainImg = col.querySelector('.prod-main-img');
+  const thumbs  = col.querySelectorAll('.prod-thumb');
+  if (!mainImg || !thumbs.length) return;
+  thumbs.forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      mainImg.style.opacity = '0';
+      setTimeout(() => {
+        mainImg.src = thumb.src;
+        mainImg.style.opacity = '1';
+      }, 150);
+      thumbs.forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+    });
   });
-  btn.dataset.orig = btn.textContent;
+  thumbs[0].classList.add('active');
 });

@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="product-styles.css" />
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.css" />
 </head>
 <body>
   <nav id="nav">
@@ -21,7 +22,8 @@
       <li><a href="index.html#products" class="nav-active">Marketplace</a></li>
       <li><a href="index.html#experiences">Experiences</a></li>
     </ul>
-    <div class="nav-cta">
+    <div class="nav-cta" style="display:flex;align-items:center;gap:12px;">
+      <button class="snipcart-checkout nav-cart">🛒 <span class="snipcart-items-count">0</span></button>
       <a href="index.html#join" class="btn-pink" style="padding:12px 32px;font-size:11px;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);">Join Now</a>
     </div>
   </nav>
@@ -43,6 +45,7 @@
     <div class="prod-detail-bg"></div>
     <div class="tex"></div>
     <div class="prod-detail-inner">
+
       <div class="prod-detail-grid">
         <div class="prod-img-col reveal">
           <div class="prod-img-wrap">
@@ -61,7 +64,8 @@
             <span class="prod-price-main">$89</span>
             <span class="prod-price-note">Free shipping on orders over $75</span>
           </div>
-          <p class="prod-desc reveal d2">A carefully curated collection of premium sensory essentials — designed to help you slow down, be present, and create an environment where real connection can flourish. Everything you need to turn an ordinary evening into an intentional experience.</p>
+                    <p class="prod-tagline reveal d2">Set the scene. Elevate the moment.</p>
+          <p class="prod-desc reveal d3">A carefully curated collection of premium sensory essentials — designed to help you slow down, be present, and create an environment where real connection can flourish. Everything you need to turn an ordinary evening into an intentional experience.</p>
           <ul class="prod-features reveal d3">
             <li><span class="feat-icon">⚡</span><div><strong>Signature Candle</strong> Hand-poured sandalwood, amber, and bergamot blend</div></li>
             <li><span class="feat-icon">⚡</span><div><strong>Aromatic Body Oil</strong> Lightweight formula with rose and jasmine</div></li>
@@ -165,6 +169,8 @@
       </div>
     </div>
   </footer>
+  <div hidden id="snipcart" data-api-key="NTE5N2MzNGYtMTZmMy00NDg4LTkyZDUtM2Y0ZmVmZWJlOTVjNjM5MTU5NzY3MTEwNjEzMzUw"></div>
+  <script async src="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.js"></script>
   <script src="product-scripts.js"></script>
 </body>
 </html>

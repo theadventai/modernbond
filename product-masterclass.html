@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="product-styles.css" />
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.css" />
 </head>
 <body>
   <nav id="nav">
@@ -21,7 +22,8 @@
       <li><a href="index.html#products" class="nav-active">Marketplace</a></li>
       <li><a href="index.html#experiences">Experiences</a></li>
     </ul>
-    <div class="nav-cta">
+    <div class="nav-cta" style="display:flex;align-items:center;gap:12px;">
+      <button class="snipcart-checkout nav-cart">🛒 <span class="snipcart-items-count">0</span></button>
       <a href="index.html#join" class="btn-pink" style="padding:12px 32px;font-size:11px;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);">Join Now</a>
     </div>
   </nav>
@@ -43,6 +45,7 @@
     <div class="prod-detail-bg"></div>
     <div class="tex"></div>
     <div class="prod-detail-inner">
+
       <div class="prod-detail-grid">
         <div class="prod-img-col reveal">
           <div class="prod-img-wrap">
@@ -61,7 +64,8 @@
             <span class="prod-price-main">$197</span>
             <span class="prod-price-note">Lifetime access · 8-week self-paced program</span>
           </div>
-          <p class="prod-desc reveal d2">The Intimacy Masterclass is Modern Bond's most comprehensive educational offering — an 8-week immersive digital program that takes you from foundational self-awareness to advanced communication and connection skills. Expert-led. Deeply transformative.</p>
+                    <p class="prod-tagline reveal d2">Eight weeks. Total transformation.</p>
+          <p class="prod-desc reveal d3">The Intimacy Masterclass is Modern Bond's most comprehensive educational offering — an 8-week immersive digital program that takes you from foundational self-awareness to advanced communication and connection skills. Expert-led. Deeply transformative.</p>
           <ul class="prod-features reveal d3">
             <li><span class="feat-icon">⚡</span><div><strong>8 Modules</strong> Covering self-awareness, communication, desire, boundaries, and deeper bonding</div></li>
             <li><span class="feat-icon">⚡</span><div><strong>40+ Video Lessons</strong> Expert-led, concise, and immediately actionable</div></li>
@@ -165,6 +169,8 @@
       </div>
     </div>
   </footer>
+  <div hidden id="snipcart" data-api-key="NTE5N2MzNGYtMTZmMy00NDg4LTkyZDUtM2Y0ZmVmZWJlOTVjNjM5MTU5NzY3MTEwNjEzMzUw"></div>
+  <script async src="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.js"></script>
   <script src="product-scripts.js"></script>
 </body>
 </html>

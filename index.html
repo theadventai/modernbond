@@ -1169,6 +1169,98 @@
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
     }
   </style>
+  <!-- Snipcart -->
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.css" />
+  <style>
+    /* ─── Snipcart dark theme — Modern Bond ─────────────────────── */
+    #snipcart {
+      --color-default:               #ffffff;
+      --color-alt:                   rgba(255,255,255,0.55);
+      --color-success:               #e91e8c;
+      --color-error:                 #ff4466;
+      --color-badge:                 #e91e8c;
+      --color-badge-active:          #f548a8;
+      --color-badge-foreground:      #ffffff;
+      --color-input-focus:           #e91e8c;
+      --color-link:                  #e91e8c;
+      --color-link-hover:            #f548a8;
+      --color-button-default:        #e91e8c;
+      --color-button-default-hover:  #f548a8;
+      --color-button-primary:        #e91e8c;
+      --color-button-primary-hover:  #f548a8;
+      --color-buttonDanger:          #e91e8c;
+      --color-icon:                  rgba(255,255,255,0.45);
+      --color-icon-hover:            #e91e8c;
+      --color-shadow:                rgba(0,0,0,0.85);
+      --color-input:                 rgba(255,255,255,0.06);
+      --color-input-placeholder:     rgba(255,255,255,0.3);
+      --color-input-label:           rgba(255,255,255,0.5);
+      --border-radius:               0px;
+      --border-radius-button:        0px;
+    }
+    .snipcart-layout,
+    .snipcart-layout__col,
+    .snipcart-layout__content,
+    .snipcart-cart,
+    .snipcart-cart__content,
+    .snipcart-cart__header,
+    .snipcart-cart__footer,
+    .snipcart-order,
+    .snipcart-checkout,
+    .snipcart-base-popup,
+    .snipcart__modal,
+    .snipcart__modal__container { background: #0c0612 !important; color: #ffffff !important; }
+    .snipcart-item-line,
+    .snipcart-summary-fees,
+    .snipcart-shipping-rates-list__item,
+    .snipcart-payment-methods-list__item,
+    .snipcart-discount-box,
+    .snipcart-typeahead { background: #100818 !important; border-color: rgba(233,30,140,0.15) !important; }
+    .snipcart-input, .snipcart-textbox, .snipcart-select__select,
+    input[class*="snipcart"], textarea[class*="snipcart"] {
+      background: #1a0820 !important; border-color: rgba(233,30,140,0.3) !important; color: #ffffff !important;
+    }
+    .snipcart-input:focus, .snipcart-textbox:focus {
+      border-color: #e91e8c !important; box-shadow: 0 0 0 2px rgba(233,30,140,0.2) !important;
+    }
+    .snipcart__hr, .snipcart-item-line + .snipcart-item-line { border-color: rgba(233,30,140,0.12) !important; }
+    .snipcart-item-line__title,
+    .snipcart-summary-fees__amount,
+    .snipcart-summary-fees__amount--highlight,
+    .snipcart-order__summary-price,
+    .snipcart-cart-header__count,
+    .snipcart-cart__secondary-header-title { color: #e91e8c !important; }
+    .snipcart-modal__close-icon, .snipcart-form-step__arrow { color: rgba(255,255,255,0.5) !important; }
+    .snipcart-modal__close-icon:hover, .snipcart-form-step__arrow:hover { color: #e91e8c !important; }
+    .snipcart__overlay { background: rgba(12,6,18,0.85) !important; }
+    .snipcart__modal__container { font-family: 'Barlow', sans-serif; }
+    .snipcart-layout ::-webkit-scrollbar { width: 4px; }
+    .snipcart-layout ::-webkit-scrollbar-track { background: #0c0612; }
+    .snipcart-layout ::-webkit-scrollbar-thumb { background: rgba(233,30,140,0.4); border-radius: 2px; }
+
+    /* ─── Nav cart button ──────────────────────────────────────── */
+    .nav-cart {
+      background: transparent;
+      border: 1px solid rgba(233,30,140,.5);
+      color: var(--white);
+      font-family: var(--font-cond);
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .15em; text-transform: uppercase;
+      padding: 10px 20px; cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all .3s;
+      clip-path: polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+    }
+    .nav-cart:hover { border-color: var(--pink); color: var(--pink); }
+    .snipcart-items-count {
+      background: var(--pink);
+      color: white;
+      border-radius: 50%;
+      width: 18px; height: 18px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700;
+    }
+  </style>
 </head>
 <body>
 
@@ -1184,7 +1276,8 @@
       <li><a href="#products">Marketplace</a></li>
       <li><a href="#experiences">Experiences</a></li>
     </ul>
-    <div class="nav-cta">
+    <div class="nav-cta" style="display:flex;align-items:center;gap:12px;">
+      <button class="snipcart-checkout nav-cart">🛒 <span class="snipcart-items-count">0</span></button>
       <a href="#join" class="btn-pink" style="padding:12px 32px;font-size:11px;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);">Join Now</a>
     </div>
   </nav>
@@ -1485,76 +1578,76 @@
         <p class="products-sub reveal d1">Curated products and tools selected to elevate intimacy, confidence, and connection. Simple, selective, premium.</p>
       </div>
 
-      <!-- Row 1: Featured large + 2 small -->
+      <!-- Row 1 -->
       <div class="products-row" style="margin-bottom:16px;">
-        <a href="product-connection-journal.html" class="prod-card reveal" style="text-decoration:none;">
-          <div class="prod-vis" style="background:url('images/product_connection_journal.png') center/cover no-repeat;"></div>
+        <a href="product-prone-pillow.html" class="prod-card reveal" style="text-decoration:none;">
+          <div class="prod-vis" style="background:url('marketplace/bed_prone_pillow/H1df4cc2dd8e44d2184e1c7bb94e168112.png') center/cover no-repeat;"></div>
           <div class="prod-overlay"></div>
           <div class="prod-info">
-            <div class="prod-cat">Featured · Digital</div>
-            <div class="prod-name">Connection Journal</div>
-            <div class="prod-price">$29 — Guided prompts for deeper intimacy</div>
+            <div class="prod-cat">Intimacy · Physical</div>
+            <div class="prod-name">Prone Pillow</div>
+            <div class="prod-price">$89 — Better angles, deeper connection</div>
           </div>
           <div class="prod-hover"><div class="prod-btn">Shop Now</div></div>
         </a>
-        <a href="product-ritual-kit.html" class="prod-card reveal d1" style="text-decoration:none;">
-          <div class="prod-vis" style="background:url('images/product_ritual_kit.png') center/cover no-repeat;"></div>
+        <a href="product-blanket.html" class="prod-card reveal d1" style="text-decoration:none;">
+          <div class="prod-vis" style="background:url('marketplace/blanket/71yzQ2pPsZL._AC_SL1500_.jpg') center/cover no-repeat;"></div>
+          <div class="prod-overlay"></div>
+          <div class="prod-info">
+            <div class="prod-cat">Comfort · Physical</div>
+            <div class="prod-name">The Intimacy Blanket</div>
+            <div class="prod-price">$79 — Wrap yourself in warmth</div>
+          </div>
+          <div class="prod-hover"><div class="prod-btn">Shop Now</div></div>
+        </a>
+        <a href="product-coconu-lube.html" class="prod-card reveal d2" style="text-decoration:none;">
+          <div class="prod-vis" style="background:url('marketplace/coconu_lube/199d028f2c536b67d510e5e4d1319475f737b048c9124eb485b1a56234bb3c3b.webp') center/cover no-repeat;"></div>
           <div class="prod-overlay"></div>
           <div class="prod-info">
             <div class="prod-cat">Wellness · Physical</div>
-            <div class="prod-name">Ritual Kit</div>
-            <div class="prod-price">$89 — Curated sensory essentials</div>
-          </div>
-          <div class="prod-hover"><div class="prod-btn">Shop Now</div></div>
-        </a>
-        <a href="product-masterclass.html" class="prod-card reveal d2" style="text-decoration:none;">
-          <div class="prod-vis" style="background:url('images/product_masterclass.png') center/cover no-repeat;"></div>
-          <div class="prod-overlay"></div>
-          <div class="prod-info">
-            <div class="prod-cat">Digital · Course</div>
-            <div class="prod-name">Intimacy Masterclass</div>
-            <div class="prod-price">$197 — 8-week immersive program</div>
+            <div class="prod-name">Coconu Lube</div>
+            <div class="prod-price">$32 — Natural, body-safe, deeply luxurious</div>
           </div>
           <div class="prod-hover"><div class="prod-btn">Shop Now</div></div>
         </a>
       </div>
 
-      <!-- Row 2: 3 equal cards -->
+      <!-- Row 2 -->
       <div class="products-row products-row-equal">
-        <a href="product-desire-deck.html" class="prod-card reveal" style="text-decoration:none;">
-          <div class="prod-vis" style="background:url('images/product_desire_deck.png') center/cover no-repeat;"></div>
-          <div class="prod-overlay"></div>
-          <div class="prod-info">
-            <div class="prod-cat">Game · Physical</div>
-            <div class="prod-name">Desire Deck</div>
-            <div class="prod-price">$49 — 60-card intimate couples game</div>
-          </div>
-          <div class="prod-hover"><div class="prod-btn">Shop Now</div></div>
-        </a>
-        <a href="product-bond-oil.html" class="prod-card reveal d1" style="text-decoration:none;">
-          <div class="prod-vis" style="background:url('images/product_bond_oil.png') center/cover no-repeat;"></div>
+        <a href="product-matchmaker-candle.html" class="prod-card reveal" style="text-decoration:none;">
+          <div class="prod-vis" style="background:url('marketplace/matchmaker_candle/0fdc14e45f3ac6980861ae5510ddb0e30863661da4f957a7cd8da3e51fd89d17.webp') center/cover no-repeat;"></div>
           <div class="prod-overlay"></div>
           <div class="prod-info">
             <div class="prod-cat">Wellness · Physical</div>
-            <div class="prod-name">Bond Oil Collection</div>
-            <div class="prod-price">$68 — Signature sensory trio</div>
+            <div class="prod-name">Matchmaker Candle</div>
+            <div class="prod-price">$38 — Light it. Let it melt. Feel everything.</div>
           </div>
           <div class="prod-hover"><div class="prod-btn">Shop Now</div></div>
         </a>
-        <a href="product-couples-blueprint.html" class="prod-card reveal d2" style="text-decoration:none;">
-          <div class="prod-vis" style="background:url('images/product_couples_blueprint.png') center/cover no-repeat;"></div>
+        <a href="product-raunchier-together.html" class="prod-card reveal d1" style="text-decoration:none;">
+          <div class="prod-vis" style="background:url('marketplace/raunchier_together_cardgame/d90558aa95a6f655a940ebf66407c0e504bffd144930912edad9d7970fdec298.webp') center/cover no-repeat;"></div>
           <div class="prod-overlay"></div>
           <div class="prod-info">
-            <div class="prod-cat">Digital · Guide</div>
-            <div class="prod-name">Couples Blueprint</div>
-            <div class="prod-price">$79 — The complete relationship guide</div>
+            <div class="prod-cat">Game · Physical</div>
+            <div class="prod-name">Raunchier Together</div>
+            <div class="prod-price">$42 — Play bold. Connect deeper.</div>
+          </div>
+          <div class="prod-hover"><div class="prod-btn">Shop Now</div></div>
+        </a>
+        <a href="product-sexy-time-candle.html" class="prod-card reveal d2" style="text-decoration:none;">
+          <div class="prod-vis" style="background:url('marketplace/sexy_time_candle/19c8c5f6107c64fe0d50c422c14071c66058c53b131edfdc97ad7711cd83e84a.webp') center/cover no-repeat;"></div>
+          <div class="prod-overlay"></div>
+          <div class="prod-info">
+            <div class="prod-cat">Wellness · Physical</div>
+            <div class="prod-name">Sexy Time Candle</div>
+            <div class="prod-price">$34 — Set the scene. Own the moment.</div>
           </div>
           <div class="prod-hover"><div class="prod-btn">Shop Now</div></div>
         </a>
       </div>
 
       <div style="text-align:center;margin-top:52px;" class="reveal">
-        <a href="product-connection-journal.html" class="btn-outline">Browse All Products</a>
+        <a href="product-prone-pillow.html" class="btn-outline">Browse All Products</a>
       </div>
     </div>
   </section>
@@ -1751,5 +1844,7 @@
       if (bloom) bloom.style.transform = `translateX(calc(-50% + ${x}px)) translateY(${y}px)`;
     });
   </script>
+  <div hidden id="snipcart" data-api-key="NTE5N2MzNGYtMTZmMy00NDg4LTkyZDUtM2Y0ZmVmZWJlOTVjNjM5MTU5NzY3MTEwNjEzMzUw"></div>
+  <script async src="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.js"></script>
 </body>
 </html>
