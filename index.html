@@ -1238,6 +1238,22 @@
     .snipcart-layout ::-webkit-scrollbar-track { background: #0c0612; }
     .snipcart-layout ::-webkit-scrollbar-thumb { background: rgba(233,30,140,0.4); border-radius: 2px; }
 
+    /* Global font — Barlow */
+    .snipcart-layout, .snipcart-layout *, .snipcart__modal, .snipcart__modal * { font-family:'Barlow',sans-serif !important; }
+    .snipcart-form__label, .snipcart-summary-fees__title, .snipcart-cart-summary__title, .snipcart-base-button, .snipcart-base-button *, .snipcart-submit, .snipcart__font--secondary, .snipcart__font--bold, .snipcart-modal__header-summary-title { font-family:'Barlow Condensed',sans-serif !important; letter-spacing:0.05em !important; }
+    .snipcart__font--large, .snipcart__font--xlarge { font-family:'Bebas Neue',sans-serif !important; letter-spacing:0.08em !important; }
+
+    /* Error & notice boxes */
+    .snipcart-flash-message, .snipcart-flash-message--error, [class*="snipcart"][class*="flash"], [class*="snipcart"][class*="error-message"] { background:rgba(180,20,60,0.15) !important; border:1px solid rgba(180,20,60,0.4) !important; color:#ffaaaa !important; border-radius:3px !important; }
+    .snipcart__notice, .snipcart-error-message, [class*="snipcart"][class*="warning"], [class*="snipcart"][class*="debug"] { background:rgba(30,20,50,0.9) !important; border:1px solid rgba(233,30,140,0.25) !important; color:rgba(255,255,255,0.7) !important; border-radius:3px !important; }
+    .snipcart-form__error, [class*="snipcart"][class*="field-error"], [class*="snipcart"][class*="validation"] { color:#ff7799 !important; font-size:12px !important; }
+
+    /* Credit card / payment */
+    .snipcart-payment-card, .snipcart-payment-card-holder, [class*="snipcart"][class*="card"], [class*="snipcart"][class*="payment"] { background:#1a0820 !important; border-color:rgba(233,30,140,0.3) !important; color:#ffffff !important; }
+    .snipcart-card-element, .__PrivateStripeElement, [class*="snipcart"][class*="stripe"], [class*="snipcart-card"] { background:#1a0820 !important; border:1px solid rgba(233,30,140,0.3) !important; border-radius:3px !important; padding:12px !important; }
+    [class*="snipcart-input--card"] { background:#1a0820 !important; border-color:rgba(233,30,140,0.3) !important; color:#ffffff !important; }
+    [class*="snipcart"][class*="informational"], [class*="snipcart"][class*="test-notice"] { color:rgba(255,255,255,0.5) !important; background:transparent !important; }
+
     /* Order Summary panel */
     .snipcart-cart-summary, .snipcart-cart-summary__content, .snipcart-cart-summary__footer, .snipcart-cart-summary__items, .snipcart-cart-summary__totals, .snipcart-cart-summary__actions, .snipcart-cart-summary-items-list { background:#100818 !important; background-color:#100818 !important; color:#ffffff !important; }
     .snipcart-cart-summary__title { color:#ffffff !important; }
