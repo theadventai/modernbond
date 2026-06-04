@@ -183,26 +183,29 @@ textarea[class*="snipcart"] {
   border-color: rgba(233,30,140,0.3) !important;
   color: #ffffff !important;
 }
-/* The Stripe card iframe wrapper */
+/* The Stripe card iframe wrapper — bold pink border */
 .snipcart-card-element,
 .__PrivateStripeElement,
 .snipcart-stripe-element,
 [class*="snipcart"][class*="stripe"],
-[class*="snipcart-card"] {
-  background: #1a0820 !important;
-  border: 1px solid rgba(233,30,140,0.3) !important;
+[class*="snipcart-card"],
+.snipcart-input__input,
+.snipcart-textbox {
+  background: #2a0a35 !important;
+  border: 2px solid rgba(233,30,140,0.7) !important;
   border-radius: 3px !important;
-  padding: 12px !important;
+  padding: 14px 16px !important;
   color: #ffffff !important;
+  font-size: 16px !important;
+  letter-spacing: 0.05em !important;
 }
-/* Card field input container */
-.snipcart-input--card-number,
-.snipcart-input--card-expiry,
-.snipcart-input--card-cvc,
-[class*="snipcart-input--card"] {
-  background: #1a0820 !important;
-  border-color: rgba(233,30,140,0.3) !important;
-  color: #ffffff !important;
+/* Card iframe wrapper brightness boost */
+.snipcart-input__input:focus,
+.snipcart-textbox:focus,
+[class*="snipcart-card"]:focus-within {
+  border-color: #e91e8c !important;
+  box-shadow: 0 0 0 3px rgba(233,30,140,0.25), 0 0 16px rgba(233,30,140,0.15) !important;
+  background: #320d40 !important;
 }
 /* Test mode info text */
 .snipcart-payment__section--informational,
@@ -210,6 +213,35 @@ textarea[class*="snipcart"] {
 [class*="snipcart"][class*="test-notice"] {
   color: rgba(255,255,255,0.5) !important;
   background: transparent !important;
+}
+
+/* ── Subtotal & Total — 2× bigger ────────────────────────────── */
+.snipcart-summary-fees__total,
+.snipcart-summary-fees__total .snipcart-summary-fees__title,
+.snipcart-summary-fees__total .snipcart-summary-fees__title--highlight {
+  font-size: 1.5rem !important;
+  font-family: 'Bebas Neue', sans-serif !important;
+  letter-spacing: 0.1em !important;
+}
+.snipcart-summary-fees__total .snipcart-summary-fees__amount,
+.snipcart-summary-fees__total .snipcart-summary-fees__amount--highlight {
+  font-size: 1.8rem !important;
+  font-family: 'Bebas Neue', sans-serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.05em !important;
+}
+/* Subtotal row */
+.snipcart-summary-fees__item:not(.snipcart-summary-fees__total) .snipcart-summary-fees__amount {
+  font-size: 1.1rem !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+}
+
+/* ── Qty label styling (text rewritten by JS MutationObserver) ── */
+.snipcart-cart-summary-item__quantity {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  color: rgba(255,255,255,0.6) !important;
+  font-size: 13px !important;
+  letter-spacing: 0.05em !important;
 }
 
 /* ── Order Summary panel (right column) → dark ──────────────── */

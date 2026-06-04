@@ -1251,8 +1251,15 @@
     /* Credit card / payment */
     .snipcart-payment-card, .snipcart-payment-card-holder, [class*="snipcart"][class*="card"], [class*="snipcart"][class*="payment"] { background:#1a0820 !important; border-color:rgba(233,30,140,0.3) !important; color:#ffffff !important; }
     .snipcart-card-element, .__PrivateStripeElement, [class*="snipcart"][class*="stripe"], [class*="snipcart-card"] { background:#1a0820 !important; border:1px solid rgba(233,30,140,0.3) !important; border-radius:3px !important; padding:12px !important; }
-    [class*="snipcart-input--card"] { background:#1a0820 !important; border-color:rgba(233,30,140,0.3) !important; color:#ffffff !important; }
+    .snipcart-input__input, .snipcart-textbox, [class*="snipcart-card"], .__PrivateStripeElement { background:#2a0a35 !important; border:2px solid rgba(233,30,140,0.7) !important; border-radius:3px !important; padding:14px 16px !important; color:#ffffff !important; font-size:16px !important; }
+    .snipcart-input__input:focus, .snipcart-textbox:focus { border-color:#e91e8c !important; box-shadow:0 0 0 3px rgba(233,30,140,0.25), 0 0 16px rgba(233,30,140,0.15) !important; background:#320d40 !important; }
     [class*="snipcart"][class*="informational"], [class*="snipcart"][class*="test-notice"] { color:rgba(255,255,255,0.5) !important; background:transparent !important; }
+    /* Totals 2x bigger */
+    .snipcart-summary-fees__total .snipcart-summary-fees__title, .snipcart-summary-fees__total .snipcart-summary-fees__title--highlight { font-size:1.5rem !important; font-family:'Bebas Neue',sans-serif !important; letter-spacing:0.1em !important; }
+    .snipcart-summary-fees__total .snipcart-summary-fees__amount, .snipcart-summary-fees__total .snipcart-summary-fees__amount--highlight { font-size:1.8rem !important; font-family:'Bebas Neue',sans-serif !important; letter-spacing:0.05em !important; }
+    .snipcart-summary-fees__item:not(.snipcart-summary-fees__total) .snipcart-summary-fees__amount { font-size:1.1rem !important; font-family:'Barlow Condensed',sans-serif !important; }
+    /* Qty */
+    .snipcart-cart-summary-item__quantity { font-family:'Barlow Condensed',sans-serif !important; color:rgba(255,255,255,0.6) !important; font-size:13px !important; }
 
     /* Order Summary panel */
     .snipcart-cart-summary, .snipcart-cart-summary__content, .snipcart-cart-summary__footer, .snipcart-cart-summary__items, .snipcart-cart-summary__totals, .snipcart-cart-summary__actions, .snipcart-cart-summary-items-list { background:#100818 !important; background-color:#100818 !important; color:#ffffff !important; }
@@ -1913,5 +1920,15 @@
   </script>
   <div hidden id="snipcart" data-api-key="NTE5N2MzNGYtMTZmMy00NDg4LTkyZDUtM2Y0ZmVmZWJlOTVjNjM5MTU5NzY3MTEwNjEzMzUw"></div>
   <script async src="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.js"></script>
+  <script>
+    // Rewrite "x1" → "Qty: 1" in Snipcart order summary
+    const rewriteQty = () => {
+      document.querySelectorAll('.snipcart-cart-summary-item__quantity').forEach(el => {
+        const match = el.textContent.trim().match(/x(\d+)/i);
+        if (match) el.textContent = 'Qty: ' + match[1];
+      });
+    };
+    new MutationObserver(rewriteQty).observe(document.body, { childList: true, subtree: true });
+  </script>
 </body>
 </html>

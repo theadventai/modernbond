@@ -20,6 +20,19 @@ window.addEventListener('load', () => {
 
 // Cart handled by Snipcart
 
+// Rewrite "x1" → "Qty: 1" in Snipcart order summary
+const rewriteQty = () => {
+  document.querySelectorAll('.snipcart-cart-summary-item__quantity').forEach(el => {
+    const text = el.textContent.trim();
+    const match = text.match(/x(\d+)/i);
+    if (match) el.textContent = 'Qty: ' + match[1];
+  });
+};
+// Watch for Snipcart cart DOM changes
+const cartObserver = new MutationObserver(rewriteQty);
+cartObserver.observe(document.body, { childList: true, subtree: true });
+rewriteQty();
+
 // Image gallery — thumbnail swap
 document.querySelectorAll('.prod-img-col').forEach(col => {
   const mainImg = col.querySelector('.prod-main-img');
