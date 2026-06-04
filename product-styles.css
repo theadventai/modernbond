@@ -149,10 +149,13 @@ textarea[class*="snipcart"] {
 .snipcart-flash-message--error,
 [class*="snipcart"][class*="flash"],
 [class*="snipcart"][class*="error-message"] {
-  background: rgba(180, 20, 60, 0.15) !important;
-  border: 1px solid rgba(180, 20, 60, 0.4) !important;
-  color: #ffaaaa !important;
-  border-radius: 3px !important;
+  background: #1a0820 !important;
+  border: none !important;
+  border-left: 4px solid #e91e8c !important;
+  color: rgba(255,255,255,0.9) !important;
+  border-radius: 0 3px 3px 0 !important;
+  padding: 14px 18px !important;
+  font-family: 'Barlow', sans-serif !important;
 }
 /* Warning / info / debug notice (URL validation, test mode) */
 .snipcart__notice,
@@ -160,18 +163,22 @@ textarea[class*="snipcart"] {
 [class*="snipcart"][class*="notice"]:not(.snipcart-summary-fees__notice),
 [class*="snipcart"][class*="debug"],
 [class*="snipcart"][class*="warning"] {
-  background: rgba(30, 20, 50, 0.9) !important;
-  border: 1px solid rgba(233,30,140,0.25) !important;
-  color: rgba(255,255,255,0.7) !important;
-  border-radius: 3px !important;
+  background: #1a0820 !important;
+  border: none !important;
+  border-left: 4px solid rgba(233,30,140,0.4) !important;
+  color: rgba(255,255,255,0.6) !important;
+  border-radius: 0 3px 3px 0 !important;
+  padding: 14px 18px !important;
+  font-family: 'Barlow', sans-serif !important;
 }
 /* "This field is required" inline errors */
+.snipcart-field-error,
 .snipcart-form__error,
-[class*="snipcart"][class*="field-error"],
-[class*="snipcart"][class*="validation"] {
-  color: #ff7799 !important;
+[class*="snipcart"][class*="field-error"] {
+  color: #f548a8 !important;
   font-family: 'Barlow', sans-serif !important;
-  font-size: 12px !important;
+  font-size: 11px !important;
+  letter-spacing: 0.03em !important;
 }
 
 /* ── Credit card / payment fields ───────────────────────────── */
