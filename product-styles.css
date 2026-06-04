@@ -112,78 +112,81 @@ textarea[class*="snipcart"] {
 .snipcart-layout ::-webkit-scrollbar-thumb { background: rgba(233,30,140,0.4); border-radius: 2px; }
 
 /* ── Qty stepper ─────────────────────────────────────────────── */
-.snipcart-quantity {
+.snipcart-item-quantity__quantity {
   display: flex !important;
   align-items: center !important;
   background: #1a0820 !important;
   border: 1px solid rgba(233,30,140,0.35) !important;
   border-radius: 3px !important;
   overflow: hidden !important;
+  gap: 0 !important;
 }
-.snipcart-quantity__button {
+/* The qty number span */
+.snipcart-item-quantity__quantity span,
+.snipcart-item-quantity__quantity .snipcart__font--secondary,
+.snipcart-item-quantity__quantity .snipcart__font--regular {
+  color: #ffffff !important;
+  min-width: 32px !important;
+  text-align: center !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+/* +/- buttons */
+.snipcart-item-quantity__quantity .snipcart-button-icon.is-small.is-secondary {
   background: transparent !important;
   color: #e91e8c !important;
   border: none !important;
-  width: 32px !important;
-  height: 32px !important;
-  font-size: 18px !important;
-  line-height: 1 !important;
-  cursor: pointer !important;
-  transition: background 0.2s !important;
+  width: 30px !important;
+  height: 30px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  cursor: pointer !important;
+  transition: background 0.2s !important;
 }
-.snipcart-quantity__button:hover {
+.snipcart-item-quantity__quantity .snipcart-button-icon.is-small.is-secondary:hover {
   background: rgba(233,30,140,0.18) !important;
 }
-.snipcart-quantity__input,
-input.snipcart-quantity__input {
-  background: transparent !important;
-  border: none !important;
-  color: #ffffff !important;
-  text-align: center !important;
-  width: 36px !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  -moz-appearance: textfield !important;
+.snipcart-item-quantity__label {
+  color: rgba(255,255,255,0.5) !important;
+  font-size: 10px !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
 }
-.snipcart-quantity__input::-webkit-inner-spin-button,
-.snipcart-quantity__input::-webkit-outer-spin-button { -webkit-appearance: none !important; }
 
-/* ── Remove button — replace trash icon with REMOVE label ───── */
-.snipcart-item-line__remove {
+/* ── Remove button — replace trash icon ─────────────────────── */
+.snipcart-button-icon.is-danger {
   background: transparent !important;
-  border: 1px solid rgba(255,255,255,0.12) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
   border-radius: 3px !important;
   color: rgba(255,255,255,0.4) !important;
   cursor: pointer !important;
-  padding: 3px 10px !important;
+  padding: 4px 10px !important;
   font-family: 'Barlow Condensed', sans-serif !important;
   font-size: 10px !important;
   letter-spacing: 0.12em !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
   transition: all 0.2s !important;
-  line-height: 1.6 !important;
+  min-height: auto !important;
+  min-width: auto !important;
+  width: auto !important;
+  height: auto !important;
 }
-.snipcart-item-line__remove:hover {
+.snipcart-button-icon.is-danger:hover {
   border-color: #e91e8c !important;
   color: #e91e8c !important;
   background: rgba(233,30,140,0.08) !important;
 }
-/* Hide default SVG trash icon */
-.snipcart-item-line__remove svg { display: none !important; }
-/* Inject REMOVE text */
-.snipcart-item-line__remove::before {
+.snipcart-button-icon.is-danger svg { display: none !important; }
+.snipcart-button-icon.is-danger::before {
   content: '× Remove' !important;
   display: inline !important;
+  color: inherit !important;
 }
 
 /* ── Checkout button — pink ──────────────────────────────────── */
-.snipcart-button-primary,
-.snipcart-base-button--primary,
-[class*="snipcart"][class*="button"][class*="primary"] {
+.snipcart-button-primary {
   background: #e91e8c !important;
   color: #ffffff !important;
   border: none !important;
@@ -192,25 +195,30 @@ input.snipcart-quantity__input {
   letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
 }
-.snipcart-button-primary:hover,
-.snipcart-base-button--primary:hover {
-  background: #f548a8 !important;
-}
+.snipcart-button-primary:hover { background: #f548a8 !important; }
 
-/* ── "Secured by Snipcart" notice — readable text ───────────── */
-.snipcart__notice,
-.snipcart__notice--powered-by,
-.snipcart-payment-card-holder,
-.snipcart-payment-card-holder__title,
-[class*="snipcart"][class*="notice"],
-[class*="snipcart"][class*="powered"] {
-  color: rgba(255,255,255,0.45) !important;
+/* ── "Secured by Snipcart" — fix light gray background ──────── */
+.snipcart-featured-payment-methods,
+.snipcart-featured-payment-methods__title,
+.snipcart-featured-payment-methods__list,
+.snipcart-featured-payment-methods__list-item {
   background: transparent !important;
+  background-color: #0c0612 !important;
 }
-.snipcart__notice a,
-.snipcart__notice--powered-by a,
-[class*="snipcart"][class*="notice"] a {
+.snipcart-featured-payment-methods__title {
+  color: rgba(255,255,255,0.5) !important;
+}
+.snipcart-featured-payment-methods__link,
+.snipcart-featured-payment-methods__link * {
+  color: rgba(255,255,255,0.5) !important;
+}
+.snipcart-featured-payment-methods__link:hover,
+.snipcart-featured-payment-methods__link:hover * {
   color: #e91e8c !important;
+}
+.snipcart-summary-fees__notice {
+  color: rgba(255,255,255,0.4) !important;
+  background: transparent !important;
 }
 
 .nav-cart {
