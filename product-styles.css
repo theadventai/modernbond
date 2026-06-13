@@ -665,7 +665,8 @@ nav.scrolled {
 .nav-logo { display: flex; align-items: center; gap: 12px; position: relative; z-index: 1; }
 .nav-links {
   display: flex; gap: 32px; list-style: none;
-  position: relative; z-index: 1;
+  position: absolute; left: 50%; transform: translateX(-50%);
+  z-index: 1;
 }
 .nav-links a {
   font-family: var(--font-cond);
