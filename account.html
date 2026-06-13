@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="images/MB_Logo_pink-pink2.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join / My Account — Modern Bond</title>
+  <meta name="description" content="Join Modern Bond — create your free account to post in the community, build your profile, and unlock member perks." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.css" />
+  <link rel="stylesheet" href="product-styles.css" />
+  <link rel="stylesheet" href="forum-styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="images/MB_Logo_pink-pink2.png" alt="Modern Bond" style="mix-blend-mode:multiply;width:53px;height:53px;object-fit:contain;" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#coaching">Coaching</a></li>
+      <li><a href="index.html#community">Community</a></li>
+      <li><a href="index.html#products">Marketplace</a></li>
+      <li><a href="index.html#experiences">Experiences</a></li>
+    </ul>
+    <div class="nav-cta" style="display:flex;align-items:center;gap:12px;">
+      <button class="snipcart-checkout nav-cart">🛒 <span class="snipcart-items-count">0</span></button>
+      <a href="account.html" class="btn-pink" style="padding:12px 32px;font-size:11px;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);">Join Now</a>
+    </div>
+  </nav>
+
+  <!-- ACCOUNT -->
+  <section class="forum-page">
+    <div class="forum-bg"></div>
+    <div class="tex"></div>
+    <div class="forum-inner">
+
+      <div class="forum-header reveal on">
+        <div class="sec-label" style="justify-content:center;">Membership</div>
+        <h1 class="forum-title">Join the<br/><span>Movement.</span></h1>
+        <p class="forum-sub">Free account · Post in the community · Member perks</p>
+      </div>
+
+      <div id="account-view">
+
+        <!-- Logged out: signup / login -->
+        <div id="auth-box" class="account-card" style="display:none;">
+          <div class="auth-tabs">
+            <button class="auth-tab active" data-tab="signup">Sign Up</button>
+            <button class="auth-tab" data-tab="login">Log In</button>
+          </div>
+
+          <form id="signup-form" class="auth-form">
+            <div>
+              <label class="forum-label" for="signup-username">Username</label>
+              <input id="signup-username" class="forum-input" type="text" minlength="3" maxlength="24" autocomplete="username" placeholder="How the community sees you" required />
+            </div>
+            <div>
+              <label class="forum-label" for="signup-email">Email</label>
+              <input id="signup-email" class="forum-input" type="email" autocomplete="email" placeholder="you@example.com" required />
+            </div>
+            <div>
+              <label class="forum-label" for="signup-password">Password</label>
+              <input id="signup-password" class="forum-input" type="password" minlength="8" autocomplete="new-password" placeholder="8+ characters" required />
+            </div>
+            <div id="signup-msg" class="forum-msg"></div>
+            <button type="submit" class="btn-pink">Create Account</button>
+          </form>
+
+          <form id="login-form" class="auth-form" style="display:none;">
+            <div>
+              <label class="forum-label" for="login-email">Email</label>
+              <input id="login-email" class="forum-input" type="email" autocomplete="email" required />
+            </div>
+            <div>
+              <label class="forum-label" for="login-password">Password</label>
+              <input id="login-password" class="forum-input" type="password" autocomplete="current-password" required />
+            </div>
+            <div id="login-msg" class="forum-msg"></div>
+            <button type="submit" class="btn-pink">Log In</button>
+          </form>
+        </div>
+
+        <!-- Logged in: profile -->
+        <div id="profile-box" class="account-card" style="display:none;">
+          <span id="profile-username"></span>
+          <div class="profile-row">
+            <span class="forum-label">Email</span>
+            <span id="profile-email" class="profile-value"></span>
+          </div>
+          <div class="profile-row">
+            <span class="forum-label">Member Since</span>
+            <span id="profile-joined" class="profile-value"></span>
+          </div>
+          <div class="profile-actions">
+            <a href="community.html" class="btn-pink btn-small">Go to The Community</a>
+            <button id="logout-btn" class="btn-outline btn-small">Log Out</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="images/LogoAvatar_001_v001.jpg" alt="Modern Bond" style="mix-blend-mode:screen;width:48px;height:48px;object-fit:contain;" />
+          </div>
+          <p>A next-generation platform for modern intimacy, connection, and personal growth.</p>
+        </div>
+        <div>
+          <div class="footer-col-h">Platform</div>
+          <ul class="footer-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#coaching">Coaching</a></li>
+            <li><a href="community.html">Community</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-h">Marketplace</div>
+          <ul class="footer-links">
+            <li><a href="product-deep-connections-pillow.html">Deep Connections Pillow</a></li>
+            <li><a href="product-love-blanket.html">The Love Blanket</a></li>
+            <li><a href="product-coconu-lube.html">Coconu Lube</a></li>
+            <li><a href="product-matchmaker-candle.html">Matchmaker Candle</a></li>
+            <li><a href="product-raunchier-together.html">Raunchier Together</a></li>
+            <li><a href="product-sexy-time-candle.html">Sexy Time Candle</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-h">Connect</div>
+          <ul class="footer-links">
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">TikTok</a></li>
+            <li><a href="#">YouTube</a></li>
+            <li><a href="#">Spotify</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2024 Modern Bond. All rights reserved.</div>
+        <div class="footer-soc">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div hidden id="snipcart" data-api-key="NTE5N2MzNGYtMTZmMy00NDg4LTkyZDUtM2Y0ZmVmZWJlOTVjNjM5MTU5NzY3MTEwNjEzMzUw"></div>
+  <script async src="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="product-scripts.js"></script>
+  <script src="forum-scripts.js"></script>
+</body>
+</html>

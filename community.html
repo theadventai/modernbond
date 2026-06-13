@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="images/MB_Logo_pink-pink2.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Community — Modern Bond</title>
+  <meta name="description" content="The Modern Bond Community — real conversations about intimacy, connection, and growth. Connect, share, grow." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.css" />
+  <link rel="stylesheet" href="product-styles.css" />
+  <link rel="stylesheet" href="forum-styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="images/MB_Logo_pink-pink2.png" alt="Modern Bond" style="mix-blend-mode:multiply;width:53px;height:53px;object-fit:contain;" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#coaching">Coaching</a></li>
+      <li><a href="index.html#community" class="nav-active">Community</a></li>
+      <li><a href="index.html#products">Marketplace</a></li>
+      <li><a href="index.html#experiences">Experiences</a></li>
+    </ul>
+    <div class="nav-cta" style="display:flex;align-items:center;gap:12px;">
+      <button class="snipcart-checkout nav-cart">🛒 <span class="snipcart-items-count">0</span></button>
+      <a href="account.html" class="btn-pink" style="padding:12px 32px;font-size:11px;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);">Join Now</a>
+    </div>
+  </nav>
+
+  <!-- FORUM -->
+  <section class="forum-page">
+    <div class="forum-bg"></div>
+    <div class="tex"></div>
+    <div class="forum-inner">
+
+      <div class="forum-header reveal on">
+        <div class="sec-label" style="justify-content:center;">The Community</div>
+        <h1 class="forum-title">Real Talk.<br/><span>Real Connection.</span></h1>
+        <p class="forum-sub">Connect · Share · Grow</p>
+      </div>
+
+      <div id="forum-feed">
+        <div class="forum-toolbar">
+          <div id="category-tabs"></div>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div class="sort-group">
+              <button class="sort-btn active" data-sort="hot">🔥 Hot</button>
+              <button class="sort-btn" data-sort="new">✦ New</button>
+            </div>
+            <button id="new-post-btn" class="btn-pink btn-small">+ New Post</button>
+          </div>
+        </div>
+
+        <div id="composer">
+          <form id="composer-form">
+            <label class="forum-label" for="composer-category">Category</label>
+            <select id="composer-category" class="forum-select"></select>
+            <label class="forum-label" for="composer-title">Title</label>
+            <input id="composer-title" class="forum-input" type="text" maxlength="200" placeholder="What do you want to talk about?" required />
+            <label class="forum-label" for="composer-body">Body</label>
+            <textarea id="composer-body" class="forum-textarea" rows="5" maxlength="10000" placeholder="Say something real…" required></textarea>
+            <div id="composer-msg" class="forum-msg"></div>
+            <div><button type="submit" class="btn-pink btn-small">Post It</button></div>
+          </form>
+        </div>
+
+        <div id="post-list"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="images/LogoAvatar_001_v001.jpg" alt="Modern Bond" style="mix-blend-mode:screen;width:48px;height:48px;object-fit:contain;" />
+          </div>
+          <p>A next-generation platform for modern intimacy, connection, and personal growth.</p>
+        </div>
+        <div>
+          <div class="footer-col-h">Platform</div>
+          <ul class="footer-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#coaching">Coaching</a></li>
+            <li><a href="index.html#community">Community</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-h">Marketplace</div>
+          <ul class="footer-links">
+            <li><a href="product-deep-connections-pillow.html">Deep Connections Pillow</a></li>
+            <li><a href="product-love-blanket.html">The Love Blanket</a></li>
+            <li><a href="product-coconu-lube.html">Coconu Lube</a></li>
+            <li><a href="product-matchmaker-candle.html">Matchmaker Candle</a></li>
+            <li><a href="product-raunchier-together.html">Raunchier Together</a></li>
+            <li><a href="product-sexy-time-candle.html">Sexy Time Candle</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-h">Connect</div>
+          <ul class="footer-links">
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">TikTok</a></li>
+            <li><a href="#">YouTube</a></li>
+            <li><a href="#">Spotify</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2024 Modern Bond. All rights reserved.</div>
+        <div class="footer-soc">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div hidden id="snipcart" data-api-key="NTE5N2MzNGYtMTZmMy00NDg4LTkyZDUtM2Y0ZmVmZWJlOTVjNjM5MTU5NzY3MTEwNjEzMzUw"></div>
+  <script async src="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="product-scripts.js"></script>
+  <script src="forum-scripts.js"></script>
+</body>
+</html>
