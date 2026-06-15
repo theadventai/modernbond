@@ -84,21 +84,66 @@
           </form>
         </div>
 
-        <!-- Logged in: profile -->
-        <div id="profile-box" class="account-card" style="display:none;">
-          <span id="profile-username"></span>
-          <div class="profile-row">
-            <span class="forum-label">Email</span>
-            <span id="profile-email" class="profile-value"></span>
+        <!-- Logged in: profile editor -->
+        <div id="profile-box" class="account-card profile-edit-card" style="display:none;">
+
+          <!-- Avatar -->
+          <div class="profile-section" style="text-align:center;">
+            <div class="avatar-wrap" id="avatar-wrap">
+              <img id="avatar-img" class="avatar-img" src="" alt="" style="display:none;" />
+              <div class="avatar-placeholder" id="avatar-placeholder">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="24" cy="18" r="8" fill="rgba(233,30,140,0.5)"/>
+                  <path d="M8 42c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="rgba(233,30,140,0.5)" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+            <input type="file" id="avatar-input" accept="image/*" style="display:none;" />
+            <button class="btn-outline btn-small" id="avatar-btn" style="margin-top:14px;">Change Photo</button>
+            <div id="avatar-msg" class="forum-msg" style="margin-top:10px;"></div>
           </div>
-          <div class="profile-row">
-            <span class="forum-label">Member Since</span>
-            <span id="profile-joined" class="profile-value"></span>
+
+          <!-- Username -->
+          <div class="profile-section">
+            <div class="profile-section-title">Username</div>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <input id="edit-username" class="forum-input" type="text" minlength="3" maxlength="24" autocomplete="username" />
+              <button class="btn-pink btn-small" id="save-username-btn" style="white-space:nowrap;">Save</button>
+            </div>
+            <div id="username-msg" class="forum-msg" style="margin-top:8px;"></div>
           </div>
-          <div class="profile-actions">
-            <a href="community.html" class="btn-pink btn-small">Go to The Community</a>
-            <button id="logout-btn" class="btn-outline btn-small">Log Out</button>
+
+          <!-- Email -->
+          <div class="profile-section">
+            <div class="profile-section-title">Email Address</div>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <input id="edit-email" class="forum-input" type="email" autocomplete="email" />
+              <button class="btn-pink btn-small" id="save-email-btn" style="white-space:nowrap;">Update</button>
+            </div>
+            <div id="email-msg" class="forum-msg" style="margin-top:8px;"></div>
           </div>
+
+          <!-- Password -->
+          <div class="profile-section">
+            <div class="profile-section-title">Change Password</div>
+            <input id="edit-password" class="forum-input" type="password" minlength="8" autocomplete="new-password" placeholder="New password (8+ characters)" style="margin-bottom:10px;" />
+            <input id="edit-password-confirm" class="forum-input" type="password" autocomplete="new-password" placeholder="Confirm new password" />
+            <div id="password-msg" class="forum-msg" style="margin-top:8px;"></div>
+            <button class="btn-pink btn-small" id="save-password-btn" style="margin-top:12px;">Update Password</button>
+          </div>
+
+          <!-- Member since + actions -->
+          <div class="profile-section" style="border-bottom:none;">
+            <div class="profile-row" style="border:none;padding:0 0 16px;">
+              <span class="forum-label">Member Since</span>
+              <span id="profile-joined" class="profile-value"></span>
+            </div>
+            <div class="profile-actions">
+              <a href="community.html" class="btn-pink btn-small">Go to The Community</a>
+              <button id="logout-btn" class="btn-outline btn-small">Log Out</button>
+            </div>
+          </div>
+
         </div>
 
       </div>

@@ -102,10 +102,8 @@ async function initAccount() {
   if (currentUser && currentProfile) {
     authBox.style.display = 'none';
     profileBox.style.display = 'block';
-    $('#profile-username').textContent = '@' + currentProfile.username;
-    $('#profile-email').textContent = currentUser.email;
-    $('#profile-joined').textContent = new Date(currentProfile.created_at)
-      .toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    renderProfile();
+    bindProfileEditors();
     return;
   }
 
@@ -149,6 +147,86 @@ async function initAccount() {
     });
     if (error) return flash(msg, error.message);
     window.location.href = 'community.html';
+  });
+}
+
+function renderProfile() {
+  // Avatar
+  if (currentProfile.avatar_url) {
+    $('#avatar-img').src = currentProfile.avatar_url;
+    $('#avatar-img').style.display = 'block';
+    $('#avatar-placeholder').style.display = 'none';
+  }
+  // Pre-fill fields
+  $('#edit-username').value = currentProfile.username || '';
+  $('#edit-email').value    = currentUser.email || '';
+  $('#profile-joined').textContent = new Date(currentProfile.created_at)
+    .toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+}
+
+function bindProfileEditors() {
+  // Avatar picker
+  $('#avatar-btn').addEventListener('click', () => $('#avatar-input').click());
+  $('#avatar-input').addEventListener('change', async e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) return flash($('#avatar-msg'), 'Image must be under 5 MB.');
+    flash($('#avatar-msg'), 'Uploading…', true);
+    const ext  = file.name.split('.').pop();
+    const path = `${currentUser.id}/${Date.now()}.${ext}`;
+    const { error: upErr } = await sb.storage.from('avatars').upload(path, file, { upsert: true });
+    if (upErr) return flash($('#avatar-msg'), upErr.message);
+    const { data: { publicUrl } } = sb.storage.from('avatars').getPublicUrl(path);
+    const { error: dbErr } = await sb.from('profiles').update({ avatar_url: publicUrl }).eq('id', currentUser.id);
+    if (dbErr) return flash($('#avatar-msg'), dbErr.message);
+    currentProfile.avatar_url = publicUrl;
+    $('#avatar-img').src = publicUrl;
+    $('#avatar-img').style.display = 'block';
+    $('#avatar-placeholder').style.display = 'none';
+    flash($('#avatar-msg'), 'Photo updated!', true);
+    setTimeout(() => flash($('#avatar-msg'), ''), 3000);
+  });
+
+  // Username
+  $('#save-username-btn').addEventListener('click', async () => {
+    const msg = $('#username-msg');
+    const val = $('#edit-username').value.trim();
+    if (val.length < 3) return flash(msg, 'Username must be at least 3 characters.');
+    if (val.length > 24) return flash(msg, 'Username must be 24 characters or fewer.');
+    flash(msg, 'Saving…', true);
+    const { error } = await sb.from('profiles').update({ username: val }).eq('id', currentUser.id);
+    if (error) return flash(msg, error.message.includes('unique') ? 'That username is already taken.' : error.message);
+    currentProfile.username = val;
+    updateNav();
+    flash(msg, 'Username updated!', true);
+    setTimeout(() => flash(msg, ''), 3000);
+  });
+
+  // Email
+  $('#save-email-btn').addEventListener('click', async () => {
+    const msg = $('#email-msg');
+    const val = $('#edit-email').value.trim();
+    if (!val.includes('@')) return flash(msg, 'Enter a valid email address.');
+    flash(msg, 'Sending confirmation…', true);
+    const { error } = await sb.auth.updateUser({ email: val });
+    if (error) return flash(msg, error.message);
+    flash(msg, 'Check your new email address for a confirmation link.', true);
+  });
+
+  // Password
+  $('#save-password-btn').addEventListener('click', async () => {
+    const msg  = $('#password-msg');
+    const pass = $('#edit-password').value;
+    const conf = $('#edit-password-confirm').value;
+    if (pass.length < 8) return flash(msg, 'Password must be at least 8 characters.');
+    if (pass !== conf)   return flash(msg, 'Passwords don\'t match.');
+    flash(msg, 'Updating…', true);
+    const { error } = await sb.auth.updateUser({ password: pass });
+    if (error) return flash(msg, error.message);
+    $('#edit-password').value = '';
+    $('#edit-password-confirm').value = '';
+    flash(msg, 'Password updated!', true);
+    setTimeout(() => flash(msg, ''), 3000);
   });
 }
 
