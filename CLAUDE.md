@@ -9,25 +9,37 @@ Modern Bond is a modern intimacy, connection, and personal growth platform. Bold
 
 ## Dev Server
 ```bash
-npx serve -p 3001 .
+npm run dev
 ```
-Preview at: http://localhost:3001
-**Never use the `-s` flag** — it enables SPA mode and breaks product page routing.
+Preview at: http://localhost:3000
+This is a Next.js 16 app (App Router, TypeScript). The old static-file server (`npx serve`) is no longer used.
 
 ## File Structure
+Next.js App Router. No build step config beyond `next.config.ts`.
 ```
 /
-├── index.html               # Main landing page (homepage)
-├── product-connection-journal.html
-├── product-ritual-kit.html
-├── product-masterclass.html
-├── product-desire-deck.html
-├── product-bond-oil.html
-├── product-couples-blueprint.html
-├── product-styles.css       # Shared styles for product pages
-├── product-scripts.js       # Shared JS for product pages
-└── images/                  # All brand assets
+├── app/
+│   ├── layout.tsx           # Root layout — fonts, Snipcart, Supabase CDN, Nav, Footer
+│   ├── globals.css          # ALL styles (merged from old product/forum/index CSS)
+│   ├── page.tsx             # Homepage ('use client' — reveal + hero parallax)
+│   ├── account/page.tsx     # Auth (signup/login) + profile editor
+│   ├── community/page.tsx   # Forum feed (categories, sort, composer, voting)
+│   ├── thread/[id]/page.tsx # Thread detail + nested comments
+│   └── products/[slug]/page.tsx  # Data-driven product detail (Snipcart add-to-cart)
+├── components/
+│   ├── Nav.tsx              # Fixed nav ('use client' — scroll state)
+│   ├── Footer.tsx
+│   └── VoteCol.tsx          # Reusable up/down vote widget
+├── lib/
+│   ├── supabase.ts          # Supabase client + Profile type
+│   ├── forum.ts             # Forum types + timeAgo / getMyVotes / toggleVote
+│   └── products.ts          # PRODUCTS data map (all 6 products)
+├── public/
+│   ├── images/              # All brand assets
+│   └── marketplace/         # Product images (per-product folders)
+└── supabase/                # schema.sql
 ```
+All page components are `'use client'` (they use Supabase auth, IntersectionObserver reveal, or browser state). Product pages are a single dynamic route driven by `lib/products.ts` — add a product by adding an entry there.
 
 ## Brand Colors
 ```css
@@ -105,10 +117,10 @@ Google Fonts import already in `<head>` of index.html.
 - Responsive: breakpoints at 1024px and 768px in media queries
 
 ## Architecture Notes
-- **No build step** — pure HTML/CSS/JS, served as static files.
-- `index.html` has its own inline `<style>` block and a `<script>` tag at the bottom; there is no shared CSS file for the homepage.
-- Product pages share `product-styles.css` and `product-scripts.js`. Each product page is self-contained HTML that links those two files — no JS framework, no bundler.
-- CTA buttons on product pages redirect to `index.html#join` after a 1-second "Added!" pulse (see `product-scripts.js:29`).
+- **Next.js 16 App Router + TypeScript.** `@/*` import alias maps to repo root.
+- All styles live in `app/globals.css` (one file, ported from the old inline + product + forum CSS). No CSS Modules, no Tailwind.
+- Snipcart (v3.7.2) and the Supabase JS CDN load via `next/script` in `app/layout.tsx`; the `#snipcart` config div sits in the body. Add-to-cart buttons are plain `snipcart-add-item` elements with `data-item-*` attributes (see `app/products/[slug]/page.tsx`).
+- Supabase: anon client in `lib/supabase.ts`. Auth (email/password), `profiles`, `categories`, `posts`/`post_feed`, `comments`, `votes` tables; avatars in the `avatars` storage bucket. Schema in `supabase/schema.sql`.
 - The `.tex` div used inside sections is a CSS texture overlay, not content.
 
 ## Git / GitHub
