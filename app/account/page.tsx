@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { supabase, type Profile } from '@/lib/supabase';
@@ -18,18 +18,29 @@ export default function AccountPage() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [recovery, setRecovery] = useState(false);
+
+  const loadUser = useCallback(async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    setUser(user);
+    if (user) {
+      const { data } = await supabase.from('profiles').select('*').eq('id', user.id).single();
+      setProfile(data);
+    } else {
+      setProfile(null);
+    }
+    setLoading(false);
+  }, []);
 
   useEffect(() => {
-    (async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-      if (user) {
-        const { data } = await supabase.from('profiles').select('*').eq('id', user.id).single();
-        setProfile(data);
-      }
-      setLoading(false);
-    })();
-  }, []);
+    // Returning from a password-reset email fires PASSWORD_RECOVERY — show the
+    // "set new password" form instead of the profile editor.
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(event => {
+      if (event === 'PASSWORD_RECOVERY') { setRecovery(true); setLoading(false); }
+    });
+    loadUser();
+    return () => subscription.unsubscribe();
+  }, [loadUser]);
 
   return (
     <section className="forum-page">
@@ -44,6 +55,8 @@ export default function AccountPage() {
 
         {loading ? (
           <div className="forum-loading">Loading…</div>
+        ) : recovery ? (
+          <ResetPasswordForm onDone={() => { setRecovery(false); setLoading(true); loadUser(); }} />
         ) : user && profile ? (
           <ProfileEditor
             user={user}
@@ -64,6 +77,9 @@ function AuthBox({ onAuthed }: { onAuthed: () => void }) {
   const [tab, setTab] = useState<'signup' | 'login'>('signup');
   const [signupMsg, setSignupMsg] = useState<Msg>(null);
   const [loginMsg, setLoginMsg] = useState<Msg>(null);
+  const [forgot, setForgot] = useState(false);
+  const [forgotMsg, setForgotMsg] = useState<Msg>(null);
+  const [oauthMsg, setOauthMsg] = useState<Msg>(null);
 
   async function onSignup(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -92,11 +108,44 @@ function AuthBox({ onAuthed }: { onAuthed: () => void }) {
     onAuthed();
   }
 
+  async function onForgot(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const f = e.currentTarget;
+    const email = (f.elements.namedItem('email') as HTMLInputElement).value.trim();
+    if (!email.includes('@')) return setForgotMsg({ text: 'Enter a valid email address.', ok: false });
+    setForgotMsg({ text: 'Sending reset link…', ok: true });
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/account`,
+    });
+    if (error) return setForgotMsg({ text: error.message, ok: false });
+    setForgotMsg({ text: 'Check your email for a link to reset your password.', ok: true });
+  }
+
+  async function oauth(provider: 'google' | 'apple') {
+    setOauthMsg({ text: 'Redirecting…', ok: true });
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: { redirectTo: `${window.location.origin}/account` },
+    });
+    if (error) setOauthMsg({ text: error.message, ok: false });
+  }
+
   return (
     <div className="account-card">
+      <div className="oauth-row">
+        <button type="button" className="oauth-btn" onClick={() => oauth('google')}>
+          <GoogleIcon /> Continue with Google
+        </button>
+        <button type="button" className="oauth-btn" onClick={() => oauth('apple')}>
+          <AppleIcon /> Continue with Apple
+        </button>
+      </div>
+      <MsgLine msg={oauthMsg} />
+      <div className="auth-divider">or with email</div>
+
       <div className="auth-tabs">
-        <button className={'auth-tab' + (tab === 'signup' ? ' active' : '')} onClick={() => setTab('signup')}>Sign Up</button>
-        <button className={'auth-tab' + (tab === 'login' ? ' active' : '')} onClick={() => setTab('login')}>Log In</button>
+        <button className={'auth-tab' + (tab === 'signup' ? ' active' : '')} onClick={() => { setTab('signup'); setForgot(false); }}>Sign Up</button>
+        <button className={'auth-tab' + (tab === 'login' ? ' active' : '')} onClick={() => { setTab('login'); setForgot(false); }}>Log In</button>
       </div>
 
       {tab === 'signup' && (
@@ -118,7 +167,7 @@ function AuthBox({ onAuthed }: { onAuthed: () => void }) {
         </form>
       )}
 
-      {tab === 'login' && (
+      {tab === 'login' && !forgot && (
         <form className="auth-form" style={{ display: 'flex' }} onSubmit={onLogin}>
           <div>
             <label className="forum-label" htmlFor="login-email">Email</label>
@@ -128,11 +177,74 @@ function AuthBox({ onAuthed }: { onAuthed: () => void }) {
             <label className="forum-label" htmlFor="login-password">Password</label>
             <input id="login-password" name="password" className="forum-input" type="password" autoComplete="current-password" required />
           </div>
+          <button type="button" className="auth-forgot" onClick={() => { setForgot(true); setForgotMsg(null); }}>Forgot password?</button>
           <MsgLine msg={loginMsg} />
           <button type="submit" className="btn-pink">Log In</button>
         </form>
       )}
+
+      {tab === 'login' && forgot && (
+        <form className="auth-form" style={{ display: 'flex' }} onSubmit={onForgot}>
+          <div>
+            <label className="forum-label" htmlFor="forgot-email">Email</label>
+            <input id="forgot-email" name="email" className="forum-input" type="email" autoComplete="email" placeholder="you@example.com" required />
+          </div>
+          <MsgLine msg={forgotMsg} />
+          <button type="submit" className="btn-pink">Send Reset Link</button>
+          <button type="button" className="auth-forgot" onClick={() => { setForgot(false); setForgotMsg(null); }}>← Back to log in</button>
+        </form>
+      )}
     </div>
+  );
+}
+
+/* ── Set-new-password form (after clicking the reset email link) ───── */
+function ResetPasswordForm({ onDone }: { onDone: () => void }) {
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
+  const [msg, setMsg] = useState<Msg>(null);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (password.length < 8) return setMsg({ text: 'Password must be at least 8 characters.', ok: false });
+    if (password !== confirm) return setMsg({ text: "Passwords don't match.", ok: false });
+    setMsg({ text: 'Updating…', ok: true });
+    const { error } = await supabase.auth.updateUser({ password });
+    if (error) return setMsg({ text: error.message, ok: false });
+    setMsg({ text: 'Password updated! Taking you to your account…', ok: true });
+    setTimeout(onDone, 1200);
+  }
+
+  return (
+    <div className="account-card">
+      <div className="profile-section-title" style={{ marginBottom: '14px' }}>Set a New Password</div>
+      <form className="auth-form" style={{ display: 'flex' }} onSubmit={onSubmit}>
+        <input className="forum-input" type="password" minLength={8} autoComplete="new-password" placeholder="New password (8+ characters)" value={password} onChange={e => setPassword(e.target.value)} required />
+        <input className="forum-input" type="password" autoComplete="new-password" placeholder="Confirm new password" value={confirm} onChange={e => setConfirm(e.target.value)} required />
+        <MsgLine msg={msg} />
+        <button type="submit" className="btn-pink">Update Password</button>
+      </form>
+    </div>
+  );
+}
+
+/* ── Provider icons ────────────────────────────────────────────────── */
+function GoogleIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z" />
+      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.26 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z" />
+      <path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z" />
+      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z" />
+    </svg>
+  );
+}
+
+function AppleIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.05 12.54c-.03-2.6 2.13-3.85 2.22-3.91-1.21-1.77-3.1-2.02-3.77-2.04-1.6-.16-3.13.94-3.95.94-.81 0-2.07-.92-3.4-.9-1.75.03-3.36 1.02-4.26 2.58-1.82 3.16-.47 7.84 1.31 10.41.87 1.26 1.9 2.67 3.26 2.62 1.31-.05 1.8-.85 3.39-.85 1.58 0 2.02.85 3.4.82 1.4-.02 2.29-1.28 3.15-2.55.99-1.46 1.4-2.87 1.42-2.95-.03-.01-2.72-1.04-2.75-4.13zM14.6 4.97c.72-.88 1.21-2.1 1.08-3.31-1.04.04-2.3.69-3.05 1.56-.67.78-1.25 2.02-1.09 3.21 1.16.09 2.34-.59 3.06-1.46z" />
+    </svg>
   );
 }
 
