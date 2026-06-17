@@ -185,7 +185,7 @@ function ReplyForm({
   }
 
   return (
-    <form className={inline ? 'inline-reply' : undefined} onSubmit={onSubmit}>
+    <form id={inline ? undefined : 'reply-form'} className={inline ? 'inline-reply' : undefined} onSubmit={onSubmit}>
       <textarea rows={inline ? 3 : 4} placeholder={placeholder} value={body} onChange={e => setBody(e.target.value)} required />
       {msg && msg.text && <div className={'forum-msg ' + (msg.ok ? 'forum-msg-ok' : 'forum-msg-err')} style={{ display: 'block' }}>{msg.text}</div>}
       <button type="submit" className="btn-pink btn-small">{buttonLabel}</button>
