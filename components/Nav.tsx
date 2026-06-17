@@ -3,14 +3,31 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { supabase } from '@/lib/supabase';
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [username, setUsername] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    async function loadUsername(userId: string | undefined) {
+      if (!userId) { if (active) setUsername(null); return; }
+      const { data } = await supabase.from('profiles').select('username').eq('id', userId).single();
+      if (active) setUsername(data?.username ?? null);
+    }
+    supabase.auth.getUser().then(({ data: { user } }) => loadUsername(user?.id));
+    // Keep the nav in sync with login / logout across the whole app.
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      loadUsername(session?.user?.id);
+    });
+    return () => { active = false; subscription.unsubscribe(); };
   }, []);
 
   return (
@@ -42,7 +59,7 @@ export default function Nav() {
           className="btn-pink"
           style={{ padding: '12px 32px', fontSize: '11px', clipPath: 'polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)' }}
         >
-          Join Now
+          {username ? `@${username}` : 'Join Now'}
         </Link>
       </div>
     </nav>
