@@ -26,8 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <Footer />
 
-        <div hidden id="snipcart" data-api-key="NTE5N2MzNGYtMTZmMy00NDg4LTkyZDUtM2Y0ZmVmZWJlOTVjNjM5MTU5NzY3MTEwNjEzMzUw"></div>
-        <Script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" strategy="beforeInteractive" />
+        <div hidden id="snipcart" data-api-key={process.env.NEXT_PUBLIC_SNIPCART_API_KEY}></div>
         <Script src="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.js" strategy="afterInteractive" />
       </body>
     </html>
