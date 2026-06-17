@@ -486,6 +486,38 @@ footer { position: relative; padding: 80px 48px 48px; border-top: 1px solid rgba
 .auth-divider::before, .auth-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,.12); }
 .auth-forgot { background: none; border: none; padding: 0; align-self: flex-start; color: var(--pink); font-family: var(--font-cond); font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; cursor: pointer; }
 .auth-forgot:hover { text-decoration: underline; color: var(--pink-light); }
+
+/* ── Moderation: report button ──────────────────────────────────── */
+.nav-admin { color: var(--pink) !important; }
+.report-wrap { display: inline-flex; align-items: center; }
+.report-btn { background: none; border: none; cursor: pointer; color: var(--muted2); font-family: var(--font-cond); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 4px 6px; transition: color .2s; }
+.report-btn:hover { color: var(--pink-light); }
+.report-form { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+.report-form .forum-input { width: auto; min-width: 240px; padding: 8px 12px; }
+.report-done { color: var(--pink); font-family: var(--font-cond); font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+.thread-foot { margin-top: 16px; }
+
+/* ── Moderation: dashboard ──────────────────────────────────────── */
+.admin-tabs { display: flex; gap: 0; margin-bottom: 28px; border-bottom: 1px solid rgba(233,30,140,.2); flex-wrap: wrap; }
+.admin-tab { background: none; border: none; cursor: pointer; font-family: var(--font-cond); font-size: 13px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--muted2); padding: 12px 22px; border-bottom: 2px solid transparent; transition: all .25s; }
+.admin-tab:hover { color: var(--white); }
+.admin-tab.active { color: var(--pink); border-bottom-color: var(--pink); }
+.admin-list { display: flex; flex-direction: column; gap: 12px; }
+.admin-row { display: flex; gap: 16px; justify-content: space-between; align-items: flex-start; background: var(--purple); border: 1px solid rgba(233,30,140,.15); padding: 18px 20px; }
+.admin-row-main { flex: 1; min-width: 0; }
+.admin-row-meta { font-family: var(--font-cond); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.admin-row-meta strong { color: var(--white); }
+.admin-tag { display: inline-block; background: var(--pink-dim); color: var(--pink-light); font-weight: 700; padding: 2px 8px; margin-right: 8px; }
+.admin-row-title { font-family: var(--font-heading); font-size: 19px; letter-spacing: .02em; color: var(--white); margin-bottom: 4px; }
+.admin-row-body { color: rgba(255,255,255,.7); font-size: 14px; line-height: 1.5; word-break: break-word; }
+.admin-row-sub { margin-top: 8px; font-size: 13px; color: var(--muted); }
+.admin-row-sub em { color: var(--pink-light); font-style: normal; }
+.admin-row-actions { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; align-items: stretch; }
+.admin-del-btn { background: rgba(233,30,140,.12); border: 1px solid var(--pink); color: var(--pink-light); cursor: pointer; font-family: var(--font-cond); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 9px 18px; transition: background .2s; }
+.admin-del-btn:hover { background: var(--pink); color: var(--white); }
+.admin-cat-form { max-width: 560px; }
+.admin-cat-fields { display: flex; gap: 10px; }
+.admin-cat-fields .forum-input { flex: 1; }
 .profile-row { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.07); font-size: 14px; }
 .profile-value { color: var(--white); font-weight: 400; }
 .profile-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 28px; }

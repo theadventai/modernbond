@@ -29,6 +29,43 @@ export type Comment = {
   profiles: { username: string } | null;
 };
 
+export type Report = {
+  id: string;
+  reason: string;
+  status: 'open' | 'resolved' | 'dismissed';
+  created_at: string;
+  reporter: string;
+  reporter_username: string;
+  post_id: string | null;
+  post_title: string | null;
+  post_body: string | null;
+  post_author: string | null;
+  comment_id: string | null;
+  comment_body: string | null;
+  comment_author: string | null;
+};
+
+/** True if the current user has is_moderator set. */
+export async function checkModerator(userId: string | undefined): Promise<boolean> {
+  if (!userId) return false;
+  const { data } = await supabase.from('profiles').select('is_moderator').eq('id', userId).single();
+  return !!data?.is_moderator;
+}
+
+/** File a report against a post or a comment. */
+export async function fileReport(
+  reporter: string,
+  target: { postId?: string; commentId?: string },
+  reason: string
+) {
+  return supabase.from('reports').insert({
+    reporter,
+    post_id: target.postId ?? null,
+    comment_id: target.commentId ?? null,
+    reason,
+  });
+}
+
 export function timeAgo(iso: string): string {
   const s = Math.floor((Date.now() - new Date(iso).getTime()) / 1000);
   if (s < 60) return 'just now';

@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { timeAgo, getMyVotes, type FeedPost, type Comment } from '@/lib/forum';
 import VoteCol from '@/components/VoteCol';
+import ReportButton from '@/components/ReportButton';
 import type { User } from '@supabase/supabase-js';
 
 export default function ThreadPage({ params }: { params: Promise<{ id: string }> }) {
@@ -69,6 +70,7 @@ export default function ThreadPage({ params }: { params: Promise<{ id: string }>
                   </div>
                   <h1 className="thread-title">{post.title}</h1>
                   <div className="thread-body" style={{ whiteSpace: 'pre-wrap' }}>{post.body}</div>
+                  <div className="thread-foot"><ReportButton target={{ postId: post.id }} userId={user?.id} /></div>
                 </div>
               </article>
             )}
@@ -142,6 +144,7 @@ function CommentNode({
       </div>
       <div className="comment-body" style={{ whiteSpace: 'pre-wrap' }}>{comment.body}</div>
       <button className="comment-reply-btn" onClick={toggleReply}>Reply</button>
+      <ReportButton target={{ commentId: comment.id }} userId={user?.id} />
       <div className="comment-reply-slot">
         {replyOpen && (
           <ReplyForm postId={postId} parentId={comment.id} user={user} inline onPosted={() => { setReplyOpen(false); onPosted(); }} placeholder="Write a reply…" buttonLabel="Reply" />

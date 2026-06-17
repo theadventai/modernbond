@@ -8,6 +8,7 @@ import { supabase } from '@/lib/supabase';
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [username, setUsername] = useState<string | null>(null);
+  const [isMod, setIsMod] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -17,15 +18,15 @@ export default function Nav() {
 
   useEffect(() => {
     let active = true;
-    async function loadUsername(userId: string | undefined) {
-      if (!userId) { if (active) setUsername(null); return; }
-      const { data } = await supabase.from('profiles').select('username').eq('id', userId).single();
-      if (active) setUsername(data?.username ?? null);
+    async function loadProfile(userId: string | undefined) {
+      if (!userId) { if (active) { setUsername(null); setIsMod(false); } return; }
+      const { data } = await supabase.from('profiles').select('username, is_moderator').eq('id', userId).single();
+      if (active) { setUsername(data?.username ?? null); setIsMod(!!data?.is_moderator); }
     }
-    supabase.auth.getUser().then(({ data: { user } }) => loadUsername(user?.id));
+    supabase.auth.getUser().then(({ data: { user } }) => loadProfile(user?.id));
     // Keep the nav in sync with login / logout across the whole app.
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      loadUsername(session?.user?.id);
+      loadProfile(session?.user?.id);
     });
     return () => { active = false; subscription.unsubscribe(); };
   }, []);
@@ -48,6 +49,7 @@ export default function Nav() {
         <li><Link href="/community">Community</Link></li>
         <li><Link href="/#products">Marketplace</Link></li>
         <li><Link href="/#experiences">Experiences</Link></li>
+        {isMod && <li><Link href="/admin" className="nav-admin">Admin</Link></li>}
       </ul>
 
       <div className="nav-cta" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
