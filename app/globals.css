@@ -396,8 +396,8 @@ footer { position: relative; padding: 80px 48px 48px; border-top: 1px solid rgba
 .prod-related-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
 .prod-related-title { font-family: var(--font-heading); font-size: clamp(20px,3vw,40px); font-weight: 900; text-transform: uppercase; margin-bottom: 52px; line-height: .92; }
 .prod-related-title span { color: var(--pink); }
-.related-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
-.related-grid .prod-card { min-height: 190px; }
+.related-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+.related-grid .prod-card { min-height: unset; aspect-ratio: 1/1; }
 
 /* ═══════════════════════════════════════════════════════════════
    FORUM / COMMUNITY / ACCOUNT PAGES
@@ -578,7 +578,7 @@ footer { position: relative; padding: 80px 48px 48px; border-top: 1px solid rgba
   .prod-why { padding: 80px 24px; }
   .prod-why-stats { grid-template-columns: repeat(2,1fr); }
   .prod-related { padding: 80px 24px; }
-  .related-grid { grid-template-columns: 1fr; }
+  .related-grid { grid-template-columns: repeat(2,1fr); }
   .forum-page { padding: 130px 24px 80px; }
 }
 @media (max-width: 640px) {

@@ -61,7 +61,7 @@ export const PRODUCTS: Record<string, Product> = {
         { n: '∞', l: 'Better Moments' },
       ],
     },
-    related: ['love-blanket', 'matchmaker-candle', 'coconu-lube'],
+    related: ['love-blanket', 'matchmaker-candle', 'coconu-lube', 'raunchier-together'],
   },
 
   'love-blanket': {
@@ -106,7 +106,7 @@ export const PRODUCTS: Record<string, Product> = {
         { n: '∞', l: 'Cozy Nights' },
       ],
     },
-    related: ['deep-connections-pillow', 'matchmaker-candle', 'sexy-time-candle'],
+    related: ['deep-connections-pillow', 'matchmaker-candle', 'sexy-time-candle', 'raunchier-together'],
   },
 
   'coconu-lube': {
@@ -152,7 +152,7 @@ export const PRODUCTS: Record<string, Product> = {
         { n: '∞', l: 'Smoother Moments' },
       ],
     },
-    related: ['matchmaker-candle', 'sexy-time-candle', 'deep-connections-pillow'],
+    related: ['matchmaker-candle', 'sexy-time-candle', 'deep-connections-pillow', 'raunchier-together'],
   },
 
   'matchmaker-candle': {
@@ -196,7 +196,7 @@ export const PRODUCTS: Record<string, Product> = {
         { n: '∞', l: 'Sensual Evenings' },
       ],
     },
-    related: ['sexy-time-candle', 'coconu-lube', 'love-blanket'],
+    related: ['sexy-time-candle', 'coconu-lube', 'love-blanket', 'deep-connections-pillow'],
   },
 
   'raunchier-together': {
@@ -238,7 +238,7 @@ export const PRODUCTS: Record<string, Product> = {
         { n: '∞', l: 'Possibilities' },
       ],
     },
-    related: ['love-blanket', 'matchmaker-candle', 'sexy-time-candle'],
+    related: ['love-blanket', 'matchmaker-candle', 'sexy-time-candle', 'coconu-lube'],
   },
 
   'sexy-time-candle': {
@@ -279,7 +279,7 @@ export const PRODUCTS: Record<string, Product> = {
         { n: '∞', l: 'Intimate Evenings' },
       ],
     },
-    related: ['matchmaker-candle', 'coconu-lube', 'love-blanket'],
+    related: ['matchmaker-candle', 'coconu-lube', 'love-blanket', 'raunchier-together'],
   },
 };
 
