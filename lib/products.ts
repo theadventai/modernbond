@@ -32,7 +32,7 @@ export const PRODUCTS: Record<string, Product> = {
     category: 'Intimacy · Physical',
     price: 89,
     priceStr: '$89',
-    priceNote: 'Free shipping · 30-day returns',
+    priceNote: '',
     tagline: 'Better angles. Deeper connection.',
     desc: 'The Deep Connections Pillow is a precision-engineered intimacy positioning cushion designed to reduce strain, open up new angles, and make every experience more comfortable and connected. Because how you position your body changes everything about how you feel.',
     features: [
@@ -41,7 +41,7 @@ export const PRODUCTS: Record<string, Product> = {
       { title: 'Discreet Packaging', body: 'Delivered in plain, unmarked packaging — your privacy is protected' },
       { title: 'Versatile Use', body: 'Works for solo practice, partner play, massage, and relaxation' },
     ],
-    badges: ['⚡ Ships in 3–5 Days', '⚡ Free Returns'],
+    badges: [],
     cover: '/marketplace/deep_connections_pillow/COVER_PronePillow_v002.png',
     thumbs: [
       '/marketplace/deep_connections_pillow/COVER_PronePillow_v002.png',
@@ -72,7 +72,7 @@ export const PRODUCTS: Record<string, Product> = {
     category: 'Comfort · Physical',
     price: 79,
     priceStr: '$79',
-    priceNote: 'Free shipping over $50 · Discreet packaging',
+    priceNote: '',
     tagline: 'Wrap yourself in warmth. Share something real.',
     desc: "The Love Blanket is designed for closeness — whether you're winding down together, deepening a connection ritual, or simply craving comfort that feels like a full-body embrace. Luxuriously soft, intentionally weighted, and made for the moments that matter most.",
     features: [
@@ -81,7 +81,7 @@ export const PRODUCTS: Record<string, Product> = {
       { title: 'Calming Weight', body: 'Gentle pressure that soothes the nervous system and invites presence' },
       { title: 'Ritual-Ready', body: 'A grounding anchor for your intimacy rituals, bedtime connection, or post-session warmth' },
     ],
-    badges: ['⚡ Ultra-Soft', '⚡ Ships in 3–5 Days'],
+    badges: ['⚡ Ultra-Soft'],
     cover: '/marketplace/the_love_blanket/COVER_TheLoveBlanket_v001_cover.jpg',
     thumbs: [
       '/marketplace/the_love_blanket/COVER_TheLoveBlanket_v001_cover.jpg',
@@ -117,7 +117,7 @@ export const PRODUCTS: Record<string, Product> = {
     category: 'Wellness · Physical',
     price: 32,
     priceStr: '$32',
-    priceNote: 'Free shipping over $50 · Discreet packaging',
+    priceNote: '',
     tagline: 'Natural. Body-safe. Deeply luxurious.',
     desc: 'Coconu is a premium natural lubricant made with organic coconut oil and plant-based ingredients. Silky smooth, long-lasting, and completely body-safe — crafted for people who take their pleasure as seriously as everything else in their life.',
     features: [
@@ -163,7 +163,7 @@ export const PRODUCTS: Record<string, Product> = {
     category: 'Wellness · Physical',
     price: 38,
     priceStr: '$38',
-    priceNote: 'Free shipping over $50 · Discreet packaging',
+    priceNote: '',
     tagline: 'Light it. Let it melt. Feel everything.',
     desc: 'The Matchmaker Candle is a dual-purpose luxury candle that burns beautifully and melts into a warm, silky massage oil. Light it to set the mood. Pour it to deepen the touch. Two experiences. One intention.',
     features: [
@@ -207,7 +207,7 @@ export const PRODUCTS: Record<string, Product> = {
     category: 'Game · Physical',
     price: 42,
     priceStr: '$42',
-    priceNote: 'Free shipping over $50 · Discreet packaging',
+    priceNote: '',
     tagline: 'Play bold. Connect deeper.',
     desc: 'Raunchier Together is an adult card game designed to ignite desire, spark real conversation, and bring couples closer through bold, playful exploration. No filters. No judgment. Just you, your partner, and a whole lot of fun.',
     features: [
@@ -216,7 +216,7 @@ export const PRODUCTS: Record<string, Product> = {
       { title: 'Premium Card Stock', body: 'Thick, durable cards with a matte finish — built to last for many nights of play' },
       { title: 'Expert Designed', body: 'Created in collaboration with intimacy coaches and relationship experts' },
     ],
-    badges: ['⚡ Ships in 3–5 Days', '⚡ For Couples'],
+    badges: ['⚡ For Couples'],
     cover: '/marketplace/raunchier_together_cardgame/Cover_CardGame.png',
     thumbs: [
       '/marketplace/raunchier_together_cardgame/Cover_CardGame.png',
@@ -249,7 +249,7 @@ export const PRODUCTS: Record<string, Product> = {
     category: 'Wellness · Physical',
     price: 34,
     priceStr: '$34',
-    priceNote: 'Free shipping over $50 · Discreet packaging',
+    priceNote: '',
     tagline: 'Set the scene. Own the moment.',
     desc: 'The Sexy Time Candle is a hand-poured premium soy candle with a bold, intoxicating scent profile crafted specifically for intimate moments. Light it before, during, or after — it belongs in every ritual.',
     features: [
