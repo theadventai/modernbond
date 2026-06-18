@@ -251,7 +251,7 @@ nav.scrolled { background: rgba(12,6,18,.92); backdrop-filter: blur(20px); borde
 .products-h2 span { color: var(--pink); }
 .products-sub { font-size: 13px; line-height: 1.8; color: var(--muted); max-width: 320px; text-align: right; }
 .products-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.prod-card { position: relative; overflow: hidden; cursor: pointer; border: 1px solid rgba(233,30,140,.2); min-height: 190px; transition: border-color .35s, box-shadow .35s; display: block; }
+.prod-card { position: relative; overflow: hidden; cursor: pointer; border: 1px solid rgba(233,30,140,.2); min-height: 380px; transition: border-color .35s, box-shadow .35s; display: block; }
 .prod-card:hover { border-color: rgba(233,30,140,.6); box-shadow: 0 0 28px rgba(233,30,140,.18), inset 0 0 0 1px rgba(233,30,140,.12); }
 .prod-vis { width: 100%; height: 100%; position: absolute; inset: 0; transition: transform .6s cubic-bezier(.16,1,.3,1); background-size: cover; background-position: center; }
 .prod-card:hover .prod-vis { transform: scale(1.04); }
@@ -397,6 +397,7 @@ footer { position: relative; padding: 80px 48px 48px; border-top: 1px solid rgba
 .prod-related-title { font-family: var(--font-heading); font-size: clamp(20px,3vw,40px); font-weight: 900; text-transform: uppercase; margin-bottom: 52px; line-height: .92; }
 .prod-related-title span { color: var(--pink); }
 .related-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+.related-grid .prod-card { min-height: 190px; }
 
 /* ═══════════════════════════════════════════════════════════════
    FORUM / COMMUNITY / ACCOUNT PAGES
