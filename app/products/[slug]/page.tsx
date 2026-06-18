@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { PRODUCTS } from '@/lib/products';
 
+type StockStatus = { stock: number | null; inStock: boolean; manageable: boolean };
+
 const SITE = 'https://joinmodernbond.com';
 
 export default function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -13,6 +15,15 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
 
   const [mainImg, setMainImg] = useState(product?.cover ?? '');
   const [fading, setFading] = useState(false);
+  const [stockStatus, setStockStatus] = useState<StockStatus>({ stock: null, inStock: true, manageable: false });
+
+  useEffect(() => {
+    if (!product) return;
+    fetch(`/api/stock/${product.slug}`)
+      .then(r => r.json())
+      .then(setStockStatus)
+      .catch(() => {});
+  }, [product?.slug]);
 
   useEffect(() => {
     if (!product) return;
@@ -78,6 +89,15 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                   <li key={i}><span className="feat-icon">⚡</span><div><strong>{f.title}</strong> {f.body}</div></li>
                 ))}
               </ul>
+              {stockStatus.manageable && (
+                <div className="prod-stock-badge reveal d3">
+                  {stockStatus.inStock
+                    ? stockStatus.stock !== null && stockStatus.stock <= 5
+                      ? <span className="stock-low">⚡ Only {stockStatus.stock} left</span>
+                      : <span className="stock-in">✓ In Stock</span>
+                    : <span className="stock-out">✗ Out of Stock</span>}
+                </div>
+              )}
               <div className="prod-ctas reveal d3">
                 <button
                   className="snipcart-add-item btn-pink"
@@ -88,8 +108,13 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                   data-item-name={product.name}
                   data-item-description={product.snipcartDescription}
                   data-item-image={product.cover}
+                  {...(stockStatus.manageable && stockStatus.stock !== null
+                    ? { 'data-item-max-quantity': stockStatus.stock }
+                    : {})}
+                  disabled={!stockStatus.inStock}
+                  style={!stockStatus.inStock ? { opacity: 0.5, cursor: 'not-allowed' } : undefined}
                 >
-                  Add to Cart — {product.priceStr}
+                  {stockStatus.inStock ? `Add to Cart — ${product.priceStr}` : 'Out of Stock'}
                 </button>
                 <Link href="/#products" className="btn-outline">Back to Marketplace</Link>
               </div>

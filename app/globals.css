@@ -363,6 +363,11 @@ footer { position: relative; padding: 80px 48px 48px; border-top: 1px solid rgba
 .prod-img-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 100%, rgba(233,30,140,.2) 0%, transparent 60%); }
 .prod-badges { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
 .prod-badge { font-family: var(--font-cond); font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--pink); border: 1px solid rgba(233,30,140,.3); padding: 6px 14px; background: rgba(233,30,140,.05); }
+.prod-stock-badge { margin-bottom: 12px; }
+.prod-stock-badge span { font-family: var(--font-cond); font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; padding: 5px 14px; }
+.stock-in  { color: #4ade80; border: 1px solid rgba(74,222,128,.3); background: rgba(74,222,128,.08); }
+.stock-low { color: #fb923c; border: 1px solid rgba(251,146,60,.3); background: rgba(251,146,60,.08); }
+.stock-out { color: rgba(255,255,255,.4); border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.04); }
 .prod-thumb-strip { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
 .prod-thumb { width: 72px; height: 72px; object-fit: cover; border: 2px solid transparent; cursor: pointer; opacity: .65; transition: border-color .25s, opacity .25s; }
 .prod-thumb:hover { opacity: 1; }
