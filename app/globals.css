@@ -536,6 +536,7 @@ footer { position: relative; padding: 80px 48px 48px; border-top: 1px solid rgba
 .snipcart__overlay { background:rgba(12,6,18,0.85) !important; }
 .snipcart-layout *,.snipcart__modal * { font-family:'Barlow',sans-serif !important; }
 .snipcart-form__label,.snipcart-base-button,.snipcart-base-button *,.snipcart__font--secondary,.snipcart__font--bold { font-family:'Barlow Condensed',sans-serif !important; letter-spacing:0.05em !important; }
+.snipcart-form__label,.snipcart-form-group__label,label[class*="snipcart"] { color:#ffffff !important; font-weight:500 !important; }
 .snipcart__font--large,.snipcart__font--xlarge { font-family:'Bebas Neue',sans-serif !important; letter-spacing:0.08em !important; }
 .snipcart-button-primary { background:#e91e8c !important; color:#ffffff !important; border:none !important; font-family:'Barlow Condensed',sans-serif !important; font-weight:700 !important; letter-spacing:0.12em !important; text-transform:uppercase !important; }
 .snipcart-button-primary:hover { background:#f548a8 !important; }
