@@ -93,10 +93,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                 </button>
                 <Link href="/#products" className="btn-outline">Back to Marketplace</Link>
               </div>
-              <div className="prod-guarantee reveal d4">
-                <span className="guarantee-icon">🔒</span>
-                <span>30-day satisfaction guarantee. Private &amp; secure checkout.</span>
-              </div>
+
             </div>
           </div>
         </div>
