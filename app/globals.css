@@ -561,6 +561,14 @@ footer { position: relative; padding: 80px 48px 48px; border-top: 1px solid rgba
 .snipcart__box--badge,.snipcart__box--badge-highlight { background:rgba(233,30,140,0.15) !important; border:1px solid rgba(233,30,140,0.4) !important; color:#e91e8c !important; }
 .snipcart-featured-payment-methods,.snipcart-featured-payment-methods__list { background:transparent !important; background-color:#0c0612 !important; }
 .snipcart-summary-fees__notice { color:rgba(255,255,255,0.4) !important; background:transparent !important; }
+/* Attribution, footer, and any remaining white surfaces */
+.snipcart__attribution,.snipcart-attribution,.snipcart__attribution * { background:#0c0612 !important; color:rgba(255,255,255,0.35) !important; border-color:rgba(233,30,140,0.1) !important; }
+.snipcart-cart__footer-col,.snipcart-cart__footer-row,.snipcart-cart__content-container { background:#0c0612 !important; }
+.snipcart__box--footer,.snipcart__footer { background:#0c0612 !important; border-color:rgba(233,30,140,0.1) !important; }
+.snipcart-cart-summary,.snipcart-cart-summary *:not(button):not(svg) { background:#100818 !important; color:#ffffff !important; }
+/* Catch-all: any Snipcart element that still has a white/light background */
+[class*="snipcart"]:not(.snipcart-input):not(.snipcart-textbox):not(.snipcart-select__select):not(input):not(textarea):not(.snipcart-button-primary):not(.stock-in):not(.stock-low):not(.stock-out) { background-color: inherit; }
+.snipcart__modal [style*="background: rgb(255"],[class*="snipcart"][style*="background: white"],[class*="snipcart"][style*="background:#fff"],[class*="snipcart"][style*="background: #fff"] { background:#0c0612 !important; }
 
 /* ═══════════════════════════════════════════════════════════════
    RESPONSIVE
