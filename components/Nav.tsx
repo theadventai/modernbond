@@ -42,7 +42,7 @@ export default function Nav() {
 
   return (
     <nav id="nav" className={scrolled ? 'scrolled' : ''}>
-      <Link href="/" className="nav-logo">
+      <a href="https://www.joinmodernbond.com" className="nav-logo">
         <Image
           src="/images/MB_Logo_pink-pink2.png"
           alt="Modern Bond"
@@ -50,7 +50,7 @@ export default function Nav() {
           height={53}
           style={{ mixBlendMode: 'multiply', objectFit: 'contain' }}
         />
-      </Link>
+      </a>
 
       <ul className="nav-links">
         <li><a href="/#about" onClick={goToSection('#about')}>About</a></li>
