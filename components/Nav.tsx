@@ -54,7 +54,8 @@ export default function Nav() {
 
       <div className="nav-cta" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <button className="snipcart-checkout nav-cart">
-          🛒 <span className="snipcart-items-count">0</span>
+          <span className="nav-cart-icon">🛒</span>
+          <span className="snipcart-items-count">0</span>
         </button>
         <Link
           href="/account"
