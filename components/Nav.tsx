@@ -55,7 +55,12 @@ export default function Nav() {
       <ul className="nav-links">
         <li><a href="/#about" onClick={goToSection('#about')}>About</a></li>
         <li><a href="/#coaching" onClick={goToSection('#coaching')}>Coaching</a></li>
-        <li><Link href="/community">Community</Link></li>
+        <li>
+          {username
+            ? <Link href="/community">Community</Link>
+            : <a href="/#community" onClick={goToSection('#community')}>Community</a>
+          }
+        </li>
         <li><a href="/#products" onClick={goToSection('#products')}>Marketplace</a></li>
         <li><a href="/#experiences" onClick={goToSection('#experiences')}>Experiences</a></li>
         {isMod && <li><Link href="/admin" className="nav-admin">Admin</Link></li>}

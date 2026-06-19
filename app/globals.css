@@ -110,11 +110,14 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 48px;
-  background: rgba(12,6,18,.92); backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(233,30,140,.08);
-  transition: border-color .4s;
+  background: transparent; backdrop-filter: none;
+  border-bottom: 1px solid transparent;
+  transition: background .4s, backdrop-filter .4s, border-color .4s;
 }
-nav.scrolled { border-bottom-color: rgba(233,30,140,.15); }
+nav.scrolled {
+  background: rgba(12,6,18,.92); backdrop-filter: blur(20px);
+  border-bottom-color: rgba(233,30,140,.15);
+}
 .nav-logo { display: flex; align-items: center; gap: 12px; position: relative; z-index: 1; }
 .nav-links { display: flex; gap: 32px; list-style: none; position: absolute; left: 50%; transform: translateX(-50%); z-index: 1; }
 .nav-links a { font-family: var(--font-cond); font-size: 13px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); transition: color .25s; }
@@ -534,7 +537,7 @@ footer { position: relative; padding: 80px 48px 48px; border-top: 1px solid rgba
 /* ═══════════════════════════════════════════════════════════════
    SNIPCART DARK THEME
 ═══════════════════════════════════════════════════════════════ */
-#snipcart { --color-default:#ffffff; --color-alt:rgba(255,255,255,0.85); --color-success:#e91e8c; --color-error:#ff4466; --color-badge:#e91e8c; --color-badge-active:#f548a8; --color-badge-foreground:#ffffff; --color-input-focus:#e91e8c; --color-link:#e91e8c; --color-link-hover:#f548a8; --color-button-default:#e91e8c; --color-button-default-hover:#f548a8; --color-button-primary:#e91e8c; --color-button-primary-hover:#f548a8; --color-icon:rgba(255,255,255,0.45); --color-icon-hover:#e91e8c; --color-shadow:rgba(0,0,0,0.85); --color-input:#f0eaf5; --color-input-placeholder:rgba(30,10,40,0.45); --color-input-label:#ffffff; --border-radius:0px; --border-radius-button:0px; }
+#snipcart { --color-default:#ffffff; --color-alt:rgba(255,255,255,0.85); --color-success:#e91e8c; --color-error:#ff4466; --color-badge:#e91e8c; --color-badge-active:#f548a8; --color-badge-foreground:#ffffff; --color-input-focus:#e91e8c; --color-link:#e91e8c; --color-link-hover:#f548a8; --color-button-default:#e91e8c; --color-button-default-hover:#f548a8; --color-button-primary:#e91e8c; --color-button-primary-hover:#f548a8; --color-icon:rgba(255,255,255,0.45); --color-icon-hover:#e91e8c; --color-shadow:rgba(0,0,0,0.85); --color-input:#f0eaf5; --color-input-placeholder:rgba(30,10,40,0.45); --color-input-label:#ffffff; --border-radius:0px; --border-radius-button:0px; --color-cart:#0c0612; --color-sidebar:#100818; --color-cart-alternate:#100818; --color-bg-primary:#0c0612; --color-bg-secondary:#100818; --color-surface-primary:#0c0612; --color-surface-secondary:#100818; --color-gray-10:#0c0612; --color-gray-20:#100818; --color-gray-30:#1a0820; background:#0c0612; }
 .snipcart-layout,.snipcart-layout__col,.snipcart-layout__content,.snipcart-cart,.snipcart-cart__content,.snipcart-cart__header,.snipcart-cart__footer,.snipcart-order,.snipcart-checkout,.snipcart-base-popup,.snipcart__modal,.snipcart__modal__container { background:#0c0612 !important; color:#ffffff !important; }
 .snipcart-item-line,.snipcart-summary-fees,.snipcart-shipping-rates-list__item,.snipcart-payment-methods-list__item,.snipcart-discount-box,.snipcart-typeahead { background:#100818 !important; border-color:rgba(233,30,140,0.15) !important; }
 .snipcart-input,.snipcart-textbox,.snipcart-select__select,input[class*="snipcart"],textarea[class*="snipcart"] { background:#f0eaf5 !important; border-color:rgba(233,30,140,0.4) !important; color:#1a0820 !important; }
@@ -569,6 +572,31 @@ nav, nav * { pointer-events: all !important; }
 .snipcart-cart__footer-col,.snipcart-cart__footer-row,.snipcart-cart__content-container { background:#0c0612 !important; }
 .snipcart__box--footer,.snipcart__footer { background:#0c0612 !important; border-color:rgba(233,30,140,0.1) !important; }
 .snipcart-cart-summary,.snipcart-cart-summary *:not(button):not(svg) { background:#100818 !important; color:#ffffff !important; }
+/* Nuclear catch-all: force every Snipcart element off white */
+#snipcart [style*="background: rgb(255"],
+#snipcart [style*="background-color: rgb(255"],
+#snipcart [style*="background:#fff"],
+#snipcart [style*="background: #fff"],
+#snipcart [style*="background:white"],
+#snipcart [style*="background: white"] { background:#0c0612 !important; }
+.snipcart-cart__secondary-header,
+.snipcart__actions--link,
+.snipcart-payment__footer,
+.snipcart-payment__method,
+.snipcart__box--gray,
+.snipcart__loading-overlay,
+.snipcart-modal__container,
+.snipcart-cart__secondary-content { background:#100818 !important; color:#ffffff !important; border-color:rgba(233,30,140,0.12) !important; }
+/* Catch Snipcart's inner payment / secured panel */
+.snipcart-payment,.snipcart-payment * { background:#0c0612 !important; color:rgba(255,255,255,0.8) !important; }
+.snipcart-payment button,.snipcart-payment .snipcart-button-primary { background:#e91e8c !important; color:#ffffff !important; }
+/* White panel that appears bottom-left / bottom-right of cart */
+.snipcart__modal .snipcart__col--large,
+.snipcart__modal .snipcart__col:not(:first-child) { background:#0c0612 !important; }
+/* Secured by Snipcart row */
+.snipcart__powered-by,
+.snipcart__powered-by *,
+[class*="powered"] { background:#0c0612 !important; color:rgba(255,255,255,0.3) !important; }
 
 /* ═══════════════════════════════════════════════════════════════
    RESPONSIVE
