@@ -5,6 +5,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 
+// Navigate to a homepage section, closing Snipcart first to prevent hash stacking.
+function goToSection(hash: string) {
+  return (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    try { (window as any).Snipcart?.api?.theme?.cart?.close(); } catch {}
+    window.location.href = '/' + hash;
+  };
+}
+
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [username, setUsername] = useState<string | null>(null);
@@ -44,11 +53,11 @@ export default function Nav() {
       </Link>
 
       <ul className="nav-links">
-        <li><Link href="/#about">About</Link></li>
-        <li><Link href="/#coaching">Coaching</Link></li>
+        <li><a href="/#about" onClick={goToSection('#about')}>About</a></li>
+        <li><a href="/#coaching" onClick={goToSection('#coaching')}>Coaching</a></li>
         <li><Link href="/community">Community</Link></li>
-        <li><Link href="/#products">Marketplace</Link></li>
-        <li><Link href="/#experiences">Experiences</Link></li>
+        <li><a href="/#products" onClick={goToSection('#products')}>Marketplace</a></li>
+        <li><a href="/#experiences" onClick={goToSection('#experiences')}>Experiences</a></li>
         {isMod && <li><Link href="/admin" className="nav-admin">Admin</Link></li>}
       </ul>
 
