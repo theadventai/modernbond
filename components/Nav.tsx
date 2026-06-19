@@ -16,6 +16,7 @@ function goToSection(hash: string) {
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const [username, setUsername] = useState<string | null>(null);
   const [isMod, setIsMod] = useState(false);
 
@@ -23,6 +24,14 @@ export default function Nav() {
     const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Force dark nav whenever Snipcart's cart/checkout hash is active
+  useEffect(() => {
+    const check = () => setCartOpen(window.location.hash.startsWith('#/'));
+    check();
+    window.addEventListener('hashchange', check);
+    return () => window.removeEventListener('hashchange', check);
   }, []);
 
   useEffect(() => {
@@ -41,7 +50,7 @@ export default function Nav() {
   }, []);
 
   return (
-    <nav id="nav" className={scrolled ? 'scrolled' : ''}>
+    <nav id="nav" className={scrolled || cartOpen ? 'scrolled' : ''}>
       <a href="https://www.joinmodernbond.com" className="nav-logo">
         <Image
           src="/images/MB_Logo_pink-pink2.png"
