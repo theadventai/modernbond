@@ -107,7 +107,7 @@ a { text-decoration: none; color: inherit; }
    NAVIGATION
 ═══════════════════════════════════════════════════════════════ */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 48px;
   background: rgba(12,6,18,.92); backdrop-filter: blur(20px);
@@ -542,7 +542,8 @@ footer { position: relative; padding: 80px 48px 48px; border-top: 1px solid rgba
 .snipcart-item-line__title,.snipcart-summary-fees__amount,.snipcart-summary-fees__amount--highlight,.snipcart-order__summary-price,.snipcart-cart-header__count { color:#e91e8c !important; }
 .snipcart-modal__close-icon,.snipcart-form-step__arrow { color:rgba(255,255,255,0.5) !important; }
 .snipcart-modal__close-icon:hover,.snipcart-form-step__arrow:hover { color:#e91e8c !important; }
-.snipcart__overlay { background:rgba(12,6,18,0.85) !important; }
+.snipcart__overlay { background:rgba(12,6,18,0.85) !important; z-index: 999 !important; }
+.snipcart__modal,.snipcart__modal__container { z-index: 1001 !important; }
 .snipcart-layout *,.snipcart__modal * { font-family:'Barlow',sans-serif !important; }
 .snipcart-form__label,.snipcart-base-button,.snipcart-base-button *,.snipcart__font--secondary,.snipcart__font--bold { font-family:'Barlow Condensed',sans-serif !important; letter-spacing:0.05em !important; }
 .snipcart-form__label,.snipcart-form-group__label,label[class*="snipcart"] { color:#ffffff !important; font-weight:500 !important; }
