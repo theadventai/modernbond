@@ -322,6 +322,10 @@ nav.scrolled {
 .tier-feats li::before { content: '⚡'; color: var(--pink); font-size: 10px; flex-shrink: 0; }
 .tier-btn { width: 100%; display: block; text-align: center; padding: 14px; font-family: var(--font-cond); font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; border: 1px solid rgba(255,255,255,.12); color: var(--muted); transition: all .3s; }
 .tier-btn:hover, .tier.feat .tier-btn { background: var(--pink); border-color: var(--pink); color: var(--white); box-shadow: 0 0 24px var(--pink-glow); }
+.tier-btn--pink { background: var(--pink) !important; border-color: var(--pink) !important; color: var(--white) !important; box-shadow: 0 0 24px var(--pink-glow); }
+.tier-btn--pink:hover { background: var(--pink-light) !important; border-color: var(--pink-light) !important; }
+.tier-btn--outline { background: transparent !important; border: 1px solid rgba(255,255,255,.25) !important; color: rgba(255,255,255,.45) !important; cursor: default; box-shadow: none !important; }
+.tier-btn--outline:hover { background: transparent !important; border-color: rgba(255,255,255,.25) !important; color: rgba(255,255,255,.45) !important; box-shadow: none !important; }
 
 /* ═══════════════════════════════════════════════════════════════
    FOOTER

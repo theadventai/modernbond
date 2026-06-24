@@ -406,9 +406,9 @@ export default function HomePage() {
                 <li>Monthly newsletter</li>
                 <li>Public events</li>
               </ul>
-              <Link href="/account" className="tier-btn">Join Now</Link>
+              <Link href="/account" className="tier-btn tier-btn--pink">Join Now</Link>
             </div>
-            <div className="tier dimmed reveal d1">
+            <div className="tier reveal d1">
               <div className="tier-name">Inner Circle</div>
               <div className="tier-price">$149 <span>/ month</span></div>
               <ul className="tier-feats">
@@ -419,7 +419,7 @@ export default function HomePage() {
                 <li>Exclusive experiences</li>
                 <li>Direct coach messaging</li>
               </ul>
-              <button className="tier-btn" disabled>Coming Soon</button>
+              <button className="tier-btn tier-btn--outline">Coming Soon</button>
             </div>
           </div>
         </div>
