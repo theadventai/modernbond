@@ -45,11 +45,11 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <div className="footer-copy">© 2024 Modern Bond. All rights reserved.</div>
+          <div className="footer-copy">© 2026 Modern Bond. All rights reserved.</div>
           <div className="footer-soc">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Contact</a>
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/terms">Terms</Link>
+            <Link href="/contact">Contact</Link>
           </div>
         </div>
       </div>
