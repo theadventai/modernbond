@@ -408,7 +408,7 @@ export default function HomePage() {
               </ul>
               <Link href="/account" className="tier-btn">Join Now</Link>
             </div>
-            <div className="tier reveal d1">
+            <div className="tier dimmed reveal d1">
               <div className="tier-name">Inner Circle</div>
               <div className="tier-price">$149 <span>/ month</span></div>
               <ul className="tier-feats">
