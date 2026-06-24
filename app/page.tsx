@@ -396,14 +396,9 @@ export default function HomePage() {
           <p className="join-desc reveal d2">
             Access the full Modern Bond experience — education, community, curated products, and exclusive events. All in one place, built with intention.
           </p>
-          <div className="join-form reveal d3">
-            <input type="email" className="join-input" placeholder="Your email address" />
-            <button className="join-submit">Join Waitlist</button>
-          </div>
-          <div className="join-note reveal d4">Private. Curated. No spam, ever.</div>
           <div className="tiers">
             <div className="tier reveal">
-              <div className="tier-name">Explorer</div>
+              <div className="tier-name">Explorer Member</div>
               <div className="tier-price">Free <span>/ always</span></div>
               <ul className="tier-feats">
                 <li>Editorial content access</li>
@@ -411,34 +406,20 @@ export default function HomePage() {
                 <li>Monthly newsletter</li>
                 <li>Public events</li>
               </ul>
-              <Link href="/account" className="tier-btn">Get Started</Link>
+              <Link href="/account" className="tier-btn">Join Now</Link>
             </div>
-            <div className="tier feat reveal d1">
-              <div className="tier-badge">⚡ Most Popular</div>
-              <div className="tier-name">Member</div>
-              <div className="tier-price">$49 <span>/ month</span></div>
-              <ul className="tier-feats">
-                <li>Everything in Explorer</li>
-                <li>Full community access</li>
-                <li>Group coaching sessions</li>
-                <li>Workshop discounts</li>
-                <li>Curated product access</li>
-                <li>Monthly AMA / Office Hours</li>
-              </ul>
-              <Link href="/account" className="tier-btn">Become a Member</Link>
-            </div>
-            <div className="tier reveal d2">
+            <div className="tier reveal d1">
               <div className="tier-name">Inner Circle</div>
               <div className="tier-price">$149 <span>/ month</span></div>
               <ul className="tier-feats">
-                <li>Everything in Member</li>
+                <li>Everything in Explorer Member</li>
                 <li>Monthly 1:1 coaching</li>
                 <li>Private community</li>
                 <li>Priority event access</li>
                 <li>Exclusive experiences</li>
                 <li>Direct coach messaging</li>
               </ul>
-              <Link href="/account" className="tier-btn">Apply Now</Link>
+              <button className="tier-btn" disabled>Coming Soon</button>
             </div>
           </div>
         </div>
