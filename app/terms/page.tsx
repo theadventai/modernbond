@@ -35,6 +35,17 @@ export default function TermsPage() {
             <li>You will provide accurate, current, and complete information during registration and maintain the accuracy of such information</li>
           </ul>
           <p className="legal-p">We reserve the right to terminate accounts and refuse service to anyone we reasonably believe to be under 18. If we discover a user is under 18, we will immediately terminate their account and delete associated data.</p>
+
+          <h3 className="legal-subsection-title">2.2 Age Certification and Liability for Misrepresentation</h3>
+          <p className="legal-p">By accessing or using the Services, you expressly certify, under penalty of breach of this Agreement, that:</p>
+          <ul className="legal-list">
+            <li>You are at least 18 years of age (or the age of majority in your jurisdiction, whichever is greater)</li>
+            <li>Any date of birth or other age-verification information you provide is truthful, accurate, and complete</li>
+            <li>You are not accessing the Services on behalf of, or for the benefit of, any person under the age of 18</li>
+            <li>You understand that the Services contain adult-oriented content and that you are voluntarily choosing to access such content</li>
+          </ul>
+          <p className="legal-p">Providing false or misleading information in connection with age verification constitutes a material breach of these Terms and may result in immediate account termination, forfeiture of any purchased credits or memberships without refund, and referral to relevant authorities where required by law.</p>
+          <p className="legal-p legal-emphasis">MODERN BOND EXPRESSLY DISCLAIMS ALL LIABILITY ARISING FROM, OR IN CONNECTION WITH, ANY ACCESS TO THE SERVICES OBTAINED THROUGH MISREPRESENTATION OF AGE OR IDENTITY. If a minor accesses the Services by providing false information, Modern Bond bears no responsibility for such access. Liability for any resulting harm rests solely with the individual who provided the false information and, where applicable, with the minor&apos;s parent or legal guardian.</p>
         </div>
 
         <div className="legal-section">
