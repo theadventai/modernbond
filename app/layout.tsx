@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import AgeGate from '@/components/AgeGate';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.css" />
       </head>
       <body>
+        <AgeGate />
         <Nav />
         {children}
         <Footer />
