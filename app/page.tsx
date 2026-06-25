@@ -115,17 +115,17 @@ export default function HomePage() {
         <div className="about-grid">
           <div>
             <div className="sec-label reveal">Who We Are</div>
-            <h2 className="about-h2 reveal d1">Built for<br /><span>Modern</span>Intimacy</h2>
+            <h2 className="about-h2 reveal d1">Let&apos;s Get <span>Real.</span></h2>
             <div className="about-body reveal d2">
-              <p>Modern Bond is where intimacy meets intention. We believe real connection — with yourself and with others — is a skill that can be <strong>learned, practiced, and deepened.</strong></p>
-              <p>We created one platform where education, community, curated tools, and transformative experiences come together to support you at every stage of your journey.</p>
-              <p>Whether you're building confidence, deepening a relationship, or simply learning to connect more authentically — <strong>Modern Bond is built for you.</strong></p>
+              <p>Modern Bond is where sex gets real. We believe a hot sex life and deep connection aren&apos;t magic — they&apos;re skills you can actually learn. We&apos;re not here to be gentle — <strong>we&apos;re here to get you results.</strong></p>
+              <p>We built one raw, unfiltered playground that combines expert coaching, a community that tells it like it is, tools that actually work, and experiences you won&apos;t forget.</p>
+              <p>Whether you&apos;re building confidence or looking to level up, you&apos;re in the right place. This is for everyone who&apos;s done with mediocre and <strong>ready for more.</strong></p>
             </div>
             <div className="about-values reveal d3">
-              <div className="val">Trust &amp; Safety First</div>
-              <div className="val">Expert-Led Guidance</div>
-              <div className="val">Curated Community</div>
-              <div className="val">Privacy by Design</div>
+              <div className="val">Trust &amp; Safety</div>
+              <div className="val">Expert-Led Coaching</div>
+              <div className="val">Like-Minded Community</div>
+              <div className="val">Curated Tools &amp; Products</div>
               <div className="val">Modern &amp; Unapologetic</div>
             </div>
           </div>
