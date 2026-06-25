@@ -51,7 +51,7 @@ export default function HomePage() {
         <div className="hero-side hero-side-right">Coaching / Content / Community / Products / Experiences</div>
         <div className="hero-content">
           <img src="/images/Tagline_001_v002.png" alt="Unlock Your Best S*x Life" className="hero-tagline-img reveal" />
-          <div className="hero-supertitle reveal d1">⚡ Next-Generation Intimacy Platform ⚡</div>
+          <div className="hero-supertitle reveal d1">⚡ Your Unfiltered Guide to Modern Intimacy ⚡</div>
           <div className="hero-ctas reveal d2">
             <Link href="#join" className="btn-pink">Begin Your Journey</Link>
             <Link href="#coaching" className="btn-outline">Explore Coaching</Link>
