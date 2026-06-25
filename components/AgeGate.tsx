@@ -145,7 +145,7 @@ export default function AgeGate() {
               Enter your date of birth to continue.
             </p>
 
-            <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+            <form onSubmit={handleSubmit} style={{ width: '100%' }} noValidate>
               <div style={{ display: 'flex', gap: 12, marginBottom: 8, justifyContent: 'center' }}>
                 {/* Day */}
                 <div style={{ flex: '0 0 70px', display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -155,7 +155,7 @@ export default function AgeGate() {
                     color: 'rgba(255,255,255,0.4)',
                   }}>Day</label>
                   <input
-                    type="number" min="1" max="31" placeholder="DD"
+                    type="number" placeholder="DD"
                     value={day} onChange={e => setDay(e.target.value)}
                     required
                     style={inputStyle}
@@ -170,7 +170,7 @@ export default function AgeGate() {
                     color: 'rgba(255,255,255,0.4)',
                   }}>Month</label>
                   <input
-                    type="number" min="1" max="12" placeholder="MM"
+                    type="number" placeholder="MM"
                     value={month} onChange={e => setMonth(e.target.value)}
                     required
                     style={inputStyle}
@@ -185,7 +185,7 @@ export default function AgeGate() {
                     color: 'rgba(255,255,255,0.4)',
                   }}>Year</label>
                   <input
-                    type="number" min="1900" max={new Date().getFullYear()} placeholder="YYYY"
+                    type="number" placeholder="YYYY"
                     value={year} onChange={e => setYear(e.target.value)}
                     required
                     style={inputStyle}
@@ -194,7 +194,14 @@ export default function AgeGate() {
               </div>
 
               {error && (
-                <p style={{ color: '#e91e8c', fontSize: 13, marginBottom: 16 }}>{error}</p>
+                <div style={{
+                  display: 'flex', alignItems: 'center', gap: 12,
+                  background: 'rgba(233,30,140,0.1)', border: '1px solid rgba(233,30,140,0.3)',
+                  padding: '12px 16px', borderRadius: 4, marginBottom: 16,
+                }}>
+                  <span style={{ fontSize: 18 }}>⚡</span>
+                  <p style={{ color: '#f548a8', fontSize: 13, margin: 0, fontWeight: 500 }}>{error}</p>
+                </div>
               )}
 
               <button
