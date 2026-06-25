@@ -148,7 +148,7 @@ export default function HomePage() {
         <div className="tex"></div>
         <div className="coaching-inner">
           <div className="coaching-top">
-            <h2 className="coaching-h2 reveal">Guides<br />&amp; <span>Coaching</span></h2>
+            <h2 className="coaching-h2 reveal">Expert Coaching <span>+ Guides</span></h2>
             <div className="coaching-intro reveal d1">
               <p>Intimacy doesn't just happen. It is built through <strong>trust, communication, curiosity, and practice.</strong></p>
               <p style={{ marginTop: '14px' }}>The stronger the connection, the stronger the experience. This is where you learn, ask real questions, and develop the skills to connect with clarity and confidence.</p>
@@ -193,7 +193,7 @@ export default function HomePage() {
               <div className="sec-label">Our Promise</div>
               <p className="feat-quote">&ldquo;Coaching designed to help you <span>communicate better</span>, connect deeper, and feel more confident in real-life situations.&rdquo;</p>
               <div style={{ marginTop: '36px' }}>
-                <Link href="#join" className="btn-pink">Book a Session</Link>
+                <button className="btn-grey-outline" disabled>Book Session - Coming Soon</button>
               </div>
             </div>
             <div className="feat-items">

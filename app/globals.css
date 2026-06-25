@@ -86,6 +86,18 @@ a { text-decoration: none; color: inherit; }
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
 }
 .btn-outline:hover { border-color: var(--pink); color: var(--pink); box-shadow: 0 0 24px var(--pink-dim); }
+.btn-grey-outline {
+  display: inline-block;
+  background: transparent; color: rgba(255,255,255,0.5);
+  font-family: var(--font-cond);
+  font-size: 13px; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase;
+  padding: 15px 40px;
+  border: 1px solid rgba(255,255,255,0.3);
+  cursor: not-allowed; transition: all .3s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.btn-grey-outline:hover { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.5); }
 
 /* ─── Section label ──────────────────────────────────────────── */
 .sec-label {
@@ -196,8 +208,8 @@ nav.scrolled {
 .coaching-h2 span { color: var(--pink); }
 .coaching-intro { font-size: 15px; line-height: 1.9; color: var(--muted); }
 .coaching-intro strong { color: var(--white); font-style: italic; }
-.coaching-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; background: rgba(233,30,140,.12); border: 1px solid rgba(233,30,140,.2); border-radius: 4px; overflow: hidden; }
-.c-card { background: linear-gradient(145deg, #120a1a 0%, #0c0612 100%); padding: 44px 32px; position: relative; overflow: hidden; transition: background .3s; display: flex; align-items: flex-start; gap: 16px; min-height: 320px; border-top: 1px solid rgba(233,30,140,.15); }
+.coaching-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+.c-card { background: linear-gradient(145deg, #120a1a 0%, #0c0612 100%); padding: 44px 32px; position: relative; overflow: hidden; transition: background .3s; display: flex; align-items: flex-start; gap: 16px; min-height: 320px; border: 1px solid rgba(233,30,140,.2); border-radius: 4px; }
 .c-card-text { flex: 0 0 40%; width: 40%; }
 .c-card-img { flex: 0 0 60%; width: 60%; display: flex; align-items: center; justify-content: center; align-self: center; }
 .c-card-icon { width: 100%; max-width: 286px; height: auto; object-fit: contain; opacity: .95; pointer-events: none; }
