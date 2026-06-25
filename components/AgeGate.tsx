@@ -87,7 +87,7 @@ export default function AgeGate() {
 
         {/* Logo */}
         <Image
-          src="/images/MB_Logo_pink-pink.png"
+          src="/images/MB_Logo_pink-pink2.png"
           alt="Modern Bond"
           width={180}
           height={60}
