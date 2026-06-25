@@ -148,7 +148,7 @@ export default function HomePage() {
         <div className="tex"></div>
         <div className="coaching-inner">
           <div className="coaching-top">
-            <h2 className="coaching-h2 reveal">Expert Coaching <span>+ Guides</span></h2>
+            <h2 className="coaching-h2 reveal">Expert Coaching<br /><span>+ Guides</span></h2>
             <div className="coaching-intro reveal d1">
               <p>Intimacy doesn't just happen. It is built through <strong>trust, communication, curiosity, and practice.</strong></p>
               <p style={{ marginTop: '14px' }}>The stronger the connection, the stronger the experience. This is where you learn, ask real questions, and develop the skills to connect with clarity and confidence.</p>
