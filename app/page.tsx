@@ -148,10 +148,10 @@ export default function HomePage() {
         <div className="tex"></div>
         <div className="coaching-inner">
           <div className="coaching-top">
-            <h2 className="coaching-h2 reveal">Expert Coaching<br /><span>+ Guides</span></h2>
+            <h2 className="coaching-h2 reveal">Coaching<br /><span>+ Guides</span></h2>
             <div className="coaching-intro reveal d1">
-              <p>Intimacy doesn't just happen. It is built through <strong>trust, communication, curiosity, and practice.</strong></p>
-              <p style={{ marginTop: '14px' }}>The stronger the connection, the stronger the experience. This is where you learn, ask real questions, and develop the skills to connect with clarity and confidence.</p>
+              <p>Great sex doesn't just happen. You build it. Through honesty, communication, and a hell of a lot of practice.</p>
+              <p style={{ marginTop: '14px' }}>This is where you stop guessing and start growing. Ask the questions you're afraid to Google. Get the skills to connect with clarity and confidence, in and out of the bedroom.</p>
             </div>
           </div>
           <div className="coaching-grid">
@@ -191,7 +191,7 @@ export default function HomePage() {
           <div className="coaching-feat reveal">
             <div>
               <div className="sec-label">Our Promise</div>
-              <p className="feat-quote">&ldquo;Coaching designed to help you <span>communicate better</span>, connect deeper, and feel more confident in real-life situations.&rdquo;</p>
+              <p className="feat-quote">&ldquo;We give you the tools to communicate better, connect deeper, and feel like a badass in and out of the bedroom.&rdquo;</p>
               <div style={{ marginTop: '36px' }}>
                 <button className="btn-grey-outline" disabled>Book Session - Coming Soon</button>
               </div>
@@ -237,13 +237,10 @@ export default function HomePage() {
               <img src="/images/COMUNITY_Image_001_v006-1.png" alt="" className="community-hero-img" />
             </div>
             <div className="community-hero-center">
-              <div className="sec-label reveal" style={{ justifyContent: 'center' }}>A Refined Space</div>
-              <h2 className="community-h2 reveal d1">
-                <span className="out">COM</span><span className="pink-fill">MUNI</span><span className="fill">TY</span>
-              </h2>
+              <div className="sec-label reveal" style={{ justifyContent: 'center' }}>Community</div>
+              <h2 className="community-h2 reveal d1">Your Unfiltered<br /><span>Playground.</span></h2>
               <p className="community-desc reveal d2" style={{ marginBottom: 0 }}>
-                A curated space for like-minded people to connect, share, and grow together.
-                Private, intentional, and built for real belonging.
+                A raw, honest space to connect, share, and grow with people who get it. No filters, no judgment, just real belonging.
               </p>
             </div>
             <div className="community-hero-img-wrap reveal">
@@ -258,7 +255,7 @@ export default function HomePage() {
               <div className="pillar-content">
                 <div className="pillar-n">01</div>
                 <div className="pillar-title">Connect</div>
-                <div className="pillar-desc">Meet people on the same path — curious, intentional, and ready to grow. Our community is curated, not just collected.</div>
+                <div className="pillar-desc">Meet people on the same path. From the school teacher to the pro, everyone's invited.</div>
                 <Link href="/community" className="pillar-link">Join the Circle →</Link>
               </div>
             </div>
@@ -269,7 +266,7 @@ export default function HomePage() {
               <div className="pillar-content">
                 <div className="pillar-n">02</div>
                 <div className="pillar-title">Share</div>
-                <div className="pillar-desc">Real conversations, honest experiences, and genuine support. Vulnerability here is met with respect, always.</div>
+                <div className="pillar-desc">Ask the questions you can't ask anywhere else. Share your wins (and your hilarious fails).</div>
                 <Link href="/community" className="pillar-link">Start Sharing →</Link>
               </div>
             </div>
@@ -280,7 +277,7 @@ export default function HomePage() {
               <div className="pillar-content">
                 <div className="pillar-n">03</div>
                 <div className="pillar-title">Grow</div>
-                <div className="pillar-desc">Ongoing engagement, group learning, and shared milestones. Growth is better when it happens together.</div>
+                <div className="pillar-desc">Level up together. Real growth happens when you stop hiding.</div>
                 <Link href="/community" className="pillar-link">Begin Growing →</Link>
               </div>
             </div>
@@ -294,8 +291,8 @@ export default function HomePage() {
         <div className="tex"></div>
         <div className="products-inner">
           <div className="products-hdr">
-            <h2 className="products-h2 reveal">The<br /><span>Marketplace</span></h2>
-            <p className="products-sub reveal d1">Curated products and tools selected to elevate intimacy, confidence, and connection. Simple, selective, premium.</p>
+            <h2 className="products-h2 reveal">Products That<br /><span>Actually Work.</span></h2>
+            <p className="products-sub reveal d1">We tested the toys so you don't have to. These are the only products we recommend to elevate your sex life and deepen your connection. Simple, selective, premium.</p>
           </div>
           <div className="products-row">
             <Link href="/products/deep-connections-pillow" className="prod-card reveal" style={{ textDecoration: 'none' }}>
@@ -370,7 +367,7 @@ export default function HomePage() {
         <div className="exp-bg"></div>
         <div className="tex"></div>
         <div className="exp-inner">
-          <div className="sec-label reveal" style={{ justifyContent: 'center' }}>Exclusive &amp; Curated</div>
+          <div className="sec-label reveal" style={{ justifyContent: 'center' }}>Coming Soon</div>
           <h2 className="exp-h2 reveal d1" style={{ textAlign: 'center' }}>Experi<span>ences</span></h2>
           <div className="exp-visual reveal d2">
             <img src="/images/MB_Experiences_v012.png" alt="Modern Bond Experiences" />
@@ -379,8 +376,8 @@ export default function HomePage() {
             </div>
           </div>
           <div className="exp-coming-soon reveal d3">
-            <p className="exp-cs-copy">We're crafting a series of immersive events, retreats, and curated gatherings designed to deepen connection in real life. Something truly special is on its way.</p>
-            <Link href="#join" className="btn-pink">Get Early Access</Link>
+            <p className="exp-cs-copy">We're planning some real life experiences that will blow your mind. Immersive events, retreats, and gatherings to meet like-minded people and take the fun offline. Trust us, you want to be there.</p>
+            <Link href="#join" className="btn-pink">Join Now for Updates</Link>
           </div>
         </div>
       </section>
