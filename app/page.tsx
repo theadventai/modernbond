@@ -296,7 +296,10 @@ export default function HomePage() {
         <div className="tex"></div>
         <div className="products-inner">
           <div className="products-hdr">
-            <h2 className="products-h2 reveal">Products That<br /><span>Actually Work.</span></h2>
+            <div>
+              <div className="sec-label reveal">Products That Actually Work</div>
+              <h2 className="products-h2 reveal">The<br /><span>Marketplace</span></h2>
+            </div>
             <p className="products-sub reveal d1">We tested the toys so you don't have to. These are the only products we recommend to elevate your sex life and deepen your connection. Simple, selective, premium.</p>
           </div>
           <div className="products-row">
