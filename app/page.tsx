@@ -241,16 +241,16 @@ export default function HomePage() {
               <h2 className="community-h2 reveal d1">
                 <span className="out">COM</span><span className="pink-fill">MUNI</span><span className="fill">TY</span>
               </h2>
-              <p className="community-desc reveal d2" style={{ marginBottom: 0 }}>
+              <p className="community-desc reveal d2">
                 A raw, honest space to connect, share, and grow with people who get it. No filters, no judgment, just real belonging.
               </p>
+              <div style={{ textAlign: 'center', marginTop: '32px' }}>
+                <Link href="/community" className="btn-pink">Join Now</Link>
+              </div>
             </div>
             <div className="community-hero-img-wrap reveal">
               <img src="/images/COMUNITY_Image_001_v006-2.png" alt="" className="community-hero-img" />
             </div>
-          </div>
-          <div style={{ textAlign: 'center', marginTop: '-16px', marginBottom: '40px' }}>
-            <Link href="/community" className="btn-pink">Join Now</Link>
           </div>
           <div className="pillars">
             <div className="pillar reveal">
