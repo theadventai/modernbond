@@ -237,7 +237,7 @@ export default function HomePage() {
               <img src="/images/COMUNITY_Image_001_v006-1.png" alt="" className="community-hero-img" />
             </div>
             <div className="community-hero-center">
-              <div className="sec-label reveal" style={{ justifyContent: 'center' }}>Community</div>
+              <div className="sec-label reveal" style={{ justifyContent: 'center' }}>Your Unfiltered Playground</div>
               <h2 className="community-h2 reveal d1">
                 <span className="out">COM</span><span className="pink-fill">MUNI</span><span className="fill">TY</span>
               </h2>
