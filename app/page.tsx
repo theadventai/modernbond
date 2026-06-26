@@ -249,7 +249,7 @@ export default function HomePage() {
               <img src="/images/COMUNITY_Image_001_v006-2.png" alt="" className="community-hero-img" />
             </div>
           </div>
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <div style={{ textAlign: 'center', marginTop: '-16px', marginBottom: '40px' }}>
             <Link href="/community" className="btn-pink">Join Now</Link>
           </div>
           <div className="pillars">
