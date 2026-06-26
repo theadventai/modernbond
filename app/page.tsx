@@ -238,7 +238,9 @@ export default function HomePage() {
             </div>
             <div className="community-hero-center">
               <div className="sec-label reveal" style={{ justifyContent: 'center' }}>Community</div>
-              <h2 className="community-h2 reveal d1">Your Unfiltered<br /><span>Playground.</span></h2>
+              <h2 className="community-h2 reveal d1">
+                <span className="out">COM</span><span className="pink-fill">MUNI</span><span className="fill">TY</span>
+              </h2>
               <p className="community-desc reveal d2" style={{ marginBottom: 0 }}>
                 A raw, honest space to connect, share, and grow with people who get it. No filters, no judgment, just real belonging.
               </p>
