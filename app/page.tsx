@@ -375,7 +375,7 @@ export default function HomePage() {
         <div className="exp-bg"></div>
         <div className="tex"></div>
         <div className="exp-inner">
-          <div className="sec-label reveal" style={{ justifyContent: 'center' }}>Coming Soon</div>
+          <div className="sec-label reveal" style={{ justifyContent: 'center' }}>Exclusive &amp; Curated</div>
           <h2 className="exp-h2 reveal d1" style={{ textAlign: 'center' }}>Experi<span>ences</span></h2>
           <div className="exp-visual reveal d2">
             <img src="/images/MB_Experiences_v012.png" alt="Modern Bond Experiences" />
