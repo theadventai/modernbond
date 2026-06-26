@@ -249,6 +249,9 @@ export default function HomePage() {
               <img src="/images/COMUNITY_Image_001_v006-2.png" alt="" className="community-hero-img" />
             </div>
           </div>
+          <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+            <Link href="/community" className="btn-pink">Join Now</Link>
+          </div>
           <div className="pillars">
             <div className="pillar reveal">
               <div className="pillar-img-wrap">
