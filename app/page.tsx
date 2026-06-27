@@ -321,7 +321,7 @@ export default function HomePage() {
               <div className="prod-hover"><div className="prod-btn">Shop Now</div></div>
             </Link>
             <Link href="/products/coconu-lube" className="prod-card reveal d2" style={{ textDecoration: 'none' }}>
-              <div className="prod-vis" style={{ background: "url('/marketplace/coconu_lube/COVER_COCONUT_Lube_v001.jpg') center/cover no-repeat" }}></div>
+              <div className="prod-vis" style={{ background: "url('/marketplace/coconu_lube/COVER_COCONUT_Lube_v002.jpg') center/cover no-repeat" }}></div>
               <div className="prod-overlay"></div>
               <div className="prod-info">
                 <div className="prod-cat">Wellness · Physical</div>

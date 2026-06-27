@@ -127,9 +127,9 @@ export const PRODUCTS: Record<string, Product> = {
       { title: 'Versatile Use', body: 'Works for massage, moisturizing, and intimate play' },
     ],
     badges: ['⚡ 100% Natural', '⚡ Body-Safe Formula'],
-    cover: '/marketplace/coconu_lube/COVER_COCONUT_Lube_v001.jpg',
+    cover: '/marketplace/coconu_lube/COVER_COCONUT_Lube_v002.jpg',
     thumbs: [
-      '/marketplace/coconu_lube/COVER_COCONUT_Lube_v001.jpg',
+      '/marketplace/coconu_lube/COVER_COCONUT_Lube_v002.jpg',
       '/marketplace/coconu_lube/COCONUT_Lube_001.webp',
       '/marketplace/coconu_lube/COCONUT_Lube_002.webp',
       '/marketplace/coconu_lube/COCONUT_Lube_003.webp',
