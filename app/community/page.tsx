@@ -112,6 +112,14 @@ export default function CommunityPage() {
                   <VoteCol postId={p.id} initialScore={p.score} initialVote={myVotes[p.id] || 0} userId={user?.id} />
                   <Link className="post-main" href={`/thread/${p.id}`}>
                     <div className="post-meta">
+                      {p.avatar_url && (
+                        <img
+                          src={p.avatar_url}
+                          alt={p.username}
+                          className="post-avatar"
+                          style={{ width: '28px', height: '28px', borderRadius: '50%', marginRight: '8px', verticalAlign: 'middle' }}
+                        />
+                      )}
                       <span className="post-cat">{p.category_name}</span>
                       <span>@{p.username}</span> · <span>{timeAgo(p.created_at)}</span>
                     </div>

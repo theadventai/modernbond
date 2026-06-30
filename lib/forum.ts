@@ -17,6 +17,7 @@ export type FeedPost = {
   username: string;
   category_name: string;
   category_slug: string;
+  avatar_url?: string;
 };
 
 export type Comment = {
@@ -26,7 +27,7 @@ export type Comment = {
   author: string;
   body: string;
   created_at: string;
-  profiles: { username: string } | null;
+  profiles: { username: string; avatar_url?: string } | null;
 };
 
 export type Report = {

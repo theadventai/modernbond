@@ -33,7 +33,7 @@ export default function ThreadPage({ params }: { params: Promise<{ id: string }>
 
   const loadComments = useCallback(async () => {
     const { data, error } = await supabase.from('comments')
-      .select('*, profiles(username)')
+      .select('*, profiles(username, avatar_url)')
       .eq('post_id', postId)
       .order('created_at', { ascending: true });
     if (error) { setComments([]); return; }
@@ -65,6 +65,14 @@ export default function ThreadPage({ params }: { params: Promise<{ id: string }>
                 <VoteCol postId={post.id} initialScore={post.score} initialVote={myVote} userId={user?.id} />
                 <div className="post-main">
                   <div className="post-meta">
+                    {post.avatar_url && (
+                      <img
+                        src={post.avatar_url}
+                        alt={post.username}
+                        className="post-avatar"
+                        style={{ width: '28px', height: '28px', borderRadius: '50%', marginRight: '8px', verticalAlign: 'middle' }}
+                      />
+                    )}
                     <span className="post-cat">{post.category_name}</span>
                     <span>@{post.username}</span> · <span>{timeAgo(post.created_at)}</span>
                   </div>
@@ -140,6 +148,14 @@ function CommentNode({
   return (
     <div className={'comment' + (depth > 0 ? ' comment-nested' : '')} data-id={comment.id}>
       <div className="comment-meta">
+        {comment.profiles?.avatar_url && (
+          <img
+            src={comment.profiles.avatar_url}
+            alt={comment.profiles.username}
+            className="comment-avatar"
+            style={{ width: '24px', height: '24px', borderRadius: '50%', marginRight: '8px', verticalAlign: 'middle' }}
+          />
+        )}
         <span className="comment-author">@{comment.profiles?.username || 'member'}</span> · {timeAgo(comment.created_at)}
       </div>
       <div className="comment-body" style={{ whiteSpace: 'pre-wrap' }}>{comment.body}</div>
