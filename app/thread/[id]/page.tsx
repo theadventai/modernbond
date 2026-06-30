@@ -70,7 +70,7 @@ export default function ThreadPage({ params }: { params: Promise<{ id: string }>
                         src={post.avatar_url}
                         alt={post.username}
                         className="post-avatar"
-                        style={{ width: '28px', height: '28px', borderRadius: '50%', marginRight: '8px', verticalAlign: 'middle' }}
+                        style={{ width: '28px', height: '28px', borderRadius: '50%', marginRight: '8px', verticalAlign: 'middle', border: '1.5px solid rgba(233,30,140,0.4)' }}
                       />
                     )}
                     <span className="post-cat">{post.category_name}</span>
@@ -153,7 +153,7 @@ function CommentNode({
             src={comment.profiles.avatar_url}
             alt={comment.profiles.username}
             className="comment-avatar"
-            style={{ width: '24px', height: '24px', borderRadius: '50%', marginRight: '8px', verticalAlign: 'middle' }}
+            style={{ width: '24px', height: '24px', borderRadius: '50%', marginRight: '8px', verticalAlign: 'middle', border: '1.5px solid rgba(233,30,140,0.4)' }}
           />
         )}
         <span className="comment-author">@{comment.profiles?.username || 'member'}</span> · {timeAgo(comment.created_at)}

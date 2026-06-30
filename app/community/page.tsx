@@ -117,7 +117,7 @@ export default function CommunityPage() {
                           src={p.avatar_url}
                           alt={p.username}
                           className="post-avatar"
-                          style={{ width: '28px', height: '28px', borderRadius: '50%', marginRight: '8px', verticalAlign: 'middle' }}
+                          style={{ width: '28px', height: '28px', borderRadius: '50%', marginRight: '8px', verticalAlign: 'middle', border: '1.5px solid rgba(233,30,140,0.4)' }}
                         />
                       )}
                       <span className="post-cat">{p.category_name}</span>
