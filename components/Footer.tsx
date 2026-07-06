@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { reopenCookieConsent } from '@/lib/cookieConsent';
 
 export default function Footer() {
   return (
@@ -50,6 +53,12 @@ export default function Footer() {
             <Link href="/privacy">Privacy</Link>
             <Link href="/terms">Terms</Link>
             <Link href="/contact">Contact</Link>
+            <button
+              onClick={reopenCookieConsent}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+            >
+              Cookie Preferences
+            </button>
           </div>
         </div>
       </div>

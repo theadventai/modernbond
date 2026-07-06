@@ -355,8 +355,8 @@ footer { position: relative; padding: 80px 48px 48px; border-top: 1px solid rgba
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.05); }
 .footer-copy { font-size: 11px; color: var(--muted2); }
 .footer-soc { display: flex; gap: 24px; }
-.footer-soc a { font-family: var(--font-cond); font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); transition: color .25s; }
-.footer-soc a:hover { color: var(--pink); }
+.footer-soc a, .footer-soc button { font-family: var(--font-cond); font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); transition: color .25s; }
+.footer-soc a:hover, .footer-soc button:hover { color: var(--pink); }
 
 /* ═══════════════════════════════════════════════════════════════
    PRODUCT DETAIL PAGES
