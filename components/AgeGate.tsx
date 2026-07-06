@@ -7,11 +7,8 @@ const STORAGE_KEY = 'mb_age_verified';
 
 export default function AgeGate() {
   const [verified, setVerified] = useState<boolean | null>(null);
-  const [day, setDay]     = useState('');
-  const [month, setMonth] = useState('');
-  const [year, setYear]   = useState('');
+  const [checked, setChecked] = useState(false);
   const [error, setError] = useState('');
-  const [denied, setDenied] = useState(false);
 
   // On mount, check if already verified in localStorage
   useEffect(() => {
@@ -30,30 +27,10 @@ export default function AgeGate() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setError('');
-
-    const d = parseInt(day,   10);
-    const m = parseInt(month, 10);
-    const y = parseInt(year,  10);
-
-    if (!d || !m || !y || y < 1900 || y > new Date().getFullYear()) {
-      setError('Please enter a valid date of birth.');
+    if (!checked) {
+      setError('You must confirm you are 18 or older to continue.');
       return;
     }
-
-    const dob  = new Date(y, m - 1, d);
-    const today = new Date();
-    let age = today.getFullYear() - dob.getFullYear();
-    const monthDiff = today.getMonth() - dob.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
-      age--;
-    }
-
-    if (age < 18) {
-      setDenied(true);
-      return;
-    }
-
     try { localStorage.setItem(STORAGE_KEY, 'true'); } catch { /* private mode */ }
     setVerified(true);
   }
@@ -95,178 +72,109 @@ export default function AgeGate() {
           priority
         />
 
-        {denied ? (
-          /* Under-18 denial screen */
-          <>
-            <h1 style={{
-              fontFamily: "'Bebas Neue', sans-serif", fontSize: 48,
-              color: '#fff', letterSpacing: 2, marginBottom: 16,
-            }}>
-              Access Restricted
-            </h1>
-            <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16, lineHeight: 1.6, marginBottom: 32 }}>
-              You must be 18 or older to access Modern Bond. This platform contains
-              mature content intended for adults only.
-            </p>
-            <a
-              href="https://www.google.com"
+        <div style={{
+          display: 'inline-block', padding: '4px 16px', marginBottom: 24,
+          border: '1px solid rgba(233,30,140,0.4)', borderRadius: 2,
+          color: '#e91e8c', fontFamily: "'Barlow Condensed', sans-serif",
+          fontSize: 12, letterSpacing: 3, textTransform: 'uppercase',
+        }}>
+          18+ Only — Mature Content
+        </div>
+
+        <h1 style={{
+          fontFamily: "'Bebas Neue', sans-serif", fontSize: 52,
+          color: '#fff', letterSpacing: 2, lineHeight: 1, marginBottom: 12,
+        }}>
+          Age Verification
+        </h1>
+
+        <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 15, lineHeight: 1.6, marginBottom: 36 }}>
+          Modern Bond contains mature content intended for adults only.
+          Please confirm your age to continue.
+        </p>
+
+        <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+          <label style={{
+            display: 'flex', alignItems: 'flex-start', gap: 12,
+            padding: '16px 18px', background: 'rgba(255,255,255,0.05)',
+            border: '1px solid rgba(255,255,255,0.15)', borderRadius: 4,
+            cursor: 'pointer', textAlign: 'left', transition: 'border-color 0.2s',
+          }}>
+            <input
+              type="checkbox"
+              checked={checked}
+              onChange={e => { setChecked(e.target.checked); setError(''); }}
               style={{
-                display: 'inline-block', padding: '14px 40px',
-                border: '1px solid rgba(255,255,255,0.2)', borderRadius: 4,
-                color: 'rgba(255,255,255,0.6)', fontFamily: "'Barlow Condensed', sans-serif",
-                fontSize: 14, letterSpacing: 2, textTransform: 'uppercase',
-                textDecoration: 'none',
+                marginTop: 2, width: 20, height: 20, flexShrink: 0,
+                accentColor: '#e91e8c', cursor: 'pointer',
               }}
-            >
-              Leave Site
-            </a>
-          </>
-        ) : (
-          /* Age gate form */
-          <>
+            />
+            <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: 14, lineHeight: 1.6 }}>
+              I certify that I am at least 18 years old and consent to viewing adult content.
+            </span>
+          </label>
+
+          {error && (
             <div style={{
-              display: 'inline-block', padding: '4px 16px', marginBottom: 24,
-              border: '1px solid rgba(233,30,140,0.4)', borderRadius: 2,
-              color: '#e91e8c', fontFamily: "'Barlow Condensed', sans-serif",
-              fontSize: 12, letterSpacing: 3, textTransform: 'uppercase',
+              display: 'flex', alignItems: 'center', gap: 12,
+              background: 'rgba(233,30,140,0.1)', border: '1px solid rgba(233,30,140,0.3)',
+              padding: '12px 16px', borderRadius: 4, marginTop: 16,
             }}>
-              18+ Only — Mature Content
+              <span style={{ fontSize: 18 }}>⚡</span>
+              <p style={{ color: '#f548a8', fontSize: 13, margin: 0, fontWeight: 500 }}>{error}</p>
             </div>
+          )}
 
-            <h1 style={{
-              fontFamily: "'Bebas Neue', sans-serif", fontSize: 52,
-              color: '#fff', letterSpacing: 2, lineHeight: 1, marginBottom: 12,
-            }}>
-              Verify Your Age
-            </h1>
+          <button
+            type="submit"
+            style={{
+              width: '100%', padding: '16px', marginTop: 20,
+              background: 'linear-gradient(135deg, #e91e8c, #f548a8)',
+              border: 'none', borderRadius: 4, cursor: 'pointer',
+              fontFamily: "'Barlow Condensed', sans-serif",
+              fontSize: 15, fontWeight: 700, letterSpacing: 3,
+              textTransform: 'uppercase', color: '#fff',
+              boxShadow: '0 0 32px rgba(233,30,140,0.35)',
+              transition: 'opacity 0.2s',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
+            onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+          >
+            Enter Site
+          </button>
 
-            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 15, lineHeight: 1.6, marginBottom: 36 }}>
-              Modern Bond contains mature content intended for adults only.
-              Enter your date of birth to continue.
-            </p>
+          <a
+            href="https://www.google.com"
+            style={{
+              display: 'block', marginTop: 16,
+              color: 'rgba(255,255,255,0.3)', fontSize: 13,
+              fontFamily: "'Barlow Condensed', sans-serif",
+              letterSpacing: 1, textDecoration: 'none',
+              transition: 'color 0.2s',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.3)')}
+          >
+            I am under 18 — Exit
+          </a>
+        </form>
 
-            <form onSubmit={handleSubmit} style={{ width: '100%' }} noValidate>
-              <div style={{ display: 'flex', gap: 12, marginBottom: 8, justifyContent: 'center' }}>
-                {/* Day */}
-                <div style={{ flex: '0 0 70px', display: 'flex', flexDirection: 'column', gap: 6 }}>
-                  <label style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
-                    fontSize: 11, letterSpacing: 2, textTransform: 'uppercase',
-                    color: 'rgba(255,255,255,0.4)',
-                  }}>Day</label>
-                  <input
-                    type="number" placeholder="DD"
-                    value={day} onChange={e => setDay(e.target.value)}
-                    required
-                    style={inputStyle}
-                  />
-                </div>
-
-                {/* Month */}
-                <div style={{ flex: '0 0 70px', display: 'flex', flexDirection: 'column', gap: 6 }}>
-                  <label style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
-                    fontSize: 11, letterSpacing: 2, textTransform: 'uppercase',
-                    color: 'rgba(255,255,255,0.4)',
-                  }}>Month</label>
-                  <input
-                    type="number" placeholder="MM"
-                    value={month} onChange={e => setMonth(e.target.value)}
-                    required
-                    style={inputStyle}
-                  />
-                </div>
-
-                {/* Year */}
-                <div style={{ flex: '0 0 100px', display: 'flex', flexDirection: 'column', gap: 6 }}>
-                  <label style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
-                    fontSize: 11, letterSpacing: 2, textTransform: 'uppercase',
-                    color: 'rgba(255,255,255,0.4)',
-                  }}>Year</label>
-                  <input
-                    type="number" placeholder="YYYY"
-                    value={year} onChange={e => setYear(e.target.value)}
-                    required
-                    style={inputStyle}
-                  />
-                </div>
-              </div>
-
-              {error && (
-                <div style={{
-                  display: 'flex', alignItems: 'center', gap: 12,
-                  background: 'rgba(233,30,140,0.1)', border: '1px solid rgba(233,30,140,0.3)',
-                  padding: '12px 16px', borderRadius: 4, marginBottom: 16,
-                }}>
-                  <span style={{ fontSize: 18 }}>⚡</span>
-                  <p style={{ color: '#f548a8', fontSize: 13, margin: 0, fontWeight: 500 }}>{error}</p>
-                </div>
-              )}
-
-              <button
-                type="submit"
-                style={{
-                  width: '100%', padding: '16px', marginTop: 20,
-                  background: 'linear-gradient(135deg, #e91e8c, #f548a8)',
-                  border: 'none', borderRadius: 4, cursor: 'pointer',
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontSize: 15, fontWeight: 700, letterSpacing: 3,
-                  textTransform: 'uppercase', color: '#fff',
-                  boxShadow: '0 0 32px rgba(233,30,140,0.35)',
-                  transition: 'opacity 0.2s',
-                }}
-                onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
-                onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-              >
-                Enter Site
-              </button>
-
-              <a
-                href="https://www.google.com"
-                style={{
-                  display: 'block', marginTop: 16,
-                  color: 'rgba(255,255,255,0.3)', fontSize: 13,
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  letterSpacing: 1, textDecoration: 'none',
-                  transition: 'color 0.2s',
-                }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.3)')}
-              >
-                I am under 18 — Exit
-              </a>
-            </form>
-
-            {/* Legal footer */}
-            <p style={{
-              marginTop: 40, color: 'rgba(255,255,255,0.25)', fontSize: 11,
-              lineHeight: 1.6, maxWidth: 360,
-            }}>
-              By entering, you confirm you are 18 years of age or older, you consent
-              to viewing adult content, and you agree to our{' '}
-              <a href="/terms" style={{ color: 'rgba(233,30,140,0.7)', textDecoration: 'underline' }}>
-                Terms & Conditions
-              </a>{' '}
-              and{' '}
-              <a href="/privacy" style={{ color: 'rgba(233,30,140,0.7)', textDecoration: 'underline' }}>
-                Privacy Policy
-              </a>.
-            </p>
-          </>
-        )}
+        {/* Legal footer */}
+        <p style={{
+          marginTop: 40, color: 'rgba(255,255,255,0.25)', fontSize: 11,
+          lineHeight: 1.6, maxWidth: 360,
+        }}>
+          By entering, you confirm you are 18 years of age or older, you consent
+          to viewing adult content, and you agree to our{' '}
+          <a href="/terms" style={{ color: 'rgba(233,30,140,0.7)', textDecoration: 'underline' }}>
+            Terms & Conditions
+          </a>{' '}
+          and{' '}
+          <a href="/privacy" style={{ color: 'rgba(233,30,140,0.7)', textDecoration: 'underline' }}>
+            Privacy Policy
+          </a>.
+        </p>
       </div>
     </div>
   );
 }
-
-const inputStyle: React.CSSProperties = {
-  width: '100%', padding: '12px 8px',
-  background: 'rgba(255,255,255,0.05)',
-  border: '1px solid rgba(255,255,255,0.15)',
-  borderRadius: 4, color: '#fff',
-  fontSize: 16, textAlign: 'center',
-  fontFamily: "'Barlow', sans-serif",
-  outline: 'none',
-  transition: 'border-color 0.2s',
-};
