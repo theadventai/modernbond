@@ -140,6 +140,27 @@ nav.scrolled {
 .nav-cart-icon { font-size: 20px; filter: brightness(1.4); line-height: 1; }
 .snipcart-items-count { background: var(--pink) !important; color: white !important; border-radius: 50% !important; width: 20px !important; height: 20px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; font-size: 11px !important; font-weight: 700 !important; }
 
+.nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 30px; height: 30px; background: transparent; border: none; cursor: pointer; padding: 0; flex-shrink: 0; }
+.nav-burger span { display: block; width: 100%; height: 2px; background: var(--white); transition: transform .3s, opacity .3s; }
+.nav-burger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.is-open span:nth-child(2) { opacity: 0; }
+.nav-burger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-mobile-menu {
+  position: fixed; inset: 0; z-index: 1001;
+  background: rgba(12,6,18,.98); backdrop-filter: blur(20px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transform: translateY(-12px);
+  transition: opacity .3s, visibility .3s, transform .3s;
+}
+.nav-mobile-menu.is-open { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-mobile-links { list-style: none; display: flex; flex-direction: column; align-items: center; gap: 30px; }
+.nav-mobile-links a { font-family: var(--font-cond); font-size: 22px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--white); transition: color .25s; }
+.nav-mobile-links a:hover { color: var(--pink); }
+@media (min-width: 1025px) {
+  .nav-mobile-menu { display: none !important; }
+}
+
 /* ═══════════════════════════════════════════════════════════════
    HERO
 ═══════════════════════════════════════════════════════════════ */
@@ -687,6 +708,7 @@ nav, nav * { pointer-events: all !important; }
 @media (max-width: 1024px) {
   nav { padding: 18px 24px; }
   .nav-links { display: none; }
+  .nav-burger { display: flex; }
   .about-grid, .coaching-top { grid-template-columns: 1fr; gap: 40px; }
   .coaching-grid { grid-template-columns: repeat(2,1fr); padding: 0 12px; }
   .coaching-feat { grid-template-columns: 1fr; gap: 40px; padding: 40px 32px; margin: 0 12px; }
@@ -706,8 +728,20 @@ nav, nav * { pointer-events: all !important; }
   .prod-related { padding: 80px 24px; }
   .related-grid { grid-template-columns: repeat(2,1fr); }
   .forum-page { padding: 130px 24px 80px; }
+  .hero-side { display: none; }
 }
 @media (max-width: 640px) {
+  nav { padding: 16px 20px; }
+  .nav-join { display: none; }
+  .nav-cart { padding: 8px 14px; }
+  .nav-cta { gap: 10px !important; }
+  /* calc(32px - 10vh) goes negative on virtually every phone viewport height,
+     and #hero's overflow:hidden then clips the CTA buttons off-screen.
+     100vh also leaves a huge dead gap between the (proportionally short-on-
+     mobile) hero art and the content below it, so cap the section height. */
+  #hero { min-height: min(100vh, 680px); }
+  .hero-content { bottom: 24px; }
+  .scroll-line { display: none; }
   .hero-ctas { flex-direction: column; align-items: center; }
   .join-form { flex-direction: column; }
   .join-input { border-right: 1px solid rgba(255,255,255,.12); }
@@ -724,4 +758,44 @@ nav, nav * { pointer-events: all !important; }
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .contact-form-wrap { padding: 28px 20px; }
   .contact-form-row { grid-template-columns: 1fr; }
+
+  /* Headings: clamp() minimums are safe on tablets but overflow on narrow phones */
+  .community-h2 { font-size: clamp(44px,16vw,64px); }
+  .join-h2 { font-size: clamp(40px,14vw,60px); }
+  .forum-title { font-size: clamp(36px,13vw,56px); }
+  .coaching-h2 { font-size: clamp(38px,12vw,52px); }
+  .exp-h2 { font-size: clamp(38px,12vw,52px); }
+  .about-h2 { font-size: clamp(36px,11vw,48px); }
+  .prod-hero-title { font-size: clamp(40px,15vw,80px); }
+  .prod-detail-title { font-size: clamp(36px,11vw,52px); }
+  .legal-title, .contact-title { font-size: clamp(34px,10vw,48px); }
+  .prod-why-title { font-size: clamp(36px,12vw,52px); }
+
+  /* Coaching cards: side-by-side text/icon is too cramped at phone widths */
+  .coaching-grid { grid-template-columns: 1fr; padding: 0 20px; }
+  .c-card { flex-direction: column; min-height: unset; padding: 32px 28px; }
+  .c-card-text, .c-card-img { flex: 1 1 auto; width: 100%; }
+  .c-card-img { margin-top: 20px; }
+  .c-card-icon { max-width: 180px; }
+
+  /* Community pillars: stack icon above text instead of 50/50 side-by-side */
+  .pillar { flex-direction: column; align-items: flex-start; min-height: unset; padding: 32px 28px; text-align: center; }
+  .pillar-img-wrap, .pillar-content { flex: 1 1 auto; width: 100%; }
+  .pillar-img-wrap { justify-content: center; margin-bottom: 8px; }
+  .pillar-content { text-align: left; }
+
+  /* Product grid: one column reads better than a cramped two-up */
+  .products-row { grid-template-columns: 1fr; }
+  .related-grid { grid-template-columns: repeat(2,1fr); gap: 8px; }
+  .related-grid .prod-info { padding: 16px; }
+  .related-grid .prod-cat { font-size: 8px; letter-spacing: .15em; margin-bottom: 4px; }
+  .related-grid .prod-name { font-size: 15px; }
+
+  /* About stats: fixed 48px numerals overflow a ~110px-wide box */
+  .about-stats { grid-template-columns: repeat(3,1fr); }
+  .stat-n { font-size: 32px; }
+  .stat-box { padding: 20px 12px; }
+
+  .prod-why-stats { grid-template-columns: repeat(2,1fr); }
+  .why-stat-n { font-size: 38px; }
 }
