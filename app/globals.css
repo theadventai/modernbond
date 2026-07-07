@@ -740,7 +740,7 @@ nav, nav * { pointer-events: all !important; }
      100vh also leaves a huge dead gap between the (proportionally short-on-
      mobile) hero art and the content below it, so cap the section height. */
   #hero { min-height: min(100vh, 578px); }
-  .hero-img-wrap { width: 125%; }
+  .hero-img-wrap { width: 135%; }
   .hero-content { bottom: 24px; }
   .scroll-line { display: none; }
   .hero-ctas { flex-direction: column; align-items: center; }
