@@ -42,7 +42,7 @@ export default function HomePage() {
         <div className="hero-bg"></div>
         <div className="tex"></div>
         <div className="hero-img-wrap">
-          <video src="/videos/LandingPage_v003.mp4" autoPlay loop muted playsInline />
+          <video src="/videos/LandingPage_v004.mp4" autoPlay muted playsInline />
         </div>
         <div className="hero-top-fade"></div>
         <div className="hero-bottom-fade"></div>
